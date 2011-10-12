@@ -5,8 +5,7 @@ public class AppliTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		System.out.println("Hella Warld");
+		System.out.println("Lol");
 	}
 
 }
