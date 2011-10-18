@@ -1,7 +1,8 @@
 
 public class Arc {
 	
-	String label;
-	int pondération;
+	int		id;
+	String 	label;
+	int 	pondération;
 
 }
