@@ -15,8 +15,8 @@ public class Graphe_matrice {
 	 * @param matriceAdjacence
 	 */
 	public Graphe_matrice() {
-		liste_noeud = new ArrayList();
-		liste_arc = new ArrayList();
+		liste_noeud = new ArrayList<Noeud>();
+		liste_arc = new ArrayList<Arc>();
 		matrice_adjacence = new ArrayList();
 	}
 	
