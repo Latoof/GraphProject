@@ -144,6 +144,37 @@ public class Graphe_liste extends Graphe {
 		
 	}
 	
+	public ArrayList<Noeud> getSuccesseurs(Noeud n) {
+		
+		ArrayList<Noeud> rList = new ArrayList<Noeud>();
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			if ( liste_adjacence.get(i).get(0).get(0) == n.getId() ) {
+				
+				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
+				
+				if ( it.hasNext() ) {
+					it.next();
+				}
+				
+				while ( it.hasNext() ) {
+					rList.add( 
+							getNoeudFromId( it.next().get(0) ) 
+							);
+				}
+				
+				
+				i = liste_adjacence.size(); // Pour stopper la boucle
+			}
+			
+		}
+		
+		
+		return rList;
+	}
+	
+	
 	@Override
 	public String toString() {
 		

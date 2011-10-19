@@ -52,15 +52,16 @@ public class AppliTest {
 			graphe.ajouterArc(a0,n0,n1);
 			graphe.ajouterArc(a1,n2,n1);
 			graphe.ajouterArc(a2,n0,n2);
-			
-			
+						
 			
 			System.out.println(graphe.toString());
 			
 			//graphe.supprimerNoeud(n1);
-			graphe.supprimerArc(a0);
+			//graphe.supprimerArc(a0);
 			
-			System.out.println(graphe.toString());
+			//System.out.println(graphe.toString());
+			
+			System.out.println( "Successeurs de n0 : "+ graphe.getSuccesseurs(n0) );
 
 		}
 		
