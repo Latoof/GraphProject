@@ -85,7 +85,7 @@ public class Graphe_liste extends Graphe {
 			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
 			
 			if ( itL.hasNext() ) {
-				itL.next();
+			//	itL.next();
 			}
 			
 			while ( itL.hasNext() ) {
@@ -99,6 +99,36 @@ public class Graphe_liste extends Graphe {
 				
 		}
 
+		return rList;
+	}
+	
+	public ArrayList<Noeud> getSuccesseurs(Noeud n) {
+		
+		ArrayList<Noeud> rList = new ArrayList<Noeud>();
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			if ( liste_adjacence.get(i).get(0).get(0) == n.getId() ) {
+				
+				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
+				
+				if ( it.hasNext() ) {
+				//	it.next();
+				}
+				
+				while ( it.hasNext() ) {
+					rList.add( 
+							getNoeudFromId( it.next().get(0) ) 
+							);
+				}
+				
+				
+				i = liste_adjacence.size(); // Pour stopper la boucle
+			}
+			
+		}
+		
+		
 		return rList;
 	}
 	
@@ -178,7 +208,7 @@ public class Graphe_liste extends Graphe {
 			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
 			
 			if ( itL.hasNext() ) {
-				itL.next();
+			//	itL.next();
 			}
 			
 			while ( itL.hasNext() ) {
@@ -210,7 +240,7 @@ public class Graphe_liste extends Graphe {
 				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
 				
 				if ( it.hasNext() ) {
-					it.next();
+				//	it.next();
 				}
 				
 				while ( it.hasNext() ) {
@@ -232,35 +262,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 	}
 	
-	public ArrayList<Noeud> getSuccesseurs(Noeud n) {
-		
-		ArrayList<Noeud> rList = new ArrayList<Noeud>();
-		
-		for (int i=0; i<liste_adjacence.size(); i++) {
-			
-			if ( liste_adjacence.get(i).get(0).get(0) == n.getId() ) {
-				
-				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
-				
-				if ( it.hasNext() ) {
-					it.next();
-				}
-				
-				while ( it.hasNext() ) {
-					rList.add( 
-							getNoeudFromId( it.next().get(0) ) 
-							);
-				}
-				
-				
-				i = liste_adjacence.size(); // Pour stopper la boucle
-			}
-			
-		}
-		
-		
-		return rList;
-	}
+
 	
 	
 	@Override
