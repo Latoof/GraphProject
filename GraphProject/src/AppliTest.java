@@ -20,10 +20,10 @@ public class AppliTest {
 		Arc a2 = new Arc(1, "b", 0);
 		Arc a3 = new Arc(2, "c", 0);
 		
-		graphe.ajouterArc(a1);
+		/*graphe.ajouterArc(a1);
 		graphe.ajouterArc(a2);
 		graphe.ajouterArc(a3);
-			
+		*/
 		System.out.println(graphe.toString());
 		
 		graphe.supprimerSommet(n2);
