@@ -15,7 +15,6 @@ public class AppliTest {
 		graphe.ajouterSommet(n1);
 		graphe.ajouterSommet(n2);
 		graphe.ajouterSommet(n3);
-			
 		
 		System.out.println(graphe.toString());
 	}
