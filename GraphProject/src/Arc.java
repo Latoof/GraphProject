@@ -21,7 +21,7 @@ public class Arc {
 	 */
 	@Override
 	public String toString() {
-		return "Arc [id=" + id + ", label=" + label + ", pondération="
+		return "Arc [id=" + id + ", label=" + label + ", ponderation="
 				+ ponderation + "]";
 	}
 	

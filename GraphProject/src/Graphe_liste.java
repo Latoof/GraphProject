@@ -31,9 +31,11 @@ public class Graphe_liste {
 	}
 	
 	public void ajouterNoeud (Noeud n) {
+		
 		liste_noeud.add(n);
 		
 		LinkedList< ArrayList<Integer> > graphList = new LinkedList< ArrayList<Integer> >();
+		graphList.add(new ArrayList<Integer>());
 		graphList.get(0).add( n.getId() );
 		
 		liste_adjacence.add( graphList );
@@ -90,7 +92,7 @@ public class Graphe_liste {
 			
 			ltemp = it.next();
 			
-			/* Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja */
+			/** Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja */
 			if ( ltemp.get(0) == n2.getId() ) {
 				alreadyPresent = true;
 				ltemp.add( a.getId() );
@@ -100,7 +102,7 @@ public class Graphe_liste {
 		}
 		
 		if ( !alreadyPresent ) {
-			/* Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore */
+			/** Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore */
 			ArrayList<Integer> transList = new ArrayList<Integer>();
 			transList.add( n2.getId() );
 			transList.add( a.getId() );
@@ -112,9 +114,30 @@ public class Graphe_liste {
 	
 	@Override
 	public String toString() {
-		return "Graphe_matrice \n[liste_arc=" + liste_arc + "\nliste_noeud="
-				+ liste_noeud + "\nmatrice_adjacence=" + liste_adjacence
-				+ "]";
+		
+		String strAdj = "";
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+			while ( itL.hasNext() ) {
+				ArrayList<Integer> aTemp = itL.next();
+				
+				
+				strAdj += "[N" + aTemp.get(0) + "|";
+				
+				for (int j=1; j<aTemp.size(); j++) {
+					strAdj += "a" + aTemp.get(j);
+				}
+				
+				strAdj += "]-->";
+				
+			}
+			strAdj += "\n";
+
+		}
+		
+		return liste_noeud.toString() + "\n" + liste_arc.toString() + "\nTransitions : \n"+strAdj;
+				
 	}
 	
 	
