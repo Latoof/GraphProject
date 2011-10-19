@@ -26,5 +26,9 @@ public class Arc {
 	}
 	
 	
+	public int getId() {
+		return this.id;
+	}
+	
 
 }

@@ -15,6 +15,7 @@ public class AppliTest {
 		graphe.ajouterSommet(n1);
 		graphe.ajouterSommet(n2);
 		graphe.ajouterSommet(n3);
+
 		
 		Arc a1 = new Arc(0, "a", 0);
 		Arc a2 = new Arc(1, "b", 0);

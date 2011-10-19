@@ -27,6 +27,7 @@ public class Graphe_matrice {
 	}
 	
 	public void supprimerSommet (Noeud n) {
+
 		liste_noeud.remove((Noeud)n);
 	}
 	
