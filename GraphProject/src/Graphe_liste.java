@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 
-public class Graphe_liste {
-
-	ArrayList<Noeud> liste_noeud;
-	ArrayList<Arc>	liste_arc;
+public class Graphe_liste extends Graphe {
 	
 	ArrayList<
 		LinkedList< 
@@ -79,36 +76,6 @@ public class Graphe_liste {
 		
 		liste_noeud.remove(n);
 	}
-
-	
-	public Noeud getNoeudFromId(int id) {
-		
-		for (int i=0; i<liste_noeud.size(); i++) {
-			
-			if (liste_noeud.get(i).getId() == id) {
-				return liste_noeud.get(i);
-			}
-			
-		}
-		
-		return new Noeud(-1,"");
-	}
-	
-	public Arc getArcFromId(int id) {
-		
-		for (int i=0; i<liste_arc.size(); i++) {
-			
-			if (liste_arc.get(i).getId() == id) {
-				return liste_arc.get(i);
-			}
-			
-		}
-		
-		return new Arc(-1,"",-1);
-		
-	}
-	
-
 	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
 		
@@ -201,9 +168,8 @@ public class Graphe_liste {
 
 		}
 		
-		return liste_noeud.toString() + "\n" + liste_arc.toString() + "\nTransitions : \n"+strAdj;
-				
+		return liste_noeud.toString() + "\n" + liste_arc.toString() + "\nTransitions : \n" + strAdj;
+
 	}
-	
-	
+
 }

@@ -3,10 +3,8 @@ import java.util.List;
 import java.util.HashSet;
 
 
-public class Graphe_matrice {
-	
-	List<Noeud> liste_noeud;
-	List<Arc>	liste_arc;
+public class Graphe_matrice extends Graphe {
+
 	
 	Matrice_Perso<HashSet<Integer>> matrice_adjacence;
 

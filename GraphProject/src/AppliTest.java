@@ -58,7 +58,7 @@ public class AppliTest {
 			System.out.println(graphe.toString());
 			
 			//graphe.supprimerNoeud(n1);
-			graphe.supprimerArc(a1);
+			graphe.supprimerArc(a0);
 			
 			System.out.println(graphe.toString());
 
