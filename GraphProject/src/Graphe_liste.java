@@ -46,10 +46,10 @@ public class Graphe_liste {
 		liste_arc.add(a);
 		
 		ArrayList<Integer> transList = new ArrayList<Integer>();
-		transList.add(n2.id);
-		transList.add(a.id);
+		transList.add( n2.getId() );
+		transList.add( a.getId() );
 		
-		liste_adjacence.get(n1.id).add(transList);
+		liste_adjacence.get( n1.getId() ).add(transList);
 	}
 
 	@Override
