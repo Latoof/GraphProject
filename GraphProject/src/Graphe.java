@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 
 public class Graphe {
@@ -72,6 +70,14 @@ public class Graphe {
 		
 		liste_arc.remove( a.getId() );
 		
+	}
+	
+	public int getNbNoeuds() {
+		return liste_noeud.size();
+	}
+	
+	public int getNbArcs() {
+		return liste_arc.size();
 	}
 	
 	@Override

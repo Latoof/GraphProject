@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 
@@ -77,6 +76,32 @@ public class Graphe_liste extends Graphe {
 		liste_noeud.remove(n);
 	}
 	
+	public ArrayList<Noeud> getPredecesseurs(Noeud n) {
+		
+		ArrayList<Noeud> rList = new ArrayList<Noeud>();
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+			
+			if ( itL.hasNext() ) {
+				itL.next();
+			}
+			
+			while ( itL.hasNext() ) {
+				
+				if ( itL.next().get(0) == n.getId() ) {
+					rList.add( getNoeudFromId(liste_adjacence.get(i).getFirst().get(0)) ); // On prend le Noeud de provenance
+					break;
+				}
+				
+			}
+				
+		}
+
+		return rList;
+	}
+	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
 		
 		liste_arc.add(a);
@@ -142,6 +167,69 @@ public class Graphe_liste extends Graphe {
 
 		liste_arc.remove( a.getId() );
 		
+	}
+	
+	public ArrayList<Arc> getArcsEntrants(Noeud n) {
+		
+		ArrayList<Arc> rList = new ArrayList<Arc>();
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+			
+			if ( itL.hasNext() ) {
+				itL.next();
+			}
+			
+			while ( itL.hasNext() ) {
+				
+				ArrayList<Integer> lTemp = itL.next();
+				
+				if ( lTemp.get(0) == n.getId() ) {
+					
+					for (int j=1; j<lTemp.size(); j++) {
+						rList.add( getArcFromId( lTemp.get(j)) );
+					}
+				}
+				
+			}
+				
+		}
+
+		return rList;
+	}
+	
+	public ArrayList<Arc> getArcsSortants(Noeud n) {
+		
+		ArrayList<Arc> rList = new ArrayList<Arc>();
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			if ( liste_adjacence.get(i).get(0).get(0) == n.getId() ) {
+				
+				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
+				
+				if ( it.hasNext() ) {
+					it.next();
+				}
+				
+				while ( it.hasNext() ) {
+					
+					ArrayList<Integer> lTemp = it.next();
+					for (int j=1; j<lTemp.size(); j++) {
+						rList.add( getArcFromId(lTemp.get(j)) );
+					}
+
+				}
+				
+				
+				i = liste_adjacence.size(); // Pour stopper la boucle
+			}
+			
+		}
+		
+		
+		return rList;
 	}
 	
 	public ArrayList<Noeud> getSuccesseurs(Noeud n) {

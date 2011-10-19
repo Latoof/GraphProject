@@ -61,7 +61,10 @@ public class AppliTest {
 			
 			//System.out.println(graphe.toString());
 			
-			System.out.println( "Successeurs de n0 : "+ graphe.getSuccesseurs(n0) );
+			System.out.println( "Predecesseurs de n2 : "+ graphe.getPredecesseurs(n2) );
+			System.out.println( "Arcs sortants de n2 : "+ graphe.getArcsSortants(n2) );
+			System.out.println( "Arcs entrants en n1 : "+ graphe.getArcsEntrants(n1) );
+
 
 		}
 		
