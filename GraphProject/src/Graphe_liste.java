@@ -6,8 +6,8 @@ import java.util.ListIterator;
 
 public class Graphe_liste {
 
-	List<Noeud> liste_noeud;
-	List<Arc>	liste_arc;
+	ArrayList<Noeud> liste_noeud;
+	ArrayList<Arc>	liste_arc;
 	
 	ArrayList<
 		LinkedList< 
@@ -42,18 +42,51 @@ public class Graphe_liste {
 	}
 	
 	public void supprimerNoeud (Noeud n) {
+		
+		/** Suppression des Noeuds voisins posterieurs **/
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			if (liste_adjacence.get(i).get(0).get(0) == n.getId() ) 
+				liste_adjacence.remove(i);
+			
+		}
+		/************************************/
+
+		
+		
+		/** Suppression des arcs allant vers ce Noeud **/
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+			while ( itL.hasNext() ) {
+				
+				ArrayList<Integer> aTemp = itL.next();
+				
+				if ( aTemp.get(0) == n.getId() ) {
+					
+					for (int j=1; j<aTemp.size(); j++) {
+						liste_arc.remove( getArcFromId( aTemp.get(j) ) );
+						itL.remove();
+						
+					}
+				}
+				
+			}
+
+		}
+		/************************************/
+
+		
 		liste_noeud.remove(n);
 	}
+
 	
 	public Noeud getNoeudFromId(int id) {
-		ListIterator<Noeud> it = this.liste_noeud.listIterator();
-	
-		Noeud ntemp;
-		while ( it.hasNext() ) {
+		
+		for (int i=0; i<liste_noeud.size(); i++) {
 			
-			ntemp = it.next();
-			if ( ntemp.getId() == id ) {
-				return ntemp;
+			if (liste_noeud.get(i).getId() == id) {
+				return liste_noeud.get(i);
 			}
 			
 		}
@@ -63,22 +96,19 @@ public class Graphe_liste {
 	
 	public Arc getArcFromId(int id) {
 		
-		ListIterator<Arc> it = this.liste_arc.listIterator();
-		
-		Arc atemp;
-		while ( it.hasNext() ) {
+		for (int i=0; i<liste_arc.size(); i++) {
 			
-			atemp = it.next();
-			if ( atemp.getId() == id ) {
-				return atemp;
+			if (liste_arc.get(i).getId() == id) {
+				return liste_arc.get(i);
 			}
 			
 		}
 		
 		return new Arc(-1,"",-1);
 		
-		
 	}
+	
+
 	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
 		
@@ -110,6 +140,41 @@ public class Graphe_liste {
 			liste_adjacence.get( n1.getId() ).add(transList);
 			/******************************/
 		}
+	}
+	
+	/** A OPTIMISER si les arcs connaissent un jour leurs noms provenance/destination (car la on parcourt tout) **/
+	public void supprimerArc(Arc a) {
+		
+		for (int i=0; i<liste_adjacence.size(); i++) {
+			
+			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+			
+			if ( itL.hasNext() ) {
+				itL.next();
+			}
+			
+			while ( itL.hasNext() ) {
+				
+				ArrayList<Integer> aTemp = itL.next();
+				
+				for (int j=1; j<aTemp.size(); j++) {
+					
+					if ( aTemp.get(j) == a.getId() ) {
+						
+							aTemp.remove(j);
+							
+					}
+				}
+				if ( aTemp.size() <= 1 ) {
+					itL.remove();
+				}
+				
+			}
+				
+		}
+
+		liste_arc.remove( a.getId() );
+		
 	}
 	
 	@Override
