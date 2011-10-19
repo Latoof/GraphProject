@@ -22,10 +22,11 @@ public class Graphe_matrice {
 	
 	public void ajouterSommet (Noeud n) {
 		liste_noeud.add(n);
+
 	}
 	
 	public void supprimerSommet (Noeud n) {
-		//liste_noeud.
+	
 	}
 
 	@Override
