@@ -7,7 +7,7 @@ public class Graphe_matrice {
 	List<Noeud> liste_noeud;
 	List<Arc>	liste_arc;
 	
-	ArrayList<Integer> matrice_adjacence;
+	ArrayList<Noeud> matrice_adjacence;
 
 	/**
 	 * @param listePoint
@@ -17,7 +17,7 @@ public class Graphe_matrice {
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();
-		matrice_adjacence = new ArrayList();
+		matrice_adjacence = new ArrayList<Noeud>();
 	}
 	
 	public void ajouterSommet (Noeud n) {
@@ -26,7 +26,16 @@ public class Graphe_matrice {
 	}
 	
 	public void supprimerSommet (Noeud n) {
+		liste_noeud.remove((Noeud)n);
+	}
 	
+	public void ajouterArc (Arc a) {
+		liste_arc.add(a);
+		
+	}
+	
+	public void supprimerArc (Arc a) {
+		liste_arc.remove((Arc)a);
 	}
 
 	@Override

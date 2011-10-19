@@ -13,10 +13,32 @@ public class Noeud {
 		this.label = label;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
+	
+	
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+
+
 	public String toString() {
 		return "Noeud [id=" + id + ", label=" + label + "]";
 	}
