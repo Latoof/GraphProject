@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
 
 
 public class Graphe_matrice {
@@ -7,7 +8,7 @@ public class Graphe_matrice {
 	List<Noeud> liste_noeud;
 	List<Arc>	liste_arc;
 	
-	ArrayList<Noeud> matrice_adjacence;
+	Matrice_Perso<HashSet<Integer>> matrice_adjacence;
 
 	/**
 	 * @param listePoint
@@ -17,7 +18,7 @@ public class Graphe_matrice {
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();
-		matrice_adjacence = new ArrayList<Noeud>();
+		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
 	}
 	
 	public void ajouterSommet (Noeud n) {
@@ -30,8 +31,9 @@ public class Graphe_matrice {
 		liste_noeud.remove((Noeud)n);
 	}
 	
-	public void ajouterArc (Arc a) {
+	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {
 		liste_arc.add(a);
+		//matrice_adjacence.
 		
 	}
 	
@@ -46,6 +48,4 @@ public class Graphe_matrice {
 				+ "]";
 	}
 	
-	
-
 }
