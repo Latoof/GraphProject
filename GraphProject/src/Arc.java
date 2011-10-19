@@ -3,17 +3,17 @@ public class Arc {
 	
 	int		id;
 	String 	label;
-	int 	pondération;
+	int 	ponderation;
 	
 	/**
 	 * @param id
 	 * @param label
 	 * @param pondération
 	 */
-	public Arc(int id, String label, int pondération) {
+	public Arc(int id, String label, int ponderation) {
 		this.id = id;
 		this.label = label;
-		this.pondération = pondération;
+		this.ponderation = ponderation;
 	}
 
 	/* (non-Javadoc)
@@ -22,7 +22,7 @@ public class Arc {
 	@Override
 	public String toString() {
 		return "Arc [id=" + id + ", label=" + label + ", pondération="
-				+ pondération + "]";
+				+ ponderation + "]";
 	}
 	
 	
