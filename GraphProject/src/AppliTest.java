@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Vector;
+
 
 public class AppliTest {
 
@@ -17,7 +20,7 @@ public class AppliTest {
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
-	
+			
 			/*
 			Arc a1 = new Arc(0, "a", 0);
 			Arc a2 = new Arc(1, "b", 0);
@@ -27,7 +30,7 @@ public class AppliTest {
 			graphe.ajouterArc(a2, n2, n3);
 			graphe.ajouterArc(a3, n1, n3);
 			*/
-			System.out.println(graphe.toString());
+			//System.out.println(graphe.toString());
 			
 			//graphe.supprimerSommet(n2);
 			
