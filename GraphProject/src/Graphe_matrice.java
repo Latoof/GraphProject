@@ -5,22 +5,26 @@ import java.util.HashSet;
 public class Graphe_matrice extends Graphe {
 
 	
-	Matrice_Perso<HashSet<Integer>> matrice_adjacence;
+	ArrayList<ArrayList<HashSet<Integer>>> matrice_adjacence;
 
-	/**
-	 * @param listePoint
-	 * @param listeArc
-	 * @param matriceAdjacence
-	 */
+	
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();
-		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
+		matrice_adjacence = new ArrayList<ArrayList<HashSet<Integer>>>();
 	}
 	
 	public void ajouterSommet (Noeud n) {
 		liste_noeud.add(n);
-
+		
+		matrice_adjacence.ensureCapacity(n.getId());
+		
+		for(int i=0; i < liste_noeud.size(); i++)
+		{
+			matrice_adjacence.add(new ArrayList<HashSet<Integer>>());
+			//System.out.println(i);
+		}
+		
 	}
 	
 	public void supprimerSommet (Noeud n) {
@@ -30,13 +34,13 @@ public class Graphe_matrice extends Graphe {
 	
 	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {
 		liste_arc.add(a);
-		//matrice_adjacence.
 		
 	}
 	
 	public void supprimerArc (Arc a) {
 		liste_arc.remove((Arc)a);
 	}
+	
 
 	@Override
 	public String toString() {

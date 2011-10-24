@@ -13,11 +13,7 @@ public class Graphe_liste extends Graphe {
 		>
 	> liste_adjacence;
 	
-	/**
-	 * @param listePoint
-	 * @param listeArc
-	 * @param matriceAdjacence
-	 */
+	
 	public Graphe_liste() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();

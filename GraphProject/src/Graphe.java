@@ -6,16 +6,9 @@ public class Graphe {
 	ArrayList<Noeud> liste_noeud;
 	ArrayList<Arc>	liste_arc;
 	
-	/**
-	 * @param listePoint
-	 * @param listeArc
-	 * @param matriceAdjacence
-	 */
 	public Graphe() {
 		liste_noeud = new ArrayList<Noeud>();
-		liste_arc = new ArrayList<Arc>();
-		//liste_adjacence = new ArrayList();
-		
+		liste_arc = new ArrayList<Arc>();		
 	}
 	
 	public void ajouterNoeud (Noeud n) {

@@ -6,7 +6,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=1; // A modifier pour changer le test (je m'en sers aussi)
+		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -18,20 +18,20 @@ public class AppliTest {
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
 	
-			
+			/*
 			Arc a1 = new Arc(0, "a", 0);
 			Arc a2 = new Arc(1, "b", 0);
 			Arc a3 = new Arc(2, "c", 0);
 			
-			/*graphe.ajouterArc(a1);
-			graphe.ajouterArc(a2);
-			graphe.ajouterArc(a3);
+			graphe.ajouterArc(a1, n1, n2);
+			graphe.ajouterArc(a2, n2, n3);
+			graphe.ajouterArc(a3, n1, n3);
 			*/
 			System.out.println(graphe.toString());
 			
-			graphe.supprimerSommet(n2);
+			//graphe.supprimerSommet(n2);
 			
-			System.out.println(graphe.toString());
+			//System.out.println(graphe.toString());
 		}
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
