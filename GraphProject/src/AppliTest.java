@@ -13,9 +13,9 @@ public class AppliTest {
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
-			Noeud n1 = new Noeud(0, "A");
-			Noeud n2 = new Noeud(1, "B");
-			Noeud n3 = new Noeud(2, "C");
+			Noeud n1 = new Noeud(1, "A");
+			Noeud n2 = new Noeud(2, "B");
+			Noeud n3 = new Noeud(3, "C");
 			
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
@@ -30,7 +30,7 @@ public class AppliTest {
 			graphe.ajouterArc(a2, n2, n3);
 			graphe.ajouterArc(a3, n1, n3);
 			*/
-			//System.out.println(graphe.toString());
+			System.out.println(graphe.toString());
 			
 			//graphe.supprimerSommet(n2);
 			
