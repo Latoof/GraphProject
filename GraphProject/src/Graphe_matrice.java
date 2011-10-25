@@ -6,8 +6,9 @@ import java.util.LinkedList;
 public class Graphe_matrice extends Graphe {
 
 	
-ArrayList<ArrayList<HashSet<Integer>>> matrice_adjacence;
-HashSet<Integer> defaut;
+ArrayList<ArrayList<HashSet<Integer>>> 	matrice_adjacence;
+ArrayList<HashSet<Integer>>				defaut_Colonne;
+HashSet<Integer> 						defaut_Cell;
 
 	
 	public Graphe_matrice() {
@@ -15,8 +16,11 @@ HashSet<Integer> defaut;
 		liste_arc = new ArrayList<Arc>();
 		matrice_adjacence = new ArrayList<ArrayList<HashSet<Integer>>>();
 		
-		defaut = new HashSet<Integer>();
-		defaut.add(-1);
+		defaut_Cell = new HashSet<Integer>();
+		defaut_Cell.add(-1);
+		
+		defaut_Colonne = new ArrayList<HashSet<Integer>>();
+		defaut_Colonne.add(defaut_Cell);
 	}
 	
 	public void ajouterSommet (Noeud n) {
@@ -42,6 +46,8 @@ HashSet<Integer> defaut;
 	public void supprimerSommet (Noeud n) {
 
 		liste_noeud.remove((Noeud)n);
+		
+		//matrice_adjacence.set(index, element);
 	}
 	
 	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {

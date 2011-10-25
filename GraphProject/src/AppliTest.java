@@ -16,10 +16,12 @@ public class AppliTest {
 			Noeud n1 = new Noeud(1, "A");
 			Noeud n2 = new Noeud(2, "B");
 			Noeud n3 = new Noeud(3, "C");
+			Noeud n4 = new Noeud(4, "D");
 			
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
+			graphe.ajouterSommet(n4);
 			
 			/*
 			Arc a1 = new Arc(0, "a", 0);
@@ -32,9 +34,9 @@ public class AppliTest {
 			*/
 			System.out.println(graphe.toString());
 			
-			//graphe.supprimerSommet(n2);
+			graphe.supprimerSommet(n2);
 			
-			//System.out.println(graphe.toString());
+			System.out.println(graphe.toString());
 		}
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
