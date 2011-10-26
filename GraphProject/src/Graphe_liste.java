@@ -27,7 +27,13 @@ public class Graphe_liste {
 		liste_arc = new ArrayList<Arc>();
 		//liste_adjacence = new ArrayList();
 		
-		liste_adjacence = new ArrayList< LinkedList<ArrayList<Integer>> >();
+		liste_adjacence = new ArrayList< 
+								LinkedList<
+									ArrayList<
+										Integer
+										>
+									> 
+								>();
 	}
 	
 	public void ajouterNoeud (Noeud n) {
@@ -80,6 +86,7 @@ public class Graphe_liste {
 	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
 		
+		
 		liste_arc.add(a);
 		
 		ListIterator<ArrayList<Integer>> it = liste_adjacence.get( n1.getId() ).listIterator();
@@ -108,6 +115,8 @@ public class Graphe_liste {
 			liste_adjacence.get( n1.getId() ).add(transList);
 			/******************************/
 		}
+		
+		
 	}
 	
 	@Override
