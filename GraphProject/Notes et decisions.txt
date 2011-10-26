@@ -1,0 +1,13 @@
+
+A ajouter au projet Git.
+
+Problème 1 : Respecter à la lettre la complexité demandée en cours.
+	
+	Pour le Graphe_liste, les différentes Listes chainees (LinkedList) sont stockées dans un ArrayList (tableau).
+	Soucis -> Pour atteindre le début d'une liste pour un Noeud, on doit donc parcourir toute l'ArrayList à chaque fois, jusqu'à trouver le bon Noeud.
+		(premier element de la LinkedList correspondante)
+	Solution a : Definir les numeros ID (etiquettes) des Noeuds automatiquement, en fonction de leur position dans l'ArrayList, ce qui permettrait
+		d'acceder au Noeud voulu simplement via notreArrayList.get( idDuNoeud );
+		
+	Solution b : Utiliser une hashMap (cle,valeur) pour stocker les LinkedList des Noeuds. Chaque LinkedList aurait alors une "clé" pour pouvoir la retrouver
+		en acces direct.
