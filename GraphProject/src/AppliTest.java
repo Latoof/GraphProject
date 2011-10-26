@@ -45,11 +45,14 @@ public class AppliTest {
 			Noeud n1 = new Noeud(1, "B");
 			Noeud n2 = new Noeud(2, "C");
 			Noeud n3 = new Noeud(3, "D");
+			Noeud n4 = new Noeud(4, "E");
+
 			
 			graphe.ajouterNoeud(n0);
 			graphe.ajouterNoeud(n1);
 			graphe.ajouterNoeud(n2);
 			graphe.ajouterNoeud(n3);
+			graphe.ajouterNoeud(n4);
 
 	
 			
@@ -59,6 +62,7 @@ public class AppliTest {
 			Arc a3 = new Arc(3, "d", 0);
 			Arc a4 = new Arc(4, "e", 0);
 			Arc a5 = new Arc(5, "f", 0);
+			Arc a6 = new Arc(6, "g", 0);
 
 			
 			graphe.ajouterArc(a0,n0,n1);
@@ -67,6 +71,7 @@ public class AppliTest {
 			graphe.ajouterArc(a3,n1,n3);
 			graphe.ajouterArc(a4,n1,n1);
 			graphe.ajouterArc(a5,n1,n3);						
+			graphe.ajouterArc(a6,n2,n4);						
 
 			
 			System.out.println(graphe.toString());
