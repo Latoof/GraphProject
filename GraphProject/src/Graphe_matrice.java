@@ -8,7 +8,7 @@ public class Graphe_matrice extends Graphe {
 	
 ArrayList<ArrayList<HashSet<Integer>>> 	matrice_adjacence;
 ArrayList<HashSet<Integer>>				defaut_Colonne;
-HashSet<Integer> 						defaut_Cell;
+HashSet<Integer>						defaut_Cell;
 
 	
 	public Graphe_matrice() {

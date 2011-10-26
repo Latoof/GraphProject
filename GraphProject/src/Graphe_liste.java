@@ -1,11 +1,13 @@
 import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class Graphe_liste extends Graphe {
@@ -170,6 +172,46 @@ public class Graphe_liste extends Graphe {
 				rList.addAll( parcoursProfondeur( nTemp, liste ) );
 			}
 						
+		}
+		
+		return rList;
+		
+	}
+	
+	public List<Noeud> parcoursLargeur( Noeud n1 ) {
+		
+		List<Noeud> rList = new LinkedList<Noeud>(); // Liste qui sera retournée
+		
+		Deque<Noeud> file = new LinkedBlockingDeque<Noeud>();
+		Set<Noeud> liste = new HashSet<Noeud>();
+		
+		if ( liste == null ) {
+			liste = new HashSet<Noeud>();
+		}
+		
+		liste.add( n1 );
+		file.add( n1 );
+		
+		
+		while ( !file.isEmpty() ) {
+			
+			Noeud n = file.pop(); // Defiler
+			rList.add(n);
+			Iterator<Noeud> it = getVoisins(n).iterator();
+
+			while ( it.hasNext() ) {
+				
+				
+				Noeud nTemp = it.next();
+				
+				if ( !liste.contains(nTemp) ) {
+					liste.add( nTemp );
+					file.add( nTemp ); // On ajoute tous ses voisins à la file.
+					//rList.addAll( parcoursProfondeur( nTemp, liste ) );
+				}
+				
+				
+			}
 		}
 		
 		return rList;
