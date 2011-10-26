@@ -17,28 +17,32 @@ public class AppliTest {
 			Noeud n2 = new Noeud(1, "B");
 			Noeud n3 = new Noeud(2, "C");
 			Noeud n4 = new Noeud(3, "D");
+			Noeud n5 = new Noeud(4, "E");
+
 			
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
 			graphe.ajouterSommet(n4);
+			graphe.ajouterSommet(n5);
+
 			
+			System.out.println(graphe.toString());
 			
+			//graphe.supprimerSommet(n2);
 			
-			/*
+			System.out.println(graphe.toString());
+			
 			Arc a1 = new Arc(0, "a", 0);
 			Arc a2 = new Arc(1, "b", 0);
 			Arc a3 = new Arc(2, "c", 0);
 			
-			graphe.ajouterArc(a1, n1, n2);
-			graphe.ajouterArc(a2, n2, n3);
+			graphe.ajouterArc(a1, n1, n4);
+			graphe.ajouterArc(a2, n4, n3);
 			graphe.ajouterArc(a3, n1, n3);
-			*/
-			System.out.println(graphe.toString());
-			
-			graphe.supprimerSommet(n2);
 			
 			System.out.println(graphe.toString());
+						
 		}
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();

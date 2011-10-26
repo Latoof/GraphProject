@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 
 public class Graphe_matrice extends Graphe {
 
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
-HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+
 
 	
 	public Graphe_matrice() {
@@ -19,33 +18,27 @@ HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 	public void ajouterSommet (Noeud n) {
 		liste_noeud.add(n);
 		
-//		HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
-		matrice_adjacence.Add(cellule_Matrice, n.getId());
+		matrice_adjacence.Add(new HashSet<Integer>(), n.getId());
 
-		int size = liste_noeud.size();
-			
-		for (int i=0; i < size; i++){ 
-			matrice_adjacence.Add(cellule_Matrice, i);
-		}
 		this.resizeMatrice();
 
 		
 	}
 	
 	public void resizeMatrice (){
-		//HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+
 		int size = liste_noeud.size();
 		
 		for (int i=0; i < size; i++){
 						
-			while ((matrice_adjacence.getNumCols(i) - 1) < size ){
-				matrice_adjacence.Add(cellule_Matrice, i);
+			while (matrice_adjacence.getNumCols(i) < size ){
+				matrice_adjacence.Add(new HashSet<Integer>(), i);
 			}
 		}
 	}
 	
 	public void supprimerSommet (Noeud n) {
-		//HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+		HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 
 		liste_noeud.remove((Noeud)n);
 		
@@ -56,6 +49,10 @@ HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 	
 	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {
 		liste_arc.add(a);
+		
+		matrice_adjacence.get(nSource.getId(), nCible.getId()).add(a.getId());
+		matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());
+
 		
 	}
 	

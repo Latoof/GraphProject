@@ -84,7 +84,21 @@ public class Matrice_Perso<E> {
 
 	@Override
 	public String toString() {
-		return "Matrice_Perso [matrice=" + matrice + "]";
+		
+		String str = "\n";
+		
+		for (int i=0; i<this.getNumRows(); i++) {
+			str += "";
+			str += i + "\t";
+			for (int j=0; j<this.getNumCols(i); j++) {
+				str += this.get(i, j) + "\t";
+			}
+			
+			str += "\n";
+		
+		}
+		return str;
+		//return "Matrice_Perso [matrice=" + matrice + "]";
 	}
 	
 }
