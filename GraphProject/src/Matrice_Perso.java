@@ -88,5 +88,10 @@ public class Matrice_Perso<E> {
 	{
 		return matrice.get(row).size();
 	}
+
+	@Override
+	public String toString() {
+		return "Matrice_Perso [matrice=" + matrice + "]";
+	}
 	
 }

@@ -9,19 +9,21 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=1; // A modifier pour changer le test (je m'en sers aussi)
+		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
-			Noeud n1 = new Noeud(1, "A");
-			Noeud n2 = new Noeud(2, "B");
-			Noeud n3 = new Noeud(3, "C");
-			Noeud n4 = new Noeud(4, "D");
+			Noeud n1 = new Noeud(0, "A");
+			Noeud n2 = new Noeud(1, "B");
+			Noeud n3 = new Noeud(2, "C");
+			Noeud n4 = new Noeud(3, "D");
 			
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
 			graphe.ajouterSommet(n4);
+			
+			
 			
 			/*
 			Arc a1 = new Arc(0, "a", 0);
@@ -96,8 +98,5 @@ public class AppliTest {
 			System.out.println(" Parcous profondeur : " + graphe.parcoursProfondeur(n1, null) );
 
 		}
-		
-		
 	}
-
 }

@@ -6,48 +6,51 @@ import java.util.LinkedList;
 public class Graphe_matrice extends Graphe {
 
 	
-ArrayList<ArrayList<HashSet<Integer>>> 	matrice_adjacence;
-ArrayList<HashSet<Integer>>				defaut_Colonne;
-HashSet<Integer> 						defaut_Cell;
-
+Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
+HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 	
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();
-		matrice_adjacence = new ArrayList<ArrayList<HashSet<Integer>>>();
-		
-		defaut_Cell = new HashSet<Integer>();
-		defaut_Cell.add(-1);
-		
-		defaut_Colonne = new ArrayList<HashSet<Integer>>();
-		defaut_Colonne.add(defaut_Cell);
+		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
 	}
 	
 	public void ajouterSommet (Noeud n) {
 		liste_noeud.add(n);
 		
-		ArrayList<HashSet<Integer>> colonne_Matrice = new ArrayList<HashSet<Integer>>();
-		HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
-		
-		while(matrice_adjacence.size() < n.getId())
-		{
-			//On rajoute des lignes à notre 1er array (les lignes).
-			matrice_adjacence.add(colonne_Matrice);
+//		HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+		matrice_adjacence.Add(cellule_Matrice, n.getId());
+
+		int size = liste_noeud.size();
 			
-			//On verifie que nos colonnes fraichement créées existe aussi.
-			while(matrice_adjacence.get(matrice_adjacence.size() - 1).size() < n.getId())
-			{
-				//On boucle en ajoutant les colonnes une a une, en considérant la derniere créée
-				matrice_adjacence.get(matrice_adjacence.size() - 1).add(cellule_Matrice);
+		for (int i=0; i < size; i++){ 
+			matrice_adjacence.Add(cellule_Matrice, i);
+		}
+		this.resizeMatrice();
+
+		
+	}
+	
+	public void resizeMatrice (){
+		//HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+		int size = liste_noeud.size();
+		
+		for (int i=0; i < size; i++){
+						
+			while ((matrice_adjacence.getNumCols(i) - 1) < size ){
+				matrice_adjacence.Add(cellule_Matrice, i);
 			}
 		}
 	}
 	
 	public void supprimerSommet (Noeud n) {
+		//HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 
 		liste_noeud.remove((Noeud)n);
 		
-		//matrice_adjacence.set(index, element);
+		for(int i=0; i < liste_noeud.size(); i++){
+			matrice_adjacence.set(n.getId(), i, cellule_Matrice);
+		}
 	}
 	
 	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {
