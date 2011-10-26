@@ -28,7 +28,7 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 			
-			//graphe.supprimerSommet(n2);
+			graphe.supprimerSommet(n2);
 			
 			System.out.println(graphe.toString());
 			
@@ -38,7 +38,8 @@ public class AppliTest {
 			
 			graphe.ajouterArc(a1, n4, n3);
 			graphe.ajouterArc(a2, n1, n3);
-			graphe.ajouterArc(a0, n1, n4);
+			graphe.ajouterArc(a0, n1, n3);
+			
 
 			System.out.println(graphe.toString());
 			
