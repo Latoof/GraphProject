@@ -30,6 +30,7 @@ public class AppliTest {
 		graphe.supprimerSommet(n2);
 		
 		System.out.println(graphe.toString());
+		
 	}
 
 }
