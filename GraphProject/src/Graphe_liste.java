@@ -1,6 +1,11 @@
+import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 
 public class Graphe_liste extends Graphe {
@@ -72,9 +77,9 @@ public class Graphe_liste extends Graphe {
 		liste_noeud.remove(n);
 	}
 	
-	public ArrayList<Noeud> getPredecesseurs(Noeud n) {
+	public Set<Noeud> getPredecesseurs(Noeud n) {
 		
-		ArrayList<Noeud> rList = new ArrayList<Noeud>();
+		Set<Noeud> rList = new HashSet<Noeud>();
 		
 		for (int i=0; i<liste_adjacence.size(); i++) {
 			
@@ -98,9 +103,9 @@ public class Graphe_liste extends Graphe {
 		return rList;
 	}
 	
-	public ArrayList<Noeud> getSuccesseurs(Noeud n) {
+	public Set<Noeud> getSuccesseurs(Noeud n) {
 		
-		ArrayList<Noeud> rList = new ArrayList<Noeud>();
+		Set<Noeud> rList = new HashSet<Noeud>();
 		
 		for (int i=0; i<liste_adjacence.size(); i++) {
 			
@@ -126,6 +131,43 @@ public class Graphe_liste extends Graphe {
 		
 		
 		return rList;
+	}
+	
+	public Set<Noeud> getVoisins( Noeud n ) {
+		
+		Set<Noeud> rList = new HashSet<Noeud>();
+
+		rList.addAll( getPredecesseurs(n) );
+		rList.addAll( getSuccesseurs(n) );
+		
+		return rList;
+		
+	}
+	
+	public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
+		
+		List<Noeud> rList = new LinkedList<Noeud>();
+		
+		if ( liste == null ) {
+			liste = new HashSet<Noeud>();
+		}
+		
+		liste.add( n1 );
+		
+		Iterator<Noeud> it = getVoisins(n1).iterator();
+		
+		rList.add(n1);
+		while ( it.hasNext() ) {
+			
+			Noeud nTemp = it.next();
+			if ( !liste.contains(nTemp) ) {
+				rList.addAll( parcoursProfondeur( nTemp, liste ) );
+			}
+						
+		}
+		
+		return rList;
+		
 	}
 	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
