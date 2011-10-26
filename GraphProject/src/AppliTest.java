@@ -96,6 +96,8 @@ public class AppliTest {
 
 			
 			System.out.println(" Parcous profondeur : " + graphe.parcoursProfondeur(n1, null) );
+			System.out.println(" Parcous largeur    : " + graphe.parcoursLargeur( n1 ) );
+
 
 		}
 	}

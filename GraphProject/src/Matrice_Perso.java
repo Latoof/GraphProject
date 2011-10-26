@@ -6,8 +6,7 @@ public class Matrice_Perso<E> {
 	
 	ArrayList<ArrayList<E>>	matrice;
 	
-	public Matrice_Perso()
-	{
+	public Matrice_Perso() {
 		matrice = new ArrayList<ArrayList<E>>();
 	}
 	
@@ -17,8 +16,7 @@ public class Matrice_Perso<E> {
 	 * 
 	 * @param num
 	 */
-	public void ensureCapacity(int num)
-	{
+	public void ensureCapacity(int num) {
 		matrice.ensureCapacity(num);
 	}
  
@@ -29,8 +27,7 @@ public class Matrice_Perso<E> {
 	 * @param row
 	 * @param num
 	 */
-	public void ensureCapacity(int row, int num)
-	{
+	public void ensureCapacity(int row, int num) {
 		ensureCapacity(row);
 		while (row < getNumRows())
 		{
@@ -42,8 +39,7 @@ public class Matrice_Perso<E> {
 	/**
 	 * Adds an item at the end of the specified row. This will guarantee that at least row rows exist.
 	 */
-	public void Add(E data, int row)
-	{
+	public void Add(E data, int row) {
 		ensureCapacity(row);
 		while(row >= getNumRows())
 		{
@@ -52,18 +48,15 @@ public class Matrice_Perso<E> {
 		matrice.get(row).add(data);
 	}
  
-	public E get(int row, int col)
-	{
+	public E get(int row, int col) {
 		return matrice.get(row).get(col);
 	}
  
-	public void set(int row, int col, E data)
-	{
+	public void set(int row, int col, E data) {
 		matrice.get(row).set(col,data);
 	}
  
-	public void remove(int row, int col)
-	{
+	public void remove(int row, int col) {
 		matrice.get(row).remove(col);
 	}
  

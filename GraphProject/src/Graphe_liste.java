@@ -1,11 +1,13 @@
 import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class Graphe_liste extends Graphe {
@@ -24,7 +26,13 @@ public class Graphe_liste extends Graphe {
 		liste_arc = new ArrayList<Arc>();
 		//liste_adjacence = new ArrayList();
 		
-		liste_adjacence = new ArrayList< LinkedList<ArrayList<Integer>> >();
+		liste_adjacence = new ArrayList< 
+								LinkedList<
+									ArrayList<
+										Integer
+										>
+									> 
+								>();
 	}
 	
 	public void ajouterNoeud (Noeud n) {
@@ -170,7 +178,48 @@ public class Graphe_liste extends Graphe {
 		
 	}
 	
+	public List<Noeud> parcoursLargeur( Noeud n1 ) {
+		
+		List<Noeud> rList = new LinkedList<Noeud>(); // Liste qui sera retournée
+		
+		Deque<Noeud> file = new LinkedBlockingDeque<Noeud>();
+		Set<Noeud> liste = new HashSet<Noeud>();
+		
+		if ( liste == null ) {
+			liste = new HashSet<Noeud>();
+		}
+		
+		liste.add( n1 );
+		file.add( n1 );
+		
+		
+		while ( !file.isEmpty() ) {
+			
+			Noeud n = file.pop(); // Defiler
+			rList.add(n);
+			Iterator<Noeud> it = getVoisins(n).iterator();
+
+			while ( it.hasNext() ) {
+				
+				
+				Noeud nTemp = it.next();
+				
+				if ( !liste.contains(nTemp) ) {
+					liste.add( nTemp );
+					file.add( nTemp ); // On ajoute tous ses voisins à la file.
+					//rList.addAll( parcoursProfondeur( nTemp, liste ) );
+				}
+				
+				
+			}
+		}
+		
+		return rList;
+		
+	}
+	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+		
 		
 		liste_arc.add(a);
 		
@@ -200,6 +249,8 @@ public class Graphe_liste extends Graphe {
 			liste_adjacence.get( n1.getId() ).add(transList);
 			/******************************/
 		}
+		
+		
 	}
 	
 	/** A OPTIMISER si les arcs connaissent un jour leurs noms provenance/destination (car la on parcourt tout) **/

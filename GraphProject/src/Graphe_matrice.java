@@ -8,6 +8,7 @@ public class Graphe_matrice extends Graphe {
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
 HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
+
 	
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
