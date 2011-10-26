@@ -318,9 +318,9 @@ public class Graphe_liste extends Graphe {
 		return rList;
 	}
 	
-	public ArrayList<Arc> getArcsSortants(Noeud n) {
+	public Set<Arc> getArcsSortants(Noeud n) {
 		
-		ArrayList<Arc> rList = new ArrayList<Arc>();
+		Set<Arc> rList = new HashSet<Arc>();
 		
 		for (int i=0; i<liste_adjacence.size(); i++) {
 			

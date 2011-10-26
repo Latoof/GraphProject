@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class Graphe_matrice extends Graphe {
@@ -58,7 +60,49 @@ Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
 	
 	public void supprimerArc (Arc a) {
 		liste_arc.remove((Arc)a);
+		
+		
 	}
+	
+	public Set<Noeud> getSuccesseurs (Noeud n) {
+		
+		Set<Noeud> rList = new HashSet<Noeud>();
+		
+		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
+			
+			Set<Integer> sTemp = matrice_adjacence.get(n.getId(), i);
+			
+			if (!sTemp.isEmpty()) {
+				rList.add(getNoeudFromId(i));
+			}
+
+			
+		}
+
+		return rList;
+		
+	}
+	
+	public Set<Arc> getArcsSortants(Noeud n) {
+
+		Set<Arc> rList = new HashSet<Arc>();
+	
+		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
+			
+			Set<Integer> sTemp = matrice_adjacence.get(n.getId(), i);
+			
+			Iterator<Integer> it = sTemp.iterator();
+			while (it.hasNext()) {
+				rList.add( getArcFromId( it.next() ) );
+			}
+
+			
+		}
+		
+		return rList;
+		
+	}
+	
 	
 	@Override
 	public String toString() {
