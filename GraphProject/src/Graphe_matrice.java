@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,17 +9,20 @@ public class Graphe_matrice extends Graphe {
 
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
-
+HashMap<Integer, Boolean> 			map_correct_noeud;
 
 	
 	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
+		map_correct_noeud = new HashMap<Integer, Boolean>();
 		liste_arc = new ArrayList<Arc>();
 		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
+		
 	}
 	
 	public void ajouterSommet (Noeud n) {
 		liste_noeud.add(n);
+		map_correct_noeud.put(n.getId(), true);
 		
 		matrice_adjacence.Add(new HashSet<Integer>(), n.getId());
 
@@ -53,7 +57,7 @@ Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
 		liste_arc.add(a);
 		
 		matrice_adjacence.get(nSource.getId(), nCible.getId()).add(a.getId());
-		matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());
+		//matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());
 
 		
 	}
