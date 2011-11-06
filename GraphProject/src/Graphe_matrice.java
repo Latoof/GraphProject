@@ -96,6 +96,25 @@ Boolean	oriented;
 		
 	}
 	
+public Set<Noeud> getPredecesseurs (Noeud n) {
+		
+		Set<Noeud> rList = new HashSet<Noeud>();
+		
+		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
+			
+			Set<Integer> sTemp = matrice_adjacence.get(n.getId(), i);
+			
+			if (!sTemp.isEmpty()) {
+				rList.add(getNoeudFromId(i));
+			}
+
+			
+		}
+
+		return rList;
+		
+	}
+	
 	public Set<Arc> getArcsSortants(Noeud n) {
 
 		Set<Arc> rList = new HashSet<Arc>();

@@ -37,14 +37,14 @@ public class AppliTest {
 			Arc a2 = new Arc(2, "c", 0);
 			
 			graphe.ajouterArc(a1, n4, n3);
-			graphe.ajouterArc(a2, n1, n3);
+			graphe.ajouterArc(a2, n1, n2);
 			graphe.ajouterArc(a0, n1, n3);
 			
 
 			System.out.println(graphe.toString());
 			
-			//System.out.println(graphe.getSuccesseurs(n1));
-			//System.out.println(graphe.getArcsSortants(n1));
+			System.out.println(graphe.getSuccesseurs(n1));
+			System.out.println(graphe.getArcsSortants(n1));
 
 			graphe.supprimerArc(a2);
 			
