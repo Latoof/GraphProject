@@ -10,13 +10,15 @@ public class Graphe_matrice extends Graphe {
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
 HashMap<Integer, Boolean> 			map_correct_noeud;
+Boolean	oriented;
 
 	
-	public Graphe_matrice() {
+	public Graphe_matrice(Boolean oriented) {
 		liste_noeud = new ArrayList<Noeud>();
 		map_correct_noeud = new HashMap<Integer, Boolean>();
 		liste_arc = new ArrayList<Arc>();
 		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
+		this.oriented = oriented;
 		
 	}
 	
@@ -44,12 +46,11 @@ HashMap<Integer, Boolean> 			map_correct_noeud;
 	}
 	
 	public void supprimerSommet (Noeud n) {
-		HashSet<Integer> cellule_Matrice = new HashSet<Integer>();
 
 		liste_noeud.remove((Noeud)n);
 		
 		for(int i=0; i < liste_noeud.size(); i++){
-			matrice_adjacence.set(n.getId(), i, cellule_Matrice);
+			matrice_adjacence.set(n.getId(), i, new HashSet<Integer>());
 		}
 	}
 	
@@ -57,7 +58,8 @@ HashMap<Integer, Boolean> 			map_correct_noeud;
 		liste_arc.add(a);
 		
 		matrice_adjacence.get(nSource.getId(), nCible.getId()).add(a.getId());
-		//matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());
+		if (this.oriented == false)
+		{matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());}
 
 		
 	}
@@ -65,6 +67,13 @@ HashMap<Integer, Boolean> 			map_correct_noeud;
 	public void supprimerArc (Arc a) {
 		liste_arc.remove((Arc)a);
 		
+		for(int i=0; i < liste_noeud.size(); i++){
+			for(int j=0; j < liste_noeud.size(); j++){
+				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
+					matrice_adjacence.get(i, j).remove(a.getId());
+				}
+			}
+		}
 		
 	}
 	
