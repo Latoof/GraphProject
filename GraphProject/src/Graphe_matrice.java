@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -102,18 +104,27 @@ public Set<Noeud> getPredecesseurs (Noeud n) {
 		
 		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
 			
-			Set<Integer> sTemp = matrice_adjacence.get(n.getId(), i);
+			Set<Integer> sTemp = matrice_adjacence.get(i, n.getId());
 			
 			if (!sTemp.isEmpty()) {
 				rList.add(getNoeudFromId(i));
 			}
-
-			
 		}
 
 		return rList;
 		
 	}
+
+public Set<Noeud> getVoisins(Noeud n) {
+	
+	Set<Noeud> rList = new HashSet<Noeud>();
+
+	rList.addAll( getPredecesseurs(n) );
+	rList.addAll( getSuccesseurs(n) );
+	
+	return rList;
+	
+}
 	
 	public Set<Arc> getArcsSortants(Noeud n) {
 
@@ -129,6 +140,52 @@ public Set<Noeud> getPredecesseurs (Noeud n) {
 			}
 
 			
+		}
+		
+		return rList;
+		
+	}
+	
+	public Set<Arc> getArcsEntrants(Noeud n) {
+
+		Set<Arc> rList = new HashSet<Arc>();
+	
+		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
+			
+			Set<Integer> sTemp = matrice_adjacence.get(i, n.getId());
+			
+			Iterator<Integer> it = sTemp.iterator();
+			while (it.hasNext()) {
+				rList.add( getArcFromId( it.next() ) );
+			}
+
+			
+		}
+		
+		return rList;
+		
+	}
+	
+public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
+		
+		List<Noeud> rList = new ArrayList<Noeud>();
+		
+		if ( liste == null ) {
+			liste = new HashSet<Noeud>();
+		}
+		
+		liste.add(n1);
+		
+		Iterator<Noeud> it = getVoisins(n1).iterator();
+		
+		rList.add(n1);
+		while ( it.hasNext() ) {
+			
+			Noeud nTemp = it.next();
+			if ( !liste.contains(nTemp) ) {
+				rList.addAll( parcoursProfondeur( nTemp, liste ) );
+			}
+						
 		}
 		
 		return rList;

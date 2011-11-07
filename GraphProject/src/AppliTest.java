@@ -11,44 +11,62 @@ public class AppliTest {
 		
 		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
-			Graphe_matrice graphe = new Graphe_matrice(true);
+			Graphe_matrice graphe = new Graphe_matrice(false);
 			
 			Noeud n0 = new Noeud(0, "A");
 			Noeud n1 = new Noeud(1, "B");
 			Noeud n2 = new Noeud(2, "C");
 			Noeud n3 = new Noeud(3, "D");
 			Noeud n4 = new Noeud(4, "E");
+			Noeud n5 = new Noeud(5, "F");
+			
 
 			graphe.ajouterSommet(n0);			
 			graphe.ajouterSommet(n1);
 			graphe.ajouterSommet(n2);
 			graphe.ajouterSommet(n3);
 			graphe.ajouterSommet(n4);
-
-			
-			//System.out.println(graphe.toString());
-			
-			//graphe.supprimerSommet(n2);
-			
-			//System.out.println(graphe.toString());
+			graphe.ajouterSommet(n5);
 			
 			Arc a0 = new Arc(0, "a", 0);
 			Arc a1 = new Arc(1, "b", 0);
 			Arc a2 = new Arc(2, "c", 0);
+			Arc a3 = new Arc(3, "d", 0);
+			Arc a4 = new Arc(4, "e", 0);
+			Arc a5 = new Arc(5, "f", 0);
+			Arc a6 = new Arc(6, "g", 0);
+			Arc a7 = new Arc(7, "h", 0);
 			
-			graphe.ajouterArc(a1, n4, n3);
-			graphe.ajouterArc(a2, n1, n2);
-			graphe.ajouterArc(a0, n1, n3);
+			graphe.ajouterArc(a0, n0, n0);
+			graphe.ajouterArc(a1, n0, n1);
+			graphe.ajouterArc(a2, n0, n3);
+			graphe.ajouterArc(a3, n1, n3);
+			graphe.ajouterArc(a4, n1, n2);
+			graphe.ajouterArc(a5, n2, n1);
+			graphe.ajouterArc(a6, n1, n4);
+			graphe.ajouterArc(a7, n4, n5);
+			
 			
 
 			System.out.println(graphe.toString());
 			
+			System.out.println("Successeurs N1 :");
 			System.out.println(graphe.getSuccesseurs(n1));
+			System.out.println("Arcs sortants N1 :");
 			System.out.println(graphe.getArcsSortants(n1));
+			System.out.println("Predecesseurs N3 :");
+			System.out.println(graphe.getPredecesseurs(n3));
+			System.out.println("Arcs entrants N3 :");
+			System.out.println(graphe.getArcsEntrants(n3));
+			System.out.println("Voisins N3 :");
+			System.out.println(graphe.getVoisins(n3));
 
-			graphe.supprimerArc(a2);
+			//graphe.supprimerArc(a2);
 			
 			System.out.println(graphe.toString());
+			
+			System.out.println("Parcours en Profondeur");
+			System.out.println(graphe.parcoursProfondeur(n0, null));
 						
 		}
 		else if ( t == 1 ) {
