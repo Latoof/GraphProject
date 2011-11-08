@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
-
 
 public class Matrice_Perso<E> {
 	
@@ -10,23 +8,12 @@ public class Matrice_Perso<E> {
 		matrice = new ArrayList<ArrayList<E>>();
 	}
 	
-	/**
-	 * ensures a minimum capacity of num rows. Note that this does not guarantee
-	 * that there are that many rows.
-	 * 
-	 * @param num
-	 */
+	
 	public void ensureCapacity(int num) {
 		matrice.ensureCapacity(num);
 	}
  
-	/**
-	 * Ensures that the given row has at least the given capacity. Note that
-	 * this method will also ensure that getNumRows() >= row
-	 * 
-	 * @param row
-	 * @param num
-	 */
+	
 	public void ensureCapacity(int row, int num) {
 		ensureCapacity(row);
 		while (row < getNumRows())
@@ -36,9 +23,7 @@ public class Matrice_Perso<E> {
 		matrice.get(row).ensureCapacity(num);
 	}
  
-	/**
-	 * Adds an item at the end of the specified row. This will guarantee that at least row rows exist.
-	 */
+	
 	public void Add(E data, int row) {
 		ensureCapacity(row);
 		while(row >= getNumRows())
@@ -98,7 +83,6 @@ public class Matrice_Perso<E> {
 		
 		}
 		return str;
-		//return "Matrice_Perso [matrice=" + matrice + "]";
 	}
 	
 }

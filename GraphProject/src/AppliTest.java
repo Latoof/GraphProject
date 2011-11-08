@@ -11,7 +11,7 @@ public class AppliTest {
 		
 		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
-			Graphe_matrice graphe = new Graphe_matrice(false);
+			Graphe_matrice graphe = new Graphe_matrice(true);
 			
 			Noeud n0 = new Noeud(0, "A");
 			Noeud n1 = new Noeud(1, "B");
@@ -20,6 +20,8 @@ public class AppliTest {
 			Noeud n4 = new Noeud(4, "E");
 			Noeud n5 = new Noeud(5, "F");
 			
+			Noeud n10 = new Noeud(10, "Z");
+			
 
 			graphe.ajouterSommet(n0);			
 			graphe.ajouterSommet(n1);
@@ -27,6 +29,8 @@ public class AppliTest {
 			graphe.ajouterSommet(n3);
 			graphe.ajouterSommet(n4);
 			graphe.ajouterSommet(n5);
+			
+			graphe.ajouterSommet(n10);
 			
 			Arc a0 = new Arc(0, "a", 0);
 			Arc a1 = new Arc(1, "b", 0);
@@ -46,8 +50,10 @@ public class AppliTest {
 			graphe.ajouterArc(a6, n1, n4);
 			graphe.ajouterArc(a7, n4, n5);
 			
+			System.out.println(graphe.toString());
 			
-
+			graphe.supprimerSommet(n10);
+			
 			System.out.println(graphe.toString());
 			
 			System.out.println("Successeurs N1 :");
@@ -65,8 +71,8 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 			
-			System.out.println("Parcours en Profondeur");
-			System.out.println(graphe.parcoursProfondeur(n0, null));
+			//System.out.println("Parcours en Profondeur");
+			//System.out.println(graphe.parcoursProfondeur(n0, null));
 						
 		}
 		else if ( t == 1 ) {

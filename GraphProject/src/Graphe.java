@@ -73,6 +73,10 @@ public class Graphe {
 		return liste_arc.size();
 	}
 	
+	public void parcoursProfondeur(Noeud nStart) {
+		
+	}
+	
 	@Override
 	public String toString() {
 		
