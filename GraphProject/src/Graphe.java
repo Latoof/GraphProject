@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
+public abstract class Graphe {
 
-public class Graphe {
-
-	ArrayList<Noeud> liste_noeud;
-	ArrayList<Arc>	liste_arc;
+	ArrayList<Noeud>	liste_noeud;
+	ArrayList<Arc>		liste_arc;
+	int 				tableauCouleur[];
+	int 				tableauParent[];
+	int 				tableauDebut[];
+	int 				tableauFin[];
+	int 				temp;
 	
 	public Graphe() {
 		liste_noeud = new ArrayList<Noeud>();
@@ -74,9 +80,41 @@ public class Graphe {
 	}
 	
 	public void parcoursProfondeur(Noeud nStart) {
+		tableauCouleur = new int[this.getNbNoeuds()];
+		tableauParent = new int[this.getNbNoeuds()];
+		tableauDebut = new int[this.getNbNoeuds()];
+		tableauFin = new int[this.getNbNoeuds()];
 		
+		for(int i=0;i<getNbNoeuds();i++){
+			tableauCouleur[i]=0;
+			tableauParent[i]=-1;
+		}
+		temp=0;
+		tableauParent[nStart.getId()]=nStart.getId();
+		visiterProfondeur(nStart);
 	}
 	
+	public void visiterProfondeur(Noeud n) {
+		tableauCouleur[n.getId()]=1;
+		tableauDebut[n.getId()]=temp;
+		temp++;
+		
+		Iterator<Noeud> it = getVoisins(n).iterator();
+		
+		while ( it.hasNext() ) {
+			
+			if(tableauCouleur[it.next().getId()] == 0){
+				tableauParent[it.next().getId()]=n.getId();
+				visiterProfondeur(it.next());
+			}
+			tableauCouleur[n.getId()]=2;
+			tableauFin[n.getId()]=temp;
+			temp++;
+		}
+	}
+
+	abstract Set<Noeud> getVoisins(Noeud n);
+
 	@Override
 	public String toString() {
 		

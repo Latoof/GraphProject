@@ -165,7 +165,7 @@ public Set<Noeud> getVoisins(Noeud n) {
 		return rList;
 		
 	}
-	
+/*	
 public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
 		
 		List<Noeud> rList = new ArrayList<Noeud>();
@@ -191,7 +191,7 @@ public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
 		return rList;
 		
 	}
-	
+*/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

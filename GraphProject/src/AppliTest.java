@@ -71,8 +71,8 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 			
-			//System.out.println("Parcours en Profondeur");
-			//System.out.println(graphe.parcoursProfondeur(n0, null));
+			System.out.println("Parcours en Profondeur");
+			graphe.parcoursProfondeur(n0);
 						
 		}
 		else if ( t == 1 ) {
