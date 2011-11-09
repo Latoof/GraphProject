@@ -52,7 +52,7 @@ public abstract class Graphe {
 			
 		}
 		
-		return new Arc(-1,"",-1);
+		return new Arc(-1,"",-1, null, null);
 		
 	}
 	

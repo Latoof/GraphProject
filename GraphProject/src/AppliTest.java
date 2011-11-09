@@ -11,7 +11,7 @@ public class AppliTest {
 		
 		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
-			Graphe_matrice graphe = new Graphe_matrice(true);
+			Graphe_matrice graphe = new Graphe_matrice();
 			
 			Noeud n0 = new Noeud(0, "A");
 			Noeud n1 = new Noeud(1, "B");
@@ -32,23 +32,23 @@ public class AppliTest {
 			
 			graphe.ajouterSommet(n10);
 			
-			Arc a0 = new Arc(0, "a", 0);
-			Arc a1 = new Arc(1, "b", 0);
-			Arc a2 = new Arc(2, "c", 0);
-			Arc a3 = new Arc(3, "d", 0);
-			Arc a4 = new Arc(4, "e", 0);
-			Arc a5 = new Arc(5, "f", 0);
-			Arc a6 = new Arc(6, "g", 0);
-			Arc a7 = new Arc(7, "h", 0);
+			Arc a0 = new Arc(0, "a", 0, n0, n0);
+			Arc a1 = new Arc(1, "b", 0, n0, n1);
+			Arc a2 = new Arc(2, "c", 0, n0, n3);
+			Arc a3 = new Arc(3, "d", 0, n1, n3);
+			Arc a4 = new Arc(4, "e", 0, n1, n2);
+			Arc a5 = new Arc(5, "f", 0, n2, n1);
+			Arc a6 = new Arc(6, "g", 0, n1, n4);
+			Arc a7 = new Arc(7, "h", 0, n4, n5);
 			
-			graphe.ajouterArc(a0, n0, n0);
-			graphe.ajouterArc(a1, n0, n1);
-			graphe.ajouterArc(a2, n0, n3);
-			graphe.ajouterArc(a3, n1, n3);
-			graphe.ajouterArc(a4, n1, n2);
-			graphe.ajouterArc(a5, n2, n1);
-			graphe.ajouterArc(a6, n1, n4);
-			graphe.ajouterArc(a7, n4, n5);
+			graphe.ajouterArc(a0);
+			graphe.ajouterArc(a1);
+			graphe.ajouterArc(a2);
+			graphe.ajouterArc(a3);
+			graphe.ajouterArc(a4);
+			graphe.ajouterArc(a5);
+			graphe.ajouterArc(a6);
+			graphe.ajouterArc(a7);
 			
 			System.out.println(graphe.toString());
 			
@@ -67,14 +67,15 @@ public class AppliTest {
 			System.out.println("Voisins N3 :");
 			System.out.println(graphe.getVoisins(n3));
 
-			//graphe.supprimerArc(a2);
+			graphe.supprimerArc(a2);
 			
 			System.out.println(graphe.toString());
 			
 			System.out.println("Parcours en Profondeur");
-			graphe.parcoursProfondeur(n0);
+			//graphe.parcoursProfondeur(n0);
 						
 		}
+		/*
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
 			
@@ -135,5 +136,6 @@ public class AppliTest {
 
 
 		}
+		*/
 	}
 }

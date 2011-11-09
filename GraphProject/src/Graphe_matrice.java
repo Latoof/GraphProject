@@ -10,17 +10,14 @@ public class Graphe_matrice extends Graphe {
 
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
-Hashtable<Integer, Boolean>		 					noeud_actifs;
-Boolean								oriented;
+Hashtable<Integer, Boolean>		 	noeud_actifs;
 
 	
-	public Graphe_matrice(Boolean oriented) {
+	public Graphe_matrice() {
 		liste_noeud = new ArrayList<Noeud>();
 		noeud_actifs = new Hashtable<Integer, Boolean>();
 		liste_arc = new ArrayList<Arc>();
-		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();
-		this.oriented = oriented;
-		
+		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();		
 	}
 	
 	public void ajouterSommet (Noeud n) {
@@ -58,26 +55,27 @@ Boolean								oriented;
 		}
 	}
 	
-	public void ajouterArc (Arc a, Noeud nSource, Noeud nCible) {
-		liste_arc.add(a);
+	public void ajouterArc (Arc a) {
 		
-		matrice_adjacence.get(nSource.getId(), nCible.getId()).add(a.getId());
-		if (this.oriented == false)
-		{matrice_adjacence.get(nCible.getId(), nSource.getId()).add(a.getId());}
-
+		liste_arc.add(a);
+		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).add(a.getId());
 		
 	}
 	
 	public void supprimerArc (Arc a) {
+		
 		liste_arc.remove((Arc)a);
 		
+		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());
+		
+		/*
 		for(int i=0; i < getNbNoeuds(); i++){
 			for(int j=0; j < getNbNoeuds(); j++){
 				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
 					matrice_adjacence.get(i, j).remove(a.getId());
 				}
 			}
-		}
+		}*/
 		
 	}
 	
@@ -165,33 +163,6 @@ public Set<Noeud> getVoisins(Noeud n) {
 		return rList;
 		
 	}
-/*	
-public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
-		
-		List<Noeud> rList = new ArrayList<Noeud>();
-		
-		if ( liste == null ) {
-			liste = new HashSet<Noeud>();
-		}
-		
-		liste.add(n1);
-		
-		Iterator<Noeud> it = getVoisins(n1).iterator();
-		
-		rList.add(n1);
-		while ( it.hasNext() ) {
-			
-			Noeud nTemp = it.next();
-			if ( !liste.contains(nTemp) ) {
-				rList.addAll( parcoursProfondeur( nTemp, liste ) );
-			}
-						
-		}
-		
-		return rList;
-		
-	}
-*/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -199,8 +170,7 @@ public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
 	@Override
 	public String toString() {
 		return "Graphe_matrice [\nmatrice_adjacence=" + matrice_adjacence
-				+ "noeud_actifs=" + noeud_actifs + "\noriented=" + oriented
-				+ "\nliste_arc=\n" + liste_arc + "\nliste_noeud=\n" + liste_noeud
+				+ "noeud_actifs=" + noeud_actifs + "\nliste_arc=\n" + liste_arc + "\nliste_noeud=\n" + liste_noeud
 				+ "]";
 	}
 	
