@@ -18,6 +18,17 @@ public class Arc {
 		this.noeudCible = noeudCible;
 		this.noeudSource = noeudSource;
 	}
+	
+	/**
+	 * @param id
+	 * @param label
+	 * @param pondération
+	 */
+	public Arc(int id, String label, int ponderation) {
+		this.id = id;
+		this.label = label;
+		this.ponderation = ponderation;
+	}
 
 	public void setNoeudSource(Noeud noeudSource) {
 		this.noeudSource = noeudSource;
