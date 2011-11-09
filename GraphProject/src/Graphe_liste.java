@@ -218,7 +218,7 @@ public class Graphe_liste extends Graphe {
 		
 	}
 	
-	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+	public void ajouterArcOld(Arc a, Noeud n1, Noeud n2) {
 		
 		
 		liste_arc.add(a);
@@ -253,8 +253,46 @@ public class Graphe_liste extends Graphe {
 		
 	}
 	
+	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+		
+		
+		liste_arc.add(a);
+		
+		ListIterator<ArrayList<Integer>> it = liste_adjacence.get( n1.getId() ).listIterator();
+		
+		boolean alreadyPresent = false;
+		ArrayList<Integer> ltemp;
+		while ( it.hasNext() && !alreadyPresent ) {
+			
+			ltemp = it.next();
+			
+			/** Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja */
+			if ( ltemp.get(0) == n2.getId() ) {
+				alreadyPresent = true;
+				ltemp.add( a.getId() );
+			}
+			/******************************/
+
+		}
+		
+		if ( !alreadyPresent ) {
+			/** Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore */
+			ArrayList<Integer> transList = new ArrayList<Integer>();
+			transList.add( n2.getId() );
+			transList.add( a.getId() );
+			
+			liste_adjacence.get( n1.getId() ).add(transList);
+			/******************************/
+		}
+		
+		a.setNoeudSource(n1);
+		a.setNoeudCible(n2);
+		
+		
+	}
+	
 	/** A OPTIMISER si les arcs connaissent un jour leurs noms provenance/destination (car la on parcourt tout) **/
-	public void supprimerArc(Arc a) {
+	public void supprimerArcOld(Arc a) {
 		
 		for (int i=0; i<liste_adjacence.size(); i++) {
 			
@@ -271,9 +309,7 @@ public class Graphe_liste extends Graphe {
 				for (int j=1; j<aTemp.size(); j++) {
 					
 					if ( aTemp.get(j) == a.getId() ) {
-						
 							aTemp.remove(j);
-							
 					}
 				}
 				if ( aTemp.size() <= 1 ) {
@@ -284,6 +320,37 @@ public class Graphe_liste extends Graphe {
 				
 		}
 
+		liste_arc.remove( a.getId() );
+		
+	}
+	
+	public void supprimerArc(Arc a) {
+
+		Noeud nSource = a.getNoeudSource();
+		
+		ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(nSource.getId()).listIterator();
+		
+		if ( itL.hasNext() ) {
+			itL.next();
+		}
+		
+		while ( itL.hasNext() ) {
+			
+			ArrayList<Integer> aTemp = itL.next();
+			
+			for (int j=1; j<aTemp.size(); j++) {
+				
+				if ( aTemp.get(j) == a.getId() ) {
+						aTemp.remove(j);
+						j = aTemp.size(); // Sortie de boucle
+				}
+			}
+			if ( aTemp.size() <= 1 ) {
+				itL.remove();
+			}
+			
+		}
+			
 		liste_arc.remove( a.getId() );
 		
 	}

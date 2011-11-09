@@ -66,11 +66,12 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		
 		liste_arc.remove((Arc)a);
 		
+
 		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());
 		
 		/*
-		for(int i=0; i < getNbNoeuds(); i++){
-			for(int j=0; j < getNbNoeuds(); j++){
+		for (int i=0; i < getNbNoeuds(); i++) {
+			for (int j=0; j < getNbNoeuds(); j++) {
 				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
 					matrice_adjacence.get(i, j).remove(a.getId());
 				}

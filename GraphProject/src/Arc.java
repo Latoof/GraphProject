@@ -19,6 +19,14 @@ public class Arc {
 		this.noeudSource = noeudSource;
 	}
 
+	public void setNoeudSource(Noeud noeudSource) {
+		this.noeudSource = noeudSource;
+	}
+
+	public void setNoeudCible(Noeud noeudCible) {
+		this.noeudCible = noeudCible;
+	}
+
 	public Noeud getNoeudSource() {
 		return noeudSource;
 	}
