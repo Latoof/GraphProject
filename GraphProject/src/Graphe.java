@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Stack;
 
 public abstract class Graphe {
 
@@ -10,6 +11,7 @@ public abstract class Graphe {
 	int 				tableauParent[];
 	int 				tableauDebut[];
 	int 				tableauFin[];
+	int					tableauDistance[];
 	int 				temp;
 	
 	public Graphe() {
@@ -108,10 +110,55 @@ public abstract class Graphe {
 				tableauParent[ nTemp.getId() ] = n.getId();
 				visiterProfondeur(nTemp);
 			}
-			tableauCouleur[ n.getId() ]=2;
-			tableauFin[ n.getId() ]= temp;
-			temp++;
 		}
+		tableauCouleur[ n.getId() ]=2;
+		tableauFin[ n.getId() ]= temp;
+		temp++;
+	}
+	
+	public void parcoursLargeur(Noeud nStart) {
+		tableauDistance = new int[this.getNbNoeuds()];
+		tableauCouleur = new int[this.getNbNoeuds()];
+		tableauParent = new int[this.getNbNoeuds()];
+		tableauDebut = new int[this.getNbNoeuds()];
+		tableauFin = new int[this.getNbNoeuds()];
+		
+		
+		Stack<Noeud> pile = new Stack<Noeud>();
+		
+		for(int i=0;i<getNbNoeuds();i++){
+			tableauCouleur[i]=0;
+			tableauParent[i]=-1;
+			tableauDistance[i]=-1;
+		}
+		temp=0;
+		tableauParent[nStart.getId()]=nStart.getId();
+		tableauDistance[nStart.getId()]=0;
+		
+		pile.push(nStart);
+		Noeud nTemp;
+		
+		while(!pile.isEmpty()){
+			nTemp=pile.pop();
+			tableauDebut[nTemp.getId()]=temp;
+			temp++;
+			
+			Iterator<Noeud> it = getVoisins(nTemp).iterator();
+			
+			while ( it.hasNext() ) {
+				
+				Noeud nTempVois = it.next();
+				if(tableauCouleur[ nTempVois.getId() ] == 0){
+					tableauCouleur[ nTempVois.getId() ] = 1;
+					tableauParent[ nTempVois.getId() ] = nTemp.getId();
+					tableauDistance[ nTempVois.getId() ] = (tableauDistance[ nTemp.getId() ] + 1);
+					pile.push(nTempVois);
+				}
+			}
+			tableauCouleur[ nTemp.getId() ]=2;
+			tableauFin[ nTemp.getId() ]= temp;
+		}
+		
 	}
 
 	abstract Set<Noeud> getVoisins(Noeud n);

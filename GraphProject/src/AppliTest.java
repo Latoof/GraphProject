@@ -41,6 +41,15 @@ public class AppliTest {
 			Arc a6 = new Arc(6, "g", 0, n1, n4);
 			Arc a7 = new Arc(7, "h", 0, n4, n5);
 			
+			Arc a10 = new Arc(10, "z", 0, n0, n0);
+			Arc a11 = new Arc(11, "y", 0, n1, n0);
+			Arc a12 = new Arc(12, "w", 0, n3, n0);
+			Arc a13 = new Arc(13, "v", 0, n3, n1);
+			Arc a14 = new Arc(14, "u", 0, n2, n1);
+			Arc a15 = new Arc(15, "t", 0, n1, n2);
+			Arc a16 = new Arc(16, "s", 0, n4, n1);
+			Arc a17 = new Arc(17, "r", 0, n5, n4);
+			
 			graphe.ajouterArc(a0);
 			graphe.ajouterArc(a1);
 			graphe.ajouterArc(a2);
@@ -50,12 +59,21 @@ public class AppliTest {
 			graphe.ajouterArc(a6);
 			graphe.ajouterArc(a7);
 			
-			System.out.println(graphe.toString());
+			graphe.ajouterArc(a10);
+			graphe.ajouterArc(a11);
+			graphe.ajouterArc(a12);
+			graphe.ajouterArc(a13);
+			graphe.ajouterArc(a14);
+			graphe.ajouterArc(a15);
+			graphe.ajouterArc(a16);
+			graphe.ajouterArc(a17);
 			
+			System.out.println(graphe.toString());
+
 			graphe.supprimerSommet(n10);
 			
 			System.out.println(graphe.toString());
-			
+/*			
 			System.out.println("Successeurs N1 :");
 			System.out.println(graphe.getSuccesseurs(n1));
 			System.out.println("Arcs sortants N1 :");
@@ -66,14 +84,20 @@ public class AppliTest {
 			System.out.println(graphe.getArcsEntrants(n3));
 			System.out.println("Voisins N3 :");
 			System.out.println(graphe.getVoisins(n3));
-
-			//graphe.supprimerArc(a2);
+*/
+//			graphe.supprimerArc(a2);
 			
-			System.out.println(graphe.toString());
+//			System.out.println(graphe.toString());
 			
 			System.out.println("Parcours en Profondeur");
 			graphe.parcoursProfondeur(n0);
-			System.out.println("END");			
+			System.out.println("END Prof");
+			
+			System.out.println("Parcours en Largeur");
+			graphe.parcoursLargeur(n0);
+			System.out.println("END Larg");	
+			
+			
 		}
 		
 		else if ( t == 1 ) {
@@ -132,7 +156,7 @@ public class AppliTest {
 
 			
 			System.out.println(" Parcous profondeur : " + graphe.parcoursProfondeur(n1, null) );
-			System.out.println(" Parcous largeur    : " + graphe.parcoursLargeur( n1 ) );
+			//System.out.println(" Parcous largeur    : " + graphe.parcoursLargeur( n1 ) );
 
 
 		}

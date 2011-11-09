@@ -177,7 +177,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
-	
+	/*
 	public List<Noeud> parcoursLargeur( Noeud n1 ) {
 		
 		List<Noeud> rList = new LinkedList<Noeud>(); // Liste qui sera retournée
@@ -217,7 +217,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
-	
+	*/
 	public void ajouterArcOld(Arc a, Noeud n1, Noeud n2) {
 		
 		
