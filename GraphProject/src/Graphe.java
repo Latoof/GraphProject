@@ -103,12 +103,13 @@ public abstract class Graphe {
 		
 		while ( it.hasNext() ) {
 			
-			if(tableauCouleur[it.next().getId()] == 0){
-				tableauParent[it.next().getId()]=n.getId();
-				visiterProfondeur(it.next());
+			Noeud nTemp = it.next();
+			if(tableauCouleur[ nTemp.getId() ] == 0){
+				tableauParent[ nTemp.getId() ] = n.getId();
+				visiterProfondeur(nTemp);
 			}
-			tableauCouleur[n.getId()]=2;
-			tableauFin[n.getId()]=temp;
+			tableauCouleur[ n.getId() ]=2;
+			tableauFin[ n.getId() ]= temp;
 			temp++;
 		}
 	}
