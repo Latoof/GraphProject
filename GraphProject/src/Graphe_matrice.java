@@ -165,9 +165,6 @@ public Set<Noeud> getVoisins(Noeud n) {
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Graphe_matrice [\nmatrice_adjacence=" + matrice_adjacence
