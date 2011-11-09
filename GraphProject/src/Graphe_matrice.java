@@ -10,7 +10,7 @@ public class Graphe_matrice extends Graphe {
 
 	
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
-Hashtable<Integer, Boolean>		 					noeud_actifs;
+Hashtable<Integer, Boolean>		 	noeud_actifs;
 Boolean								oriented;
 
 	
@@ -71,8 +71,8 @@ Boolean								oriented;
 	public void supprimerArc (Arc a) {
 		liste_arc.remove((Arc)a);
 		
-		for(int i=0; i < getNbNoeuds(); i++){
-			for(int j=0; j < getNbNoeuds(); j++){
+		for (int i=0; i < getNbNoeuds(); i++) {
+			for (int j=0; j < getNbNoeuds(); j++) {
 				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
 					matrice_adjacence.get(i, j).remove(a.getId());
 				}
