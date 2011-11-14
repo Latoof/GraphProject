@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,7 +25,6 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		noeud_actifs.put(n.getId(), true);
 		
 		matrice_adjacence.Add(new HashSet<Integer>(), n.getId());
-
 		this.resizeMatrice();
 	}
 	
@@ -34,10 +32,12 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 
 		liste_noeud.remove((Noeud)n);
 		noeud_actifs.put(n.getId(), false);
-		
-		for(int i=0; i < liste_noeud.get(getNbNoeuds() - 1).getId(); i++){
+		/*
+		for(int i=0; i < (matrice_adjacence.getNumRows() - 1); i++){
 			matrice_adjacence.set(n.getId(), i, new HashSet<Integer>());
+			matrice_adjacence.set(i, n.getId(), new HashSet<Integer>());
 		}
+		*/
 	}
 	
 	public void resizeMatrice (){
@@ -66,9 +66,8 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 	public void supprimerArc (Arc a) {
 		
 		liste_arc.remove((Arc)a);
+		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());
 		
-
-		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());	
 	}
 	
 	public Set<Noeud> getSuccesseurs (Noeud n) {

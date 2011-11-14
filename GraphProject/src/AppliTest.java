@@ -70,7 +70,7 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 
-			graphe.supprimerSommet(n10);
+			graphe.supprimerSommet(n3);
 			
 			System.out.println(graphe.toString());
 /*			
@@ -85,7 +85,7 @@ public class AppliTest {
 			System.out.println("Voisins N3 :");
 			System.out.println(graphe.getVoisins(n3));
 */
-//			graphe.supprimerArc(a2);
+			graphe.supprimerArc(a2);
 			
 //			System.out.println(graphe.toString());
 			

@@ -66,7 +66,6 @@ public abstract class Graphe {
 		
 	}
 	
-	/** A OPTIMISER si les arcs connaissent un jour leurs noms provenance/destination (car la on parcourt tout) **/
 	public void supprimerArc(Arc a) {
 		
 		liste_arc.remove( a.getId() );
