@@ -1,5 +1,5 @@
 
-public class Noeud implements Comparable {
+public class Noeud implements Comparable<Noeud> {
 
 	int 	id;
 	String 	label;
@@ -13,41 +13,30 @@ public class Noeud implements Comparable {
 		this.label = label;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-
 	public String getLabel() {
 		return label;
 	}
-
-
 
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
-
-
 	public String toString() {
 		return "Noeud [id=" + id + ", label=" + label + "]";
 	}
 
-
-
-	public int compareTo(Object noeud_a_comparer) {
-
-		return (this.id - ((Noeud) noeud_a_comparer).id); // Peut etre a inverser
+	@Override
+	public int compareTo(Noeud arg0) {
+		// TODO Auto-generated method stub
+		return this.getId() - arg0.getId();
 	}
 	
 	

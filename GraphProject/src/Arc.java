@@ -1,5 +1,5 @@
 
-public class Arc {
+public class Arc implements Comparable<Arc> {
 	
 	int		id;
 	String 	label;
@@ -10,6 +10,8 @@ public class Arc {
 	 * @param id
 	 * @param label
 	 * @param pondération
+	 * @param noeudSource
+	 * @param noeudCible
 	 */
 	public Arc(int id, String label, int ponderation, Noeud noeudSource, Noeud noeudCible) {
 		this.id = id;
@@ -45,20 +47,20 @@ public class Arc {
 	public Noeud getNoeudCible() {
 		return noeudCible;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Arc [id=" + id + ", label=" + label + ", ponderation="
 				+ ponderation + "]";
 	}
-	
-	
-	public int getId() {
-		return this.id;
-	}
-	
 
+	@Override
+	public int compareTo(Arc a) {
+		// TODO Auto-generated method stub
+		return this.getId() - a.getId();
+	}
 }

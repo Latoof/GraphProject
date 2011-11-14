@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 public class Graphe_matrice extends Graphe {
@@ -41,7 +42,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 	
 	public void resizeMatrice (){
 
-		int size = liste_noeud.get(getNbNoeuds() - 1).getId();
+		int size = (matrice_adjacence.getNumRows() - 1);
 		
 		for (int i=0; i < (size + 1); i++){
 						
@@ -67,22 +68,12 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		liste_arc.remove((Arc)a);
 		
 
-		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());
-		
-		/*
-		for (int i=0; i < getNbNoeuds(); i++) {
-			for (int j=0; j < getNbNoeuds(); j++) {
-				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
-					matrice_adjacence.get(i, j).remove(a.getId());
-				}
-			}
-		}*/
-		
+		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());	
 	}
 	
 	public Set<Noeud> getSuccesseurs (Noeud n) {
 		
-		Set<Noeud> rList = new HashSet<Noeud>();
+		Set<Noeud> rList = new TreeSet<Noeud>();
 		
 		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
 			if(noeud_actifs.get(i)){
@@ -100,7 +91,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 	
 public Set<Noeud> getPredecesseurs (Noeud n) {
 		
-		Set<Noeud> rList = new HashSet<Noeud>();
+		Set<Noeud> rList = new TreeSet<Noeud>();
 		
 		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
 			if(noeud_actifs.get(i)){
@@ -118,7 +109,7 @@ public Set<Noeud> getPredecesseurs (Noeud n) {
 
 public Set<Noeud> getVoisins(Noeud n) {
 	
-	Set<Noeud> rList = new HashSet<Noeud>();
+	Set<Noeud> rList = new TreeSet<Noeud>();
 
 	rList.addAll( getPredecesseurs(n) );
 	rList.addAll( getSuccesseurs(n) );
@@ -129,7 +120,7 @@ public Set<Noeud> getVoisins(Noeud n) {
 	
 	public Set<Arc> getArcsSortants(Noeud n) {
 
-		Set<Arc> rList = new HashSet<Arc>();
+		Set<Arc> rList = new TreeSet<Arc>();
 	
 		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
 			if(noeud_actifs.get(i)){
@@ -148,7 +139,7 @@ public Set<Noeud> getVoisins(Noeud n) {
 	
 	public Set<Arc> getArcsEntrants(Noeud n) {
 
-		Set<Arc> rList = new HashSet<Arc>();
+		Set<Arc> rList = new TreeSet<Arc>();
 	
 		for (int i=0; i<this.matrice_adjacence.getNumCols(n.getId()); i++) {
 			if(noeud_actifs.get(i)){
