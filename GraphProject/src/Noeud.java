@@ -1,5 +1,5 @@
 
-public class Noeud {
+public class Noeud implements Comparable {
 
 	int 	id;
 	String 	label;
@@ -41,6 +41,13 @@ public class Noeud {
 
 	public String toString() {
 		return "Noeud [id=" + id + ", label=" + label + "]";
+	}
+
+
+
+	public int compareTo(Object noeud_a_comparer) {
+
+		return (this.id - ((Noeud) noeud_a_comparer).id); // Peut etre a inverser
 	}
 	
 	
