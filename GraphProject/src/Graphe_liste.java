@@ -151,7 +151,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
-	
+/*
 	public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
 		
 		List<Noeud> rList = new LinkedList<Noeud>();
@@ -177,6 +177,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
+	*/
 	/*
 	public void ajouterArcOld(Arc a, Noeud n1, Noeud n2) {
 		

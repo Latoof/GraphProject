@@ -19,9 +19,6 @@ public class AppliTest {
 			Noeud n3 = new Noeud(3, "D");
 			Noeud n4 = new Noeud(4, "E");
 			Noeud n5 = new Noeud(5, "F");
-			
-			Noeud n10 = new Noeud(10, "Z");
-			
 
 			graphe.ajouterSommet(n0);			
 			graphe.ajouterSommet(n1);
@@ -29,8 +26,6 @@ public class AppliTest {
 			graphe.ajouterSommet(n3);
 			graphe.ajouterSommet(n4);
 			graphe.ajouterSommet(n5);
-			
-			graphe.ajouterSommet(n10);
 			
 			Arc a0 = new Arc(0, "a", 0, n0, n0);
 			Arc a1 = new Arc(1, "b", 0, n0, n1);
@@ -70,7 +65,7 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 
-			graphe.supprimerSommet(n3);
+//			graphe.supprimerSommet(n3);
 			
 			System.out.println(graphe.toString());
 /*			
@@ -85,12 +80,12 @@ public class AppliTest {
 			System.out.println("Voisins N3 :");
 			System.out.println(graphe.getVoisins(n3));
 */
-			graphe.supprimerArc(a2);
+//			graphe.supprimerArc(a2);
 			
 //			System.out.println(graphe.toString());
 			
 			System.out.println("Parcours en Profondeur");
-			graphe.parcoursProfondeur(n0);
+			graphe.parcoursProfondeur(n0, true);
 			System.out.println("END Prof");
 			
 			System.out.println("Parcours en Largeur");
@@ -155,7 +150,7 @@ public class AppliTest {
 			System.out.println( "Arcs entrants en n1 : " + graphe.getArcsEntrants(n1) );
 
 			
-			System.out.println(" Parcous profondeur : " + graphe.parcoursProfondeur(n1, null) );
+			//System.out.println(" Parcous profondeur : " + graphe.parcoursProfondeur(n1, false) );
 			//System.out.println(" Parcous largeur    : " + graphe.parcoursLargeur( n1 ) );
 
 

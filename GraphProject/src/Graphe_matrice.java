@@ -46,7 +46,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		
 		for (int i=0; i < (size + 1); i++){
 						
-			while (matrice_adjacence.getNumCols(i) < size ){
+			while (matrice_adjacence.getNumCols(i) <= size ){
 				matrice_adjacence.Add(new HashSet<Integer>(), i);
 			}
 			
