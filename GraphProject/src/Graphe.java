@@ -66,7 +66,6 @@ public abstract class Graphe {
 		
 	}
 	
-	/** A OPTIMISER si les arcs connaissent un jour leurs noms provenance/destination (car la on parcourt tout) **/
 	public void supprimerArc(Arc a) {
 		
 		liste_arc.remove( a.getId() );
@@ -81,7 +80,7 @@ public abstract class Graphe {
 		return liste_arc.size();
 	}
 	
-	public void parcoursProfondeur(Noeud nStart) {
+	public void parcoursProfondeur(Noeud nStart, Boolean parcoursTot) {
 		tableauCouleur = new int[this.getNbNoeuds()];
 		tableauParent = new int[this.getNbNoeuds()];
 		tableauDebut = new int[this.getNbNoeuds()];
@@ -94,6 +93,15 @@ public abstract class Graphe {
 		temp=0;
 		tableauParent[nStart.getId()]=nStart.getId();
 		visiterProfondeur(nStart);
+		
+		if(parcoursTot){
+			for(int i=0;i<getNbNoeuds();i++){
+				if(tableauCouleur[i] == 0){
+					visiterProfondeur(this.getNoeudFromId(i));
+				}
+			}
+		}
+		
 	}
 	
 	public void visiterProfondeur(Noeud n) {

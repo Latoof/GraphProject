@@ -151,7 +151,7 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
-	
+/*
 	public List<Noeud> parcoursProfondeur( Noeud n1, Set<Noeud> liste ) {
 		
 		List<Noeud> rList = new LinkedList<Noeud>();
@@ -177,47 +177,8 @@ public class Graphe_liste extends Graphe {
 		return rList;
 		
 	}
-	/*
-	public List<Noeud> parcoursLargeur( Noeud n1 ) {
-		
-		List<Noeud> rList = new LinkedList<Noeud>(); // Liste qui sera retournée
-		
-		Deque<Noeud> file = new LinkedBlockingDeque<Noeud>();
-		Set<Noeud> liste = new HashSet<Noeud>();
-		
-		if ( liste == null ) {
-			liste = new HashSet<Noeud>();
-		}
-		
-		liste.add( n1 );
-		file.add( n1 );
-		
-		
-		while ( !file.isEmpty() ) {
-			
-			Noeud n = file.pop(); // Defiler
-			rList.add(n);
-			Iterator<Noeud> it = getVoisins(n).iterator();
-
-			while ( it.hasNext() ) {
-				
-				
-				Noeud nTemp = it.next();
-				
-				if ( !liste.contains(nTemp) ) {
-					liste.add( nTemp );
-					file.add( nTemp ); // On ajoute tous ses voisins à la file.
-					//rList.addAll( parcoursProfondeur( nTemp, liste ) );
-				}
-				
-				
-			}
-		}
-		
-		return rList;
-		
-	}
 	*/
+	/*
 	public void ajouterArcOld(Arc a, Noeud n1, Noeud n2) {
 		
 		
@@ -231,27 +192,26 @@ public class Graphe_liste extends Graphe {
 			
 			ltemp = it.next();
 			
-			/** Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja */
+			// Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja
 			if ( ltemp.get(0) == n2.getId() ) {
 				alreadyPresent = true;
 				ltemp.add( a.getId() );
 			}
-			/******************************/
+			
 
 		}
 		
 		if ( !alreadyPresent ) {
-			/** Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore */
+			// Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore
 			ArrayList<Integer> transList = new ArrayList<Integer>();
 			transList.add( n2.getId() );
 			transList.add( a.getId() );
 			
 			liste_adjacence.get( n1.getId() ).add(transList);
-			/******************************/
 		}
 		
 		
-	}
+	}*/
 	
 	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
 		
