@@ -17,4 +17,23 @@ public class Ville extends Noeud {
 	}
 	
 	
+	public String toDotLine() {
+
+		String ligneDot = "\"" + this.label + "\""; // on commence par
+		// prendre le label
+		// du noeud
+		ligneDot += " ["; // on met le crochet qui precede les options
+		// ensuite on met les options
+		ligneDot += "label=\"" + this.label + "\" ";
+		ligneDot += "fontcolor=" + "black" + " ";
+		ligneDot += "shape=" + "ellipse" + " ";
+		ligneDot += "color=" + "black" + " ";
+		ligneDot += "fontname=" + "Sans" + " ";
+		ligneDot += "fontsize=" + "14" + " ";
+		ligneDot += "style=" + "Sans" + " ";
+		ligneDot += "]; \n"; // on ferme le crochet
+
+		return ligneDot;
+	}
+	
 }

@@ -3,6 +3,14 @@ public class Route extends Arc {
 
 	String identifiant;
 	
+	public String getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
+	}
+
 	public Route(int id, String label, int ponderation) {
 		super(id, label, ponderation);
 
@@ -28,7 +36,7 @@ public class Route extends Arc {
 		ligneDot += " -> ";
 		ligneDot += "\"" + this.getNoeudCible().getLabel() + "\""; //on ajoute le noeud destination entre guillemets
 		ligneDot += " ["; // on ajoute ensuite les options de la transition
-		ligneDot += "label=\""+label.toString()+"\" ";
+		ligneDot += "label=\""+this.getIdentifiant()+"\" ";
 		ligneDot += "fontcolor=" + "black" + " ";
 		ligneDot += "labelfontname=" + "Sans" + " ";
 		ligneDot += "labelfontsize=" + "14" + " ";
