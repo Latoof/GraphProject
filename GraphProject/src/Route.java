@@ -3,30 +3,27 @@ public class Route extends Arc {
 
 	String identifiant;
 	
+	/***
+	 * 
+	 * @param id
+	 * @param identifiant
+	 */
+
+	public Route(int id, Noeud noeudSource, Noeud noeudCible, String identifiant, int distance, int interet ) {
+		super( id, noeudSource, noeudCible);
+		this.identifiant = identifiant;
+	}
+	
+	public Route(int id, String identifiant, int distance, int interet ) {
+		super( id );
+		this.identifiant = identifiant;
+	}
+	
 	public String getIdentifiant() {
 		return identifiant;
 	}
 
 	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
-	}
-
-	public Route(int id, String label, int ponderation) {
-		super(id, label, ponderation);
-
-	}
-
-	public Route(int id, String identifiant, String label, int ponderation) {
-		super(id, label, ponderation);
-		this.identifiant = identifiant;
-	}
-	
-	public Route(int id, String label, int ponderation, Noeud noeudSource, Noeud noeudCible) {
-		super( id,  label,  ponderation,  noeudSource, noeudCible);
-	}
-	
-	public Route(int id, String identifiant, String label, int ponderation, Noeud noeudSource, Noeud noeudCible) {
-		super( id,  label,  ponderation,  noeudSource, noeudCible);
 		this.identifiant = identifiant;
 	}
 	

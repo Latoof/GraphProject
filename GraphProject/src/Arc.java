@@ -31,6 +31,16 @@ public class Arc implements Comparable<Arc> {
 		this.label = label;
 		this.ponderation = ponderation;
 	}
+	
+	public Arc( int id ) {
+		this.id = id;
+	}
+	
+	public Arc( int id, Noeud noeudSource, Noeud noeudCible ) {
+		this.id = id;
+		this.noeudCible = noeudCible;
+		this.noeudSource = noeudSource;
+	}
 
 	public void setNoeudSource(Noeud noeudSource) {
 		this.noeudSource = noeudSource;

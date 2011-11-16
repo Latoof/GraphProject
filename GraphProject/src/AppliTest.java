@@ -6,7 +6,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=0; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -135,6 +135,37 @@ public class AppliTest {
 
 
 		}
-		
+		else if ( t == 5 ) {
+			Carte carte = new Carte();
+			
+			Ville v1 = new Ville(1, "Nantes");
+			Ville v2 = new Ville(2, "Nantes");
+			Ville v3 = new Ville(3, "Nantes");
+			Ville v4 = new Ville(4, "Nantes");
+			Ville v5 = new Ville(5, "Nantes");
+
+			
+			carte.ajouterSommet(v1);
+			carte.ajouterSommet(v2);
+			carte.ajouterSommet(v3);
+			carte.ajouterSommet(v4);
+			carte.ajouterSommet(v5);
+
+	
+			Route r1 = new Route(1, v1, v2, "route66", 10, 3);
+			Route r2 = new Route(2, v2, v4, "a57", 23, 4);
+			Route r3 = new Route(3, v4, v5, "a11", 29, 1);
+
+
+			carte.ajouterArc(r1);
+			carte.ajouterArc(r2);
+			carte.ajouterArc(r3);
+			
+			System.out.println("Well done.");
+			System.out.println( carte.toString() ) ;
+
+			
+		}
+
 	}
 }

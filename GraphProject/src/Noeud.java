@@ -8,6 +8,10 @@ public class Noeud implements Comparable<Noeud> {
 	 * @param id
 	 * @param label
 	 */
+	public Noeud(int id) {
+		this.id = id;
+	}
+	
 	public Noeud(int id, String label) {
 		this.id = id;
 		this.label = label;
