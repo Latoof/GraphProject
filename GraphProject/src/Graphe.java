@@ -30,6 +30,17 @@ public abstract class Graphe {
 		liste_noeud.remove(n);
 	}
 
+	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+		
+		liste_arc.add(a);
+		
+	}
+	
+	public void supprimerArc(Arc a) {
+		
+		liste_arc.remove( a.getId() );
+		
+	}
 	
 	public Noeud getNoeudFromId(int id) {
 		
@@ -55,20 +66,6 @@ public abstract class Graphe {
 		}
 		
 		return new Arc(-1,"",-1, null, null);
-		
-	}
-	
-
-	
-	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
-		
-		liste_arc.add(a);
-		
-	}
-	
-	public void supprimerArc(Arc a) {
-		
-		liste_arc.remove( a.getId() );
 		
 	}
 	
@@ -169,7 +166,9 @@ public abstract class Graphe {
 		
 	}
 
-	abstract Set<Noeud> getVoisins(Noeud n);
+	public Set<Noeud> getVoisins(Noeud n){
+		return null;
+	}
 
 	@Override
 	public String toString() {

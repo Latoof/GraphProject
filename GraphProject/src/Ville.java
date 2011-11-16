@@ -2,17 +2,11 @@
 public class Ville extends Noeud {
 	
 	int 	interet;
-	String nomVille;
+	String 	nomVille;
 	
-	public Ville(int idNumb, String label, int interet) {
-		super(idNumb, label);
+	public Ville(int idNumb, String nomVille, int interet) {
+		super(idNumb, nomVille);
 		this.interet = interet;
-	} 
-
-	public Ville(int id, String nomVille) {
-		super(id);
-		this.id = id;
-		this.nomVille = nomVille;
 	}
 	
 	public int getInteret() {

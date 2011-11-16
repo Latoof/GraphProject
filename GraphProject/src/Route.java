@@ -2,6 +2,7 @@
 public class Route extends Arc {
 
 	String identifiant;
+	int interet;
 	
 	/***
 	 * 
@@ -9,16 +10,26 @@ public class Route extends Arc {
 	 * @param identifiant
 	 */
 
-	public Route(int id, Noeud noeudSource, Noeud noeudCible, String identifiant, int distance, int interet ) {
-		super( id, noeudSource, noeudCible);
+	public Route(int id, String identifiant, int distance, int interet, Ville villeSource, Ville villeCible) {
+		super(id, identifiant, distance, villeSource, villeCible);
 		this.identifiant = identifiant;
+		this.interet = interet;
 	}
 	
-	public Route(int id, String identifiant, int distance, int interet ) {
-		super( id );
-		this.identifiant = identifiant;
+	/**
+	 * @return the interet
+	 */
+	public int getInteret() {
+		return interet;
 	}
-	
+
+	/**
+	 * @param interet the interet to set
+	 */
+	public void setInteret(int interet) {
+		this.interet = interet;
+	}
+
 	public String getIdentifiant() {
 		return identifiant;
 	}

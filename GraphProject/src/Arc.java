@@ -21,25 +21,10 @@ public class Arc implements Comparable<Arc> {
 		this.noeudSource = noeudSource;
 	}
 	
-	/**
-	 * @param id
-	 * @param label
-	 * @param pondération
-	 */
 	public Arc(int id, String label, int ponderation) {
 		this.id = id;
 		this.label = label;
 		this.ponderation = ponderation;
-	}
-	
-	public Arc( int id ) {
-		this.id = id;
-	}
-	
-	public Arc( int id, Noeud noeudSource, Noeud noeudCible ) {
-		this.id = id;
-		this.noeudCible = noeudCible;
-		this.noeudSource = noeudSource;
 	}
 
 	public void setNoeudSource(Noeud noeudSource) {
