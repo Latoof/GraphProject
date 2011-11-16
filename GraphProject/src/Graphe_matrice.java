@@ -41,7 +41,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 	
 	public void resizeMatrice (){
 
-		int size = liste_noeud.get(getNbNoeuds() - 1).getId();
+		int size = (matrice_adjacence.getNumRows() - 1);
 		
 		for (int i=0; i < (size + 1); i++){
 						
@@ -69,15 +69,6 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 
 		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).remove(a.getId());
 		
-		/*
-		for (int i=0; i < getNbNoeuds(); i++) {
-			for (int j=0; j < getNbNoeuds(); j++) {
-				if(matrice_adjacence.get(i, j).contains((Integer) a.getId())){
-					matrice_adjacence.get(i, j).remove(a.getId());
-				}
-			}
-		}*/
-		
 	}
 	
 	public Set<Noeud> getSuccesseurs (Noeud n) {
@@ -93,9 +84,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 				}
 			}
 		}
-
 		return rList;
-		
 	}
 	
 public Set<Noeud> getPredecesseurs (Noeud n) {
