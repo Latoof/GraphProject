@@ -1,14 +1,8 @@
-import java.util.AbstractSet;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingDeque;
-
 
 public class Graphe_liste extends Graphe {
 	
@@ -24,7 +18,6 @@ public class Graphe_liste extends Graphe {
 	public Graphe_liste() {
 		liste_noeud = new ArrayList<Noeud>();
 		liste_arc = new ArrayList<Arc>();
-		//liste_adjacence = new ArrayList();
 		
 		liste_adjacence = new ArrayList< 
 								LinkedList<

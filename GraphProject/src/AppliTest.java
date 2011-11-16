@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Vector;
-
 
 public class AppliTest {
 
@@ -65,25 +62,6 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 
-//			graphe.supprimerSommet(n3);
-			
-			System.out.println(graphe.toString());
-/*			
-			System.out.println("Successeurs N1 :");
-			System.out.println(graphe.getSuccesseurs(n1));
-			System.out.println("Arcs sortants N1 :");
-			System.out.println(graphe.getArcsSortants(n1));
-			System.out.println("Predecesseurs N3 :");
-			System.out.println(graphe.getPredecesseurs(n3));
-			System.out.println("Arcs entrants N3 :");
-			System.out.println(graphe.getArcsEntrants(n3));
-			System.out.println("Voisins N3 :");
-			System.out.println(graphe.getVoisins(n3));
-*/
-//			graphe.supprimerArc(a2);
-			
-//			System.out.println(graphe.toString());
-			
 			System.out.println("Parcours en Profondeur");
 			graphe.parcoursProfondeur(n0, true);
 			System.out.println("END Prof");
@@ -92,6 +70,8 @@ public class AppliTest {
 			graphe.parcoursLargeur(n0);
 			System.out.println("END Larg");	
 			
+			Ville v1 = new Ville(0, "Nantes", 2);
+			System.out.println(v1.getLabel() +" " + v1.getInteret());
 			
 		}
 		
