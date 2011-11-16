@@ -58,6 +58,8 @@ public class Arc implements Comparable<Arc> {
 				+ ponderation + "]";
 	}
 
+
+	
 	@Override
 	public int compareTo(Arc a) {
 		// TODO Auto-generated method stub
