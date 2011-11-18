@@ -66,7 +66,7 @@ public class Route extends Arc {
 		ligneDot += "color=" + "black" + " ";
 		ligneDot += "arrowhead=" + "normal";
 		*/
-		ligneDot += "];" ; // fin des options
+		ligneDot += "];\n" ; // fin des options
 		
 		return ligneDot;
 	}

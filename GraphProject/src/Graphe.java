@@ -30,7 +30,7 @@ public abstract class Graphe {
 		liste_noeud.remove(n);
 	}
 
-	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+	public void ajouterArc(Arc a) {
 		
 		liste_arc.add(a);
 		

@@ -46,7 +46,7 @@ public String getInteretString(){
 		ligneDot += "style=" + "Sans" + " ";
 		*/
 		
-		ligneDot += "];"; // on ferme le crochet
+		ligneDot += "];\n"; // on ferme le crochet
 
 		return ligneDot;
 	}

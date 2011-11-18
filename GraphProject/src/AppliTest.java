@@ -136,43 +136,40 @@ public class AppliTest {
 
 		}
 		else if ( t == 5 ) {
-			//Carte carte = new Carte();
+			Carte carte = new Carte();
 			
 			Ville v1 = new Ville(1, "Nantes", 4);
 			Ville v2 = new Ville(2, "Angers", 3);
 			Ville v3 = new Ville(3, "Les Sables d'Olonnes", 2);
 			Ville v4 = new Ville(4, "La Roche/Yon", 2);
 			Ville v5 = new Ville(5, "Pornichet", 5);
+			Ville v6 = new Ville(6, "paris", 5);
 			
-			System.out.println(v1.toDotLine());
-			System.out.println(v2.toDotLine());
-			System.out.println(v3.toDotLine());
-			System.out.println(v4.toDotLine());
-			System.out.println(v5.toDotLine());
-			
-			/*
-			carte.ajouterSommet(v1);
-			carte.ajouterSommet(v2);
-			carte.ajouterSommet(v3);
-			carte.ajouterSommet(v4);
-			carte.ajouterSommet(v5);
-*/
+			carte.ajouterNoeud(v1);
+			carte.ajouterNoeud(v2);
+			carte.ajouterNoeud(v3);
+			carte.ajouterNoeud(v4);
+			carte.ajouterNoeud(v5);
+			carte.ajouterNoeud(v6);
 	
-			Route r1 = new Route(1, "route66", 10.6, 3, v1, v2);
+			Route r1 = new Route(1, "route66s", 10.6, 3, v1, v2);
 			Route r2 = new Route(2, "a57", 23.5, 4, v2, v4);
 			Route r3 = new Route(3, "a11", 29.8, 1, v4, v5);
-			
-			System.out.println(r1.toDotLine());
-			System.out.println(r2.toDotLine());
-			System.out.println(r3.toDotLine());
+			Route r4 = new Route(4, "route66n", 10.6, 3, v2, v1);
+			Route r5 = new Route(5, "a59", 10.6, 3, v3, v4);
+			Route r6 = new Route(6, "a58", 10.6, 3, v2, v3);
 
-//			carte.ajouterArc(r1);
-//			carte.ajouterArc(r2);
-//			carte.ajouterArc(r3);
+			carte.ajouterArc(r1);
+			carte.ajouterArc(r2);
+			carte.ajouterArc(r3);
+			carte.ajouterArc(r4);
+			carte.ajouterArc(r5);
+			carte.ajouterArc(r6);
 			
 			System.out.println("Well done.");
-//			System.out.println( carte.toString() ) ;
-
+			//System.out.println(carte.toString());
+			
+			carte.writeDotFile();
 			
 		}
 
