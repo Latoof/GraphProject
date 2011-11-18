@@ -156,8 +156,12 @@ public class AppliTest {
 			Route r2 = new Route(2, "a57", 23.5, 4, v2, v4);
 			Route r3 = new Route(3, "a11", 29.8, 1, v4, v5);
 			Route r4 = new Route(4, "route66n", 10.6, 3, v2, v1);
-			Route r5 = new Route(5, "a59", 10.6, 3, v3, v4);
+			Route r5 = new Route(5, "a59", 10.6, 3, v6, v4);
 			Route r6 = new Route(6, "a58", 10.6, 3, v2, v3);
+			Route r7 = new Route(6, "a58", 10.6, 3, v2, v3);
+			Route r8 = new Route(8, "d5554", 50.3, 5, v5, v1);
+			Route r9 = new Route(9, "d125", 30.3, 2, v1, v6);
+			Route r10 = new Route(10, "n45", 27.8, 1, v1, v3);
 
 			carte.ajouterArc(r1);
 			carte.ajouterArc(r2);
@@ -165,6 +169,10 @@ public class AppliTest {
 			carte.ajouterArc(r4);
 			carte.ajouterArc(r5);
 			carte.ajouterArc(r6);
+			carte.ajouterArc(r7);
+			carte.ajouterArc(r8);
+			carte.ajouterArc(r9);
+			carte.ajouterArc(r10);
 			
 			System.out.println("Well done.");
 			//System.out.println(carte.toString());
