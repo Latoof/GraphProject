@@ -3,7 +3,7 @@ public class Arc implements Comparable<Arc> {
 	
 	int		id;
 	String 	label;
-	int 	ponderation;
+	double 	ponderation;
 	Noeud	noeudSource, noeudCible;
 	
 	/**
@@ -13,7 +13,7 @@ public class Arc implements Comparable<Arc> {
 	 * @param noeudSource
 	 * @param noeudCible
 	 */
-	public Arc(int id, String label, int ponderation, Noeud noeudSource, Noeud noeudCible) {
+	public Arc(int id, String label, double ponderation, Noeud noeudSource, Noeud noeudCible) {
 		this.id = id;
 		this.label = label;
 		this.ponderation = ponderation;
@@ -21,25 +21,10 @@ public class Arc implements Comparable<Arc> {
 		this.noeudSource = noeudSource;
 	}
 	
-	/**
-	 * @param id
-	 * @param label
-	 * @param pondération
-	 */
 	public Arc(int id, String label, int ponderation) {
 		this.id = id;
 		this.label = label;
 		this.ponderation = ponderation;
-	}
-	
-	public Arc( int id ) {
-		this.id = id;
-	}
-	
-	public Arc( int id, Noeud noeudSource, Noeud noeudCible ) {
-		this.id = id;
-		this.noeudCible = noeudCible;
-		this.noeudSource = noeudSource;
 	}
 
 	public void setNoeudSource(Noeud noeudSource) {
@@ -60,6 +45,34 @@ public class Arc implements Comparable<Arc> {
 	
 	public int getId() {
 		return this.id;
+	}
+
+	/**
+	 * @return the label
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * @param label the label to set
+	 */
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	/**
+	 * @return the ponderation
+	 */
+	public double getPonderation() {
+		return ponderation;
+	}
+
+	/**
+	 * @param ponderation the ponderation to set
+	 */
+	public void setPonderation(double ponderation) {
+		this.ponderation = ponderation;
 	}
 
 	@Override

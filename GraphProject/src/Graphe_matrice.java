@@ -20,7 +20,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();		
 	}
 	
-	public void ajouterSommet (Noeud n) {
+	public void ajouterNoeud (Noeud n) {
 		liste_noeud.add(n);
 		noeud_actifs.put(n.getId(), true);
 		
@@ -28,7 +28,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		this.resizeMatrice();
 	}
 	
-	public void supprimerSommet (Noeud n) {
+	public void supprimerNoeud (Noeud n) {
 
 		liste_noeud.remove((Noeud)n);
 		noeud_actifs.put(n.getId(), false);

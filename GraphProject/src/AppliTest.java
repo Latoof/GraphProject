@@ -17,12 +17,12 @@ public class AppliTest {
 			Noeud n4 = new Noeud(4, "E");
 			Noeud n5 = new Noeud(5, "F");
 
-			graphe.ajouterSommet(n0);			
-			graphe.ajouterSommet(n1);
-			graphe.ajouterSommet(n2);
-			graphe.ajouterSommet(n3);
-			graphe.ajouterSommet(n4);
-			graphe.ajouterSommet(n5);
+			graphe.ajouterNoeud(n0);			
+			graphe.ajouterNoeud(n1);
+			graphe.ajouterNoeud(n2);
+			graphe.ajouterNoeud(n3);
+			graphe.ajouterNoeud(n4);
+			graphe.ajouterNoeud(n5);
 			
 			Arc a0 = new Arc(0, "a", 0, n0, n0);
 			Arc a1 = new Arc(1, "b", 0, n0, n1);
@@ -138,32 +138,46 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(1, "Nantes");
-			Ville v2 = new Ville(2, "Nantes");
-			Ville v3 = new Ville(3, "Nantes");
-			Ville v4 = new Ville(4, "Nantes");
-			Ville v5 = new Ville(5, "Nantes");
-
+			Ville v1 = new Ville(1, "Nantes", 4);
+			Ville v2 = new Ville(2, "Angers", 3);
+			Ville v3 = new Ville(3, "Les Sables d'Olonnes", 2);
+			Ville v4 = new Ville(4, "La Roche/Yon", 2);
+			Ville v5 = new Ville(5, "Pornichet", 5);
+			Ville v6 = new Ville(6, "paris", 5);
 			
-			carte.ajouterSommet(v1);
-			carte.ajouterSommet(v2);
-			carte.ajouterSommet(v3);
-			carte.ajouterSommet(v4);
-			carte.ajouterSommet(v5);
-
+			carte.ajouterNoeud(v1);
+			carte.ajouterNoeud(v2);
+			carte.ajouterNoeud(v3);
+			carte.ajouterNoeud(v4);
+			carte.ajouterNoeud(v5);
+			carte.ajouterNoeud(v6);
 	
-			Route r1 = new Route(1, v1, v2, "route66", 10, 3);
-			Route r2 = new Route(2, v2, v4, "a57", 23, 4);
-			Route r3 = new Route(3, v4, v5, "a11", 29, 1);
-
+			Route r1 = new Route(1, "route66s", 10.6, 3, v1, v2);
+			Route r2 = new Route(2, "a57", 23.5, 4, v2, v4);
+			Route r3 = new Route(3, "a11", 29.8, 1, v4, v5);
+			Route r4 = new Route(4, "route66n", 10.6, 3, v2, v1);
+			Route r5 = new Route(5, "a59", 10.6, 3, v6, v4);
+			Route r6 = new Route(6, "a58", 10.6, 3, v2, v3);
+			Route r7 = new Route(6, "a58", 10.6, 3, v2, v3);
+			Route r8 = new Route(8, "d5554", 50.3, 5, v5, v1);
+			Route r9 = new Route(9, "d125", 30.3, 2, v1, v6);
+			Route r10 = new Route(10, "n45", 27.8, 1, v1, v3);
 
 			carte.ajouterArc(r1);
 			carte.ajouterArc(r2);
 			carte.ajouterArc(r3);
+			carte.ajouterArc(r4);
+			carte.ajouterArc(r5);
+			carte.ajouterArc(r6);
+			carte.ajouterArc(r7);
+			carte.ajouterArc(r8);
+			carte.ajouterArc(r9);
+			carte.ajouterArc(r10);
 			
 			System.out.println("Well done.");
-			System.out.println( carte.toString() ) ;
-
+			//System.out.println(carte.toString());
+			
+			carte.writeDotFile();
 			
 		}
 
