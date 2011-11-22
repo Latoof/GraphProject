@@ -1,3 +1,6 @@
+import java.util.Set;
+import java.util.TreeSet;
+
 
 public class AppliTest {
 
@@ -6,7 +9,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=0; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -154,7 +157,7 @@ public class AppliTest {
 			Route r4 = new Route(4, "route66n", 10.6, 3, v2, v1);
 			Route r5 = new Route(5, "a59", 10.6, 3, v6, v4);
 			Route r6 = new Route(6, "a58", 10.6, 3, v2, v3);
-			Route r7 = new Route(6, "a58", 10.6, 3, v2, v3);
+			Route r7 = new Route(7, "a58", 10.6, 3, v2, v3);
 			Route r8 = new Route(8, "d5554", 50.3, 5, v5, v1);
 			Route r9 = new Route(9, "d125", 30.3, 2, v1, v6);
 			Route r10 = new Route(10, "n45", 27.8, 1, v1, v3);
@@ -173,7 +176,22 @@ public class AppliTest {
 			System.out.println("Well done.");
 			//System.out.println(carte.toString());
 			
-			carte.writeDotFile();
+			Set<Route> setRoute = new TreeSet<Route>();
+			
+			Route ra = new Route(100, "a", 10, 1, v1, v3);
+			Route rb = new Route(101, "b", 20, 1, v1, v3);
+			Route rc = new Route(102, "c", 05, 1, v1, v3);
+			
+			setRoute.add((Route)ra);
+			setRoute.add((Route)rc);
+			setRoute.add((Route)rb);
+			
+			System.out.println("a par rapport à b : " + ra.compareTo(rb));
+			
+			
+			System.out.println(setRoute.toString());
+			
+			//carte.writeDotFile();
 			
 		}
 

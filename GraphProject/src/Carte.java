@@ -9,7 +9,7 @@ public class Carte extends Graphe_matrice {
 		super();
 	}
 	
-	public void getCheminsOptAgreg () {
+	public void getCheminsOptAgreg (Ville vStart) {
 		
 	}
 

@@ -82,8 +82,6 @@ public class Arc implements Comparable<Arc> {
 	}
 
 
-	
-	@Override
 	public int compareTo(Arc a) {
 		// TODO Auto-generated method stub
 		return this.getId() - a.getId();
