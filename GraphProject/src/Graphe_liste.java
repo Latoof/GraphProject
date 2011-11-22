@@ -101,6 +101,10 @@ public class Graphe_liste extends Graphe {
 				
 		}
 
+		if(rList.contains(n)){
+			rList.remove(n);
+		}
+		
 		return rList;
 	}
 	
@@ -130,6 +134,9 @@ public class Graphe_liste extends Graphe {
 			
 		}
 		
+		if(rList.contains(n)){
+			rList.remove(n);
+		}
 		
 		return rList;
 	}

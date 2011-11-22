@@ -6,16 +6,16 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=5; // A modifier pour changer le test (je m'en sers aussi)
+		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
-			Noeud n0 = new Noeud(0, "A");
-			Noeud n1 = new Noeud(1, "B");
-			Noeud n2 = new Noeud(2, "C");
-			Noeud n3 = new Noeud(3, "D");
-			Noeud n4 = new Noeud(4, "E");
-			Noeud n5 = new Noeud(5, "F");
+			Noeud n0 = new Noeud(0, "1");
+			Noeud n1 = new Noeud(1, "2");
+			Noeud n2 = new Noeud(2, "3");
+			Noeud n3 = new Noeud(3, "4");
+			Noeud n4 = new Noeud(4, "5");
+			Noeud n5 = new Noeud(5, "6");
 
 			graphe.ajouterNoeud(n0);			
 			graphe.ajouterNoeud(n1);
@@ -62,16 +62,12 @@ public class AppliTest {
 			
 			System.out.println(graphe.toString());
 
-			System.out.println("Parcours en Profondeur");
 			graphe.parcoursProfondeur(n0, true);
-			System.out.println("END Prof");
 			
 			System.out.println("Parcours en Largeur");
 			graphe.parcoursLargeur(n0);
 			System.out.println("END Larg");	
-			
-			Ville v1 = new Ville(0, "Nantes", 2);
-			System.out.println(v1.getLabel() +" " + v1.getInteret());
+
 			
 		}
 		

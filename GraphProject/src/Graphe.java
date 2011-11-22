@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
-import java.util.Stack;
 
 public abstract class Graphe {
 
@@ -83,6 +83,8 @@ public abstract class Graphe {
 		tableauDebut = new int[this.getNbNoeuds()];
 		tableauFin = new int[this.getNbNoeuds()];
 		
+		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getLabel());
+		
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauCouleur[i]=0;
 			tableauParent[i]=-1;
@@ -98,13 +100,15 @@ public abstract class Graphe {
 				}
 			}
 		}
-		
 	}
 	
 	public void visiterProfondeur(Noeud n) {
+						
 		tableauCouleur[n.getId()]=1;
 		tableauDebut[n.getId()]=temp;
 		temp++;
+		
+		System.out.println("entrée : " + n.getLabel());
 		
 		Iterator<Noeud> it = getVoisins(n).iterator();
 		
@@ -117,6 +121,7 @@ public abstract class Graphe {
 			}
 		}
 		tableauCouleur[ n.getId() ]=2;
+		System.out.println("sortie : " + n.getLabel());
 		tableauFin[ n.getId() ]= temp;
 		temp++;
 	}
@@ -129,7 +134,9 @@ public abstract class Graphe {
 		tableauFin = new int[this.getNbNoeuds()];
 		
 		
-		Stack<Noeud> pile = new Stack<Noeud>();
+		LinkedList<Noeud> file = new LinkedList<Noeud>();
+		
+		System.out.println("Parcours en largeur depuis le noeud " + nStart.getLabel());
 		
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauCouleur[i]=0;
@@ -137,33 +144,37 @@ public abstract class Graphe {
 			tableauDistance[i]=-1;
 		}
 		temp=0;
+		tableauCouleur[nStart.getId()]=1;
 		tableauParent[nStart.getId()]=nStart.getId();
 		tableauDistance[nStart.getId()]=0;
 		
-		pile.push(nStart);
-		Noeud nTemp;
+		file.addFirst(nStart);
+		Noeud u;
 		
-		while(!pile.isEmpty()){
-			nTemp=pile.pop();
-			tableauDebut[nTemp.getId()]=temp;
+		while(!file.isEmpty()){
+			u=file.pollFirst();
+			tableauDebut[u.getId()]=temp;
 			temp++;
 			
-			Iterator<Noeud> it = getVoisins(nTemp).iterator();
+			System.out.println("entrée : " + u.getLabel());
+			
+			Iterator<Noeud> it = getVoisins(u).iterator();
 			
 			while ( it.hasNext() ) {
 				
-				Noeud nTempVois = it.next();
-				if(tableauCouleur[ nTempVois.getId() ] == 0){
-					tableauCouleur[ nTempVois.getId() ] = 1;
-					tableauParent[ nTempVois.getId() ] = nTemp.getId();
-					tableauDistance[ nTempVois.getId() ] = (tableauDistance[ nTemp.getId() ] + 1);
-					pile.push(nTempVois);
+				Noeud v = it.next();
+				if(tableauCouleur[ v.getId() ] == 0){
+					tableauCouleur[ v.getId() ] = 1;
+					tableauParent[ v.getId() ] = u.getId();
+					tableauDistance[ v.getId() ] = (tableauDistance[ u.getId() ] + 1);
+					file.addLast(v);
 				}
 			}
-			tableauCouleur[ nTemp.getId() ]=2;
-			tableauFin[ nTemp.getId() ]= temp;
+			tableauCouleur[ u.getId() ]=2;
+			System.out.println("sortie : " + u.getLabel());
+			tableauFin[ u.getId() ]=temp;
+			temp++;
 		}
-		
 	}
 
 	public Set<Noeud> getVoisins(Noeud n){

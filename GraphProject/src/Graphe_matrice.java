@@ -79,7 +79,9 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 				Set<Integer> sTemp = matrice_adjacence.get(n.getId(), i);
 				
 				if (!sTemp.isEmpty()) {
-					rList.add(getNoeudFromId(i));
+					if(i != n.getId()){
+						rList.add(getNoeudFromId(i));
+					}
 				}
 			}
 		}
@@ -95,11 +97,12 @@ public Set<Noeud> getPredecesseurs (Noeud n) {
 				Set<Integer> sTemp = matrice_adjacence.get(i, n.getId());
 				
 				if (!sTemp.isEmpty()) {
-					rList.add(getNoeudFromId(i));
+					if(i != n.getId()){
+						rList.add(getNoeudFromId(i));
+					}
 				}
 			}
 		}
-
 		return rList;
 		
 	}

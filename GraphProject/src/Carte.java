@@ -1,17 +1,16 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 
 public class Carte extends Graphe_matrice {
 
-
-	
 	//ArrayList	listeRoutes, listeVilles;
 
 	public Carte() {
 		super();
+	}
+	
+	public void getCheminsOptAgreg () {
+		
 	}
 
 	public void writeDotFile(){
