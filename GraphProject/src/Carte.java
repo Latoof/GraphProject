@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -48,7 +50,38 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		
-		//this.ponderationAgregation(vStart, vCible, route, coeff)
+		tableauParent = new int[this.getNbNoeuds()];
+		tableauDistance = new int[this.getNbNoeuds()];
+		
+		
+		LinkedList<Ville> file = new LinkedList<Ville>();
+		
+		System.out.println("Parcours en largeur depuis le noeud " + vStart.getLabel());
+		
+		for(int i=0;i<getNbNoeuds();i++){
+			tableauDistance[i]=-1;
+			tableauParent[i]=-1;
+			file.add(this.getVilleFromId(i));
+		}
+		tableauDistance[vStart.getId()]=0;
+		tableauParent[vStart.getId()]=vStart.getId();
+		
+		Ville u;
+		
+		while(!file.isEmpty()){
+			u=file.pollFirst();
+			
+			Iterator<Arc> it = getArcsSortants(u).iterator();
+			
+			while ( it.hasNext() ) {
+				
+				Route r = (Route)it.next();
+				if(tableauDistance[r.getNoeudCible().getId()] > (tableauDistance[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, 0.5))){
+					tableauDistance[r.getNoeudCible().getId()] = (int)(tableauDistance[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, 0.5));
+					tableauParent[r.getNoeudCible().getId()] = r.getNoeudSource().getId();
+				}
+			}
+		}
 	}
 	
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {

@@ -195,7 +195,7 @@ public class AppliTest {
 			//carte.writeDotFile();
 			
 			carte.genererItineraireAgregation(v0);
-			System.out.println(carte.ponderationAgregation(v1, v2, r6, 0.5));
+			System.out.println("Well done.");
 		}
 
 	}
