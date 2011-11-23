@@ -15,9 +15,9 @@ public class Ville extends Noeud {
 	
 public String getInteretString(){
 		
-		String stars = new String();
+		String stars = "";
 		
-		for (int i=0;i < this.interet;i++){
+		for (int i=0;i < this.interet; i++){
 			stars += "*";
 		}
 		

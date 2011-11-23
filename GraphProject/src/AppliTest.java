@@ -7,8 +7,9 @@ public class AppliTest {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		int t=6; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
@@ -201,11 +202,13 @@ public class AppliTest {
 		else if ( t == 6 ) {
 			Carte carte = new Carte();
 			try {
-				carte.loadFromDotFile( "/comptes/E084657T/Dropbox/Univ nantes - Master 1 ALMA/StrucComplexes/map.dot" );
+				carte.loadFromDotFile( "E:/Dropbox/Univ nantes - Master 1 ALMA/StrucComplexes/map.dot" );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			carte.writeDotFile( "E:/Dropbox/Univ nantes - Master 1 ALMA/StrucComplexes/map_out.dot" );
 		}
 
 	}
