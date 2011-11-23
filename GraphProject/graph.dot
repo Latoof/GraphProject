@@ -4,15 +4,15 @@ digraph {
 "Les Sables d'Olonnes" [label="Les Sables d'Olonnes(**)"];
 "La Roche/Yon" [label="La Roche/Yon(**)"];
 "Pornichet" [label="Pornichet(*****)"];
-"paris" [label="paris(*****)"];
+"paris" [label="paris(****)"];
 "Nantes" -> "Angers" [label="route66s(10.6;***)"];
 "Angers" -> "La Roche/Yon" [label="a57(23.5;****)"];
 "La Roche/Yon" -> "Pornichet" [label="a11(29.8;*)"];
 "Angers" -> "Nantes" [label="route66n(10.6;***)"];
 "paris" -> "La Roche/Yon" [label="a59(10.6;***)"];
 "Angers" -> "Les Sables d'Olonnes" [label="a58(10.6;***)"];
-"Angers" -> "Les Sables d'Olonnes" [label="a58(10.6;***)"];
-"Pornichet" -> "Nantes" [label="d5554(50.3;*****)"];
+"Angers" -> "Les Sables d'Olonnes" [label="a60(11.6;****)"];
+"paris" -> "Angers" [label="d5554(50.3;*****)"];
 "Nantes" -> "paris" [label="d125(30.3;**)"];
-"Nantes" -> "Les Sables d'Olonnes" [label="n45(27.8;*)"];
+"Angers" -> "La Roche/Yon" [label="n45(27.8;*)"];
 }
