@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -9,7 +10,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) {
 		
-		int t=5; // A modifier pour changer le test (je m'en sers aussi)
+		int t=6; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -193,6 +194,15 @@ public class AppliTest {
 			
 			//carte.writeDotFile();
 			
+		}
+		else if ( t == 6 ) {
+			Carte carte = new Carte();
+			try {
+				carte.loadFromDotFile( "/comptes/E084657T/Dropbox/Univ nantes - Master 1 ALMA/StrucComplexes/map.dot" );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

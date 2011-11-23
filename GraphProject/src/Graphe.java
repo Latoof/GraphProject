@@ -19,6 +19,7 @@ public abstract class Graphe {
 		liste_arc = new ArrayList<Arc>();		
 	}
 	
+	
 	public void ajouterNoeud (Noeud n) {
 		
 		liste_noeud.add(n);
@@ -181,6 +182,7 @@ public abstract class Graphe {
 		return null;
 	}
 
+	
 	@Override
 	public String toString() {
 		
