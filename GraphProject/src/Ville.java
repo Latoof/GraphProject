@@ -51,9 +51,28 @@ public String getInteretString(){
 		return ligneDot;
 	}
 	
-	public int compareTo(Ville v) {
+	/**
+	 * On considere d'abord l'interet puis l'id pour classer les villes entre elles.
+	 */
+	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
-		return this.getInteret() - v.getInteret();
+		Ville a = (Ville)this;
+		Ville b = (Ville)arg0;
+		
+		if(a.getInteret() > b.getInteret()){
+			return 1;
+		}
+		else if(a.getInteret() < b.getInteret()){
+			return -1;
+		}
+		else{
+			if(a.getId() > b.getId()){
+				return 1;
+			}
+			else{
+				return -1;
+			}
+		}
 	}
 	
 }

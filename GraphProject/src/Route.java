@@ -80,16 +80,23 @@ public class Route extends Arc {
 	 * comparables, on considére que les routes sont "égales" (Les 2 possibilités restent 
 	 * à envisager).
 	 */
-	public int compareTo(Route r) {
+	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
-		if ((this.interet < r.getInteret()) && (this.ponderation > r.getPonderation())){
+		Route a = (Route)this;
+		Route b = (Route)arg0;
+		if ((a.interet < b.getInteret()) && (a.ponderation > b.getPonderation())){
 			return -1;
 		}
-		else if ((this.interet > r.getInteret()) && (this.ponderation < r.getPonderation())){
+		else if ((a.interet > b.getInteret()) && (a.ponderation < b.getPonderation())){
 			return 1;
 		}
 		else {
-			return 0;
+			if(a.getId() > b.getId()){
+				return 1;
+			}
+			else{
+				return -1;
+			}
 		}
 	}
 	

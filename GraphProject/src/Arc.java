@@ -1,5 +1,5 @@
 
-public class Arc implements Comparable<Arc> {
+public class Arc implements Comparable {
 	
 	int		id;
 	String 	label;
@@ -82,8 +82,10 @@ public class Arc implements Comparable<Arc> {
 	}
 
 
-	public int compareTo(Arc a) {
+	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
-		return this.getId() - a.getId();
+		Arc a = (Arc)this;
+		Arc b = (Arc)arg0;
+		return a.getId() - b.getId();
 	}
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.TreeSet;
 
 
 public class AppliTest {
@@ -137,9 +138,9 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(1, "Angers", 0);
-			Ville v2 = new Ville(2, "Nantes", 0);
-			Ville v3 = new Ville(3, "Pornichet", 0);
+			Ville v1 = new Ville(1, "Angers", 3);
+			Ville v2 = new Ville(2, "Nantes", 2);
+			Ville v3 = new Ville(3, "Pornichet", 2);
 			Ville v4 = new Ville(4, "Rezé", 0);
 			Ville v5 = new Ville(5, "St-Luce-sur-Loire", 0);
 			Ville v6 = new Ville(6, "Rennes", 0);
@@ -170,8 +171,15 @@ public class AppliTest {
 			carte.ajouterArc(r8);
 			
 			System.out.println("Creation : Well done\n");
+			/*
+			TreeSet<Route> setVille = new TreeSet<Route>();
+			setVille.add(r1);
+			setVille.add(r2);
+			setVille.add(r3);
 			
-			carte.genererItineraireAgregation(v1, 1);
+			System.out.println(setVille);
+			*/
+			//carte.genererItineraireAgregation(v1, 1);
 			
 			System.out.println("END");
 						

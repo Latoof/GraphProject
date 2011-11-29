@@ -1,5 +1,5 @@
 
-public class Noeud implements Comparable<Noeud> {
+public class Noeud implements Comparable {
 
 	int 	id;
 	String 	label;
@@ -31,9 +31,11 @@ public class Noeud implements Comparable<Noeud> {
 
 
 	@Override
-	public int compareTo(Noeud arg0) {
+	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
-		return this.getId() - arg0.getId();
+		Noeud a = (Noeud)this;
+		Noeud b = (Noeud)arg0;
+		return a.getId() - b.getId();
 	}
 	
 	
