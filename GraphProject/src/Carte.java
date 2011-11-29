@@ -33,7 +33,7 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
-	public void genererItineraireAgregation (Ville vStart, double coeff) {
+	public boolean genererItineraireAgregation (Ville vStart, double coeff) {
 		distanceMax = 0;
 		interetMax = 0;
 		
@@ -54,19 +54,43 @@ public class Carte extends Graphe_matrice {
 		tableauParent = new int[this.getNbNoeuds()];
 		tableauDistanceKilo = new double[this.getNbNoeuds()];
 		
-		
-		LinkedList<Ville> file = new LinkedList<Ville>();
-		
-		System.out.println("Parcours en largeur depuis le noeud " + vStart.getLabel() + "\n");
+		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getLabel() + "\n");
 		
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo[i]=1000;
 			tableauParent[i]=-1;
-			file.add(this.getVilleFromId(i));
 		}
 		tableauDistanceKilo[vStart.getId()]=0;
 		tableauParent[vStart.getId()]=vStart.getId();
 		
+		for(int i=1; i < this.getNbNoeuds(); i++){
+			Iterator<Arc> it = this.liste_arc.iterator();
+			while(it.hasNext()){
+				Route r = (Route)it.next();
+				if(tableauDistanceKilo[r.getNoeudCible().getId()] > (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+					tableauDistanceKilo[r.getNoeudCible().getId()] = (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff));
+					tableauParent[r.getNoeudCible().getId()] = r.getNoeudSource().getId();
+				}
+			}
+		}
+		
+		for(int i=0; i < getNbNoeuds(); i++){
+			System.out.println("Ville : " + getVilleFromId(i).getLabel());
+			System.out.println("Parent : " + getVilleFromId(tableauParent[i]).getLabel());
+			System.out.println("Distance depuis le point de départ : " + tableauDistanceKilo[i] + "\n");
+		}
+		
+		Iterator<Arc> iterat = this.liste_arc.iterator();
+		while(iterat.hasNext()){
+			Route r = (Route)iterat.next();
+			if(tableauDistanceKilo[r.getNoeudCible().getId()] > (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+				return false;
+			}
+		}
+		
+		return true;
+		
+		/*
 		Ville u;
 		
 		while(!file.isEmpty()){
@@ -91,7 +115,8 @@ public class Carte extends Graphe_matrice {
 			System.out.println("Distance depuis le point de départ : " + tableauDistanceKilo[i] + "\n");
 		}
 		
-		System.out.println("END Dijkstra");
+		System.out.println("END Bellman-Ford");
+		*/
 	}
 	
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {
@@ -99,6 +124,8 @@ public class Carte extends Graphe_matrice {
 		
 		result = coeff * route.getPonderation() / (this.distanceMax);
 		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
+		
+//		result = route.getPonderation();
 			
 		return result;
 	}

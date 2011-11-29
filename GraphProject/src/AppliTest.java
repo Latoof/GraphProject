@@ -155,11 +155,11 @@ public class AppliTest {
 	
 			Route r1 = new Route(1, "1->1", 1, 1, v1, v1);
 			Route r2 = new Route(2, "1->2", 2, 0, v1, v2);
-			Route r3 = new Route(3, "2->4", 0, 0, v2, v4);
-			Route r4 = new Route(4, "4->1", 1, 0, v4, v1);
+			Route r3 = new Route(3, "2->4", -2, 0, v2, v4);
+			Route r4 = new Route(4, "1->4", 1, 0, v1, v4);
 			Route r5 = new Route(5, "2->3", 3, 0, v2, v3);
 			Route r6 = new Route(6, "2->5", 2, 0, v2, v5);
-			Route r7 = new Route(7, "3->5", 0, 0, v3, v5);
+			Route r7 = new Route(7, "3->5", -2, 0, v3, v5);
 			Route r8 = new Route(8, "5->6", 1, 0, v5, v6);
 
 			carte.ajouterArc(r1);
