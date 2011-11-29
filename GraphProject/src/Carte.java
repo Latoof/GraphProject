@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 
@@ -9,7 +9,7 @@ public class Carte extends Graphe_matrice {
 
 	double	distanceMax;
 	int		interetMax;
-	double	tableauDistanceKilo[];
+	Hashtable<Integer, Double>	tableauDistanceKilo;
 
 	public Carte() {
 		super();
@@ -33,7 +33,21 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
-	public boolean genererItineraireAgregation (Ville vStart, double coeff) {
+	public void genererItineraireAgregation(Ville vStart, double coeff){		
+		if(this.methodeAgregation(vStart, coeff)){
+			for(int i=0; i < getNbNoeuds(); i++){
+				System.out.println("Ville : " + getVilleFromId(i).getLabel());
+				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getLabel());
+				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
+			}
+		}
+		else{
+			System.out.println("Presence d'un circuit absorbant : Resultats non concluants\n");
+		}
+		
+	}
+	
+	public boolean methodeAgregation (Ville vStart, double coeff) {
 		distanceMax = 0;
 		interetMax = 0;
 		
@@ -51,72 +65,46 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		
-		tableauParent = new int[this.getNbNoeuds()];
-		tableauDistanceKilo = new double[this.getNbNoeuds()];
+//		tableauParent = new int[this.getNbNoeuds()];
+		Hashtable<Integer, Integer> tableauParent = new Hashtable<Integer, Integer>();
+		tableauDistanceKilo = new Hashtable<Integer, Double>();
 		
 		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getLabel() + "\n");
 		
 		for(int i=0;i<getNbNoeuds();i++){
-			tableauDistanceKilo[i]=1000;
-			tableauParent[i]=-1;
+//			tableauDistanceKilo[i]=1000;
+			tableauDistanceKilo.put(i, 1000.0);
+			tableauParent.put(i, -1);
 		}
-		tableauDistanceKilo[vStart.getId()]=0;
-		tableauParent[vStart.getId()]=vStart.getId();
+//		tableauDistanceKilo[vStart.getId()]=0;
+		tableauDistanceKilo.put(vStart.getId(), 0.0);
+		tableauParent.put(vStart.getId(), vStart.getId());
 		
-		for(int i=1; i < this.getNbNoeuds(); i++){
+		for(int i=0; i < this.getNbNoeuds(); i++){
 			Iterator<Arc> it = this.liste_arc.iterator();
+			int k = 0;
 			while(it.hasNext()){
 				Route r = (Route)it.next();
-				if(tableauDistanceKilo[r.getNoeudCible().getId()] > (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
-					tableauDistanceKilo[r.getNoeudCible().getId()] = (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff));
-					tableauParent[r.getNoeudCible().getId()] = r.getNoeudSource().getId();
+				System.out.println(k);
+				System.out.println(tableauDistanceKilo.get(r.getNoeudCible().getId()));
+				System.out.println(tableauDistanceKilo.get(r.getNoeudSource().getId()) + "\n\n");
+				if(tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+//					tableauDistanceKilo[r.getNoeudCible().getId()] = (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff));
+					tableauDistanceKilo.put(r.getNoeudCible().getId(), (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff)));
+					tableauParent.put(r.getNoeudCible().getId(), r.getNoeudSource().getId());
 				}
+				k++;
 			}
 		}
-		
-		for(int i=0; i < getNbNoeuds(); i++){
-			System.out.println("Ville : " + getVilleFromId(i).getLabel());
-			System.out.println("Parent : " + getVilleFromId(tableauParent[i]).getLabel());
-			System.out.println("Distance depuis le point de départ : " + tableauDistanceKilo[i] + "\n");
-		}
-		
 		Iterator<Arc> iterat = this.liste_arc.iterator();
 		while(iterat.hasNext()){
 			Route r = (Route)iterat.next();
-			if(tableauDistanceKilo[r.getNoeudCible().getId()] > (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+//			tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + )
+			if(tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
 				return false;
 			}
 		}
-		
 		return true;
-		
-		/*
-		Ville u;
-		
-		while(!file.isEmpty()){
-			u=file.pollFirst();
-			
-			Iterator<Arc> it = getArcsSortants(u).iterator();
-			
-			while ( it.hasNext() ) {
-				
-				Route r = (Route)it.next();
-				
-				if(tableauDistanceKilo[r.getNoeudCible().getId()] > (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
-					tableauDistanceKilo[r.getNoeudCible().getId()] = (tableauDistanceKilo[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff));
-					tableauParent[r.getNoeudCible().getId()] = r.getNoeudSource().getId();
-				}
-			}
-		}
-		
-		for(int i=0; i < getNbNoeuds(); i++){
-			System.out.println("Ville : " + getVilleFromId(i).getLabel());
-			System.out.println("Parent : " + getVilleFromId(tableauParent[i]).getLabel());
-			System.out.println("Distance depuis le point de départ : " + tableauDistanceKilo[i] + "\n");
-		}
-		
-		System.out.println("END Bellman-Ford");
-		*/
 	}
 	
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {

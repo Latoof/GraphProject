@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -139,12 +140,12 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(0, "Angers", 0);
-			Ville v2 = new Ville(1, "Nantes", 0);
-			Ville v3 = new Ville(2, "Pornichet", 0);
-			Ville v4 = new Ville(3, "Rennes", 0);
-			Ville v5 = new Ville(4, "Rezé", 0);
-			Ville v6 = new Ville(5, "Ste-Luce-sur-Loire", 0);
+			Ville v1 = new Ville(1, "Angers", 0);
+			Ville v2 = new Ville(2, "Nantes", 0);
+			Ville v3 = new Ville(3, "Pornichet", 0);
+			Ville v4 = new Ville(4, "Rennes", 0);
+			Ville v5 = new Ville(5, "Rezé", 0);
+			Ville v6 = new Ville(6, "Ste-Luce-sur-Loire", 0);
 			
 			carte.ajouterNoeud(v1);
 			carte.ajouterNoeud(v2);
@@ -153,14 +154,14 @@ public class AppliTest {
 			carte.ajouterNoeud(v5);
 			carte.ajouterNoeud(v6);
 	
-			Route r1 = new Route(1, "1->1", 1, 1, v1, v1);
-			Route r2 = new Route(2, "1->2", 2, 0, v1, v2);
-			Route r3 = new Route(3, "2->4", -2, 0, v2, v4);
-			Route r4 = new Route(4, "1->4", 1, 0, v1, v4);
-			Route r5 = new Route(5, "2->3", 3, 0, v2, v3);
-			Route r6 = new Route(6, "2->5", 2, 0, v2, v5);
-			Route r7 = new Route(7, "3->5", -2, 0, v3, v5);
-			Route r8 = new Route(8, "5->6", 1, 0, v5, v6);
+			Route r1 = new Route(0, "1->1", 1, 1, v1, v1);
+			Route r2 = new Route(1, "1->2", 2, 0, v1, v2);
+			Route r3 = new Route(2, "2->4", -2, 0, v2, v4);
+			Route r4 = new Route(3, "1->4", 1, 0, v1, v4);
+			Route r5 = new Route(4, "2->3", 3, 0, v2, v3);
+			Route r6 = new Route(5, "2->5", 2, 0, v2, v5);
+			Route r7 = new Route(6, "3->5", -2, 0, v3, v5);
+			Route r8 = new Route(7, "5->6", 1, 0, v5, v6);
 
 			carte.ajouterArc(r1);
 			carte.ajouterArc(r2);
@@ -172,8 +173,6 @@ public class AppliTest {
 			carte.ajouterArc(r8);
 			
 			System.out.println("Creation : Well done\n");
-
-			//carte.writeDotFile("./out.dot");
 			
 			carte.genererItineraireAgregation(v1, 1);
 			
