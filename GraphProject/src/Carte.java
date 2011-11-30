@@ -223,7 +223,6 @@ public int loadFromDotFile(String cheminFichierDot) throws IOException {
 
 		if ( closeB ) {
 			return 0;
-			
 		}
 		else {
 			return -1;
