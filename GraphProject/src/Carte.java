@@ -44,7 +44,7 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		else{
-			System.out.println("Presence d'un circuit absorbant : Resultats non concluants\n");
+			System.out.println("Resultats non concluants :\n\t- Verifier la présence d'un circuit absorbant\n\t- Verifier que interet_max ou distance_max > 0\n");
 		}
 		
 	}
@@ -54,17 +54,26 @@ public class Carte extends Graphe_matrice {
 		interetMax = 0;
 		
 		for(int i=0; i < this.getNbNoeuds(); i++){
-			if(interetMax < this.getVilleFromId(i).getInteret()){
-				this.interetMax = this.getVilleFromId(i).getInteret();
+			Ville v = (Ville)this.liste_noeud.get(i);
+			if(interetMax < v.getInteret()){
+				this.interetMax = v.getInteret();
 			}
 		}
 		for(int j=0; j < this.getNbArcs(); j++){
-			if(distanceMax < this.getRouteFromId(j).getPonderation()){
-				this.distanceMax = this.getRouteFromId(j).getPonderation();
+			Route r = (Route)this.liste_arc.get(j);
+			if(distanceMax < r.getPonderation()){
+				this.distanceMax = r.getPonderation();
 			}
-			if(interetMax < this.getRouteFromId(j).getInteret()){
-				this.interetMax = this.getRouteFromId(j).getInteret();
+			if(interetMax < r.getInteret()){
+				this.interetMax = r.getInteret();
 			}
+		}
+		
+		System.out.println("interet max : " + interetMax);
+		System.out.println("distance max : " + distanceMax);
+		
+		if(interetMax == 0 || distanceMax == 0){
+			return false;
 		}
 		
 		tableauParent = new Hashtable<Integer, Integer>();

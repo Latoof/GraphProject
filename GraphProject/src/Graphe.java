@@ -8,7 +8,7 @@ public abstract class Graphe {
 
 	ArrayList<Noeud>			liste_noeud;
 	ArrayList<Arc>				liste_arc;
-	int 						tableauCouleur[];
+	Hashtable<Integer, Integer> tableauCouleur;
 	Hashtable<Integer, Integer>	tableauParent;
 	Hashtable<Integer, Integer> tableauDebut;
 	Hashtable<Integer, Integer> tableauFin;
@@ -80,7 +80,7 @@ public abstract class Graphe {
 	}
 	
 	public void parcoursProfondeur(Noeud nStart, Boolean parcoursTot) {
-		tableauCouleur = new int[this.getNbNoeuds()];
+		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDebut = new Hashtable<Integer, Integer>();
 		tableauFin = new Hashtable<Integer, Integer>();
@@ -88,7 +88,7 @@ public abstract class Graphe {
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getLabel());
 		
 		for(int i=0;i<getNbNoeuds();i++){
-			tableauCouleur[i]=0;
+			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
 		}
 		temp=0;
@@ -98,7 +98,7 @@ public abstract class Graphe {
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
-				if(tableauCouleur[i] == 0){
+				if(tableauCouleur.get(i) == 0){
 					visiterProfondeur(this.getNoeudFromId(i));
 				}
 			}
@@ -107,7 +107,7 @@ public abstract class Graphe {
 	
 	public void visiterProfondeur(Noeud n) {
 						
-		tableauCouleur[n.getId()]=1;
+		tableauCouleur.put(n.getId(), 1);
 //		tableauDebut[n.getId()]=temp;
 		tableauDebut.put(n.getId(), temp);
 		temp++;
@@ -119,12 +119,12 @@ public abstract class Graphe {
 		while ( it.hasNext() ) {
 			
 			Noeud nTemp = it.next();
-			if(tableauCouleur[ nTemp.getId() ] == 0){
+			if(tableauCouleur.get(nTemp.getId()) == 0){
 				tableauParent.put(nTemp.getId(), n.getId());
 				visiterProfondeur(nTemp);
 			}
 		}
-		tableauCouleur[ n.getId() ]=2;
+		tableauCouleur.put(n.getId(), 2);
 		System.out.println("sortie : " + n.getLabel());
 //		tableauFin[ n.getId() ]= temp;
 		tableauFin.put(n.getId(), temp);
@@ -133,7 +133,7 @@ public abstract class Graphe {
 	
 	public void parcoursLargeur(Noeud nStart) {
 		tableauDistance = new Hashtable<Integer, Integer>();
-		tableauCouleur = new int[this.getNbNoeuds()];
+		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDebut = new Hashtable<Integer, Integer>();
 		tableauFin = new Hashtable<Integer, Integer>();
@@ -144,13 +144,13 @@ public abstract class Graphe {
 		System.out.println("Parcours en largeur depuis le noeud " + nStart.getLabel());
 		
 		for(int i=0;i<getNbNoeuds();i++){
-			tableauCouleur[i]=0;
+			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
 //			tableauDistance[i]=-1;
 			tableauDistance.put(i, -1);
 		}
 		temp=0;
-		tableauCouleur[nStart.getId()]=1;
+		tableauCouleur.put(nStart.getId(), 1);
 		tableauParent.put(nStart.getId(), nStart.getId());
 //		tableauDistance[nStart.getId()]=0;
 		tableauDistance.put(nStart.getId(), 0);
@@ -171,15 +171,15 @@ public abstract class Graphe {
 			while ( it.hasNext() ) {
 				
 				Noeud v = it.next();
-				if(tableauCouleur[ v.getId() ] == 0){
-					tableauCouleur[ v.getId() ] = 1;
+				if(tableauCouleur.get(v.getId()) == 0){
+					tableauCouleur.put(v.getId(), 1);
 					tableauParent.put(v.getId(), u.getId());
 //					tableauDistance[ v.getId() ] = (tableauDistance[ u.getId() ] + 1);
 					tableauDistance.put(v.getId(), (tableauDistance.get(u.getId()) + 1));
 					file.addLast(v);
 				}
 			}
-			tableauCouleur[ u.getId() ]=2;
+			tableauCouleur.put(u.getId(), 2);
 			System.out.println("sortie : " + u.getLabel());
 //			tableauFin[ u.getId() ]=temp;
 			tableauFin.put(u.getId(), temp);

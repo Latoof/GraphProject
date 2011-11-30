@@ -10,7 +10,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=5; // A modifier pour changer le test (je m'en sers aussi)
+		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -138,12 +138,12 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(1, "Angers", 3);
-			Ville v2 = new Ville(2, "Nantes", 2);
-			Ville v3 = new Ville(3, "Pornichet", 2);
+			Ville v1 = new Ville(1, "Angers", 0);
+			Ville v2 = new Ville(2, "Nantes", 0);
+			Ville v3 = new Ville(3, "Pornichet", 0);
 			Ville v4 = new Ville(4, "Rezé", 0);
 			Ville v5 = new Ville(5, "St-Luce-sur-Loire", 0);
-			Ville v6 = new Ville(6, "Rennes", 0);
+			Ville v6 = new Ville(6, "Rennes", 1);
 			
 			carte.ajouterNoeud(v1);
 			carte.ajouterNoeud(v2);
@@ -181,7 +181,7 @@ public class AppliTest {
 			*/
 
 			carte.writeDotFile("./map.dot");
-			carte.genererItineraireAgregation(v1, 1);
+			carte.genererItineraireAgregation(v1, 0.5);
 			
 			System.out.println("END");
 						
@@ -196,6 +196,13 @@ public class AppliTest {
 			}
 
 			//carte.writeDotFile( "./map_out.dot" );
+		}
+		else if ( t==7 ){
+			Carte carte = new Carte();
+			carte.loadFromDotFile("./test.dot");
+			
+			System.out.println(carte);
+			carte.genererItineraireAgregation(carte.getVilleFromId(0), 1);
 		}
 	}
 }

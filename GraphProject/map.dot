@@ -1,10 +1,9 @@
-digraph{
-"Angers" [label="Angers(***)"];
-"Nantes" [label="Nantes(**)"];
-"Pornichet" [label="Pornichet(**)"];
+digraph {"Angers" [label="Angers()"];
+"Nantes" [label="Nantes()"];
+"Pornichet" [label="Pornichet()"];
 "Rezé" [label="Rezé()"];
 "St-Luce-sur-Loire" [label="St-Luce-sur-Loire()"];
-"Rennes" [label="Rennes()"];
+"Rennes" [label="Rennes(*)"];
 "Angers" -> "Angers" [label="1->1(1.0;*)"];
 "Angers" -> "Nantes" [label="1->2(2.0;)"];
 "Nantes" -> "Rezé" [label="2->4(-2.0;)"];
