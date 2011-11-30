@@ -115,7 +115,7 @@ public class Carte extends Graphe_matrice {
 	public void writeDotFile( String file ) throws IOException {
 				
 		//Création de l'objet
-		String dotString = "";
+		String dotString = "digraph {";
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(file);

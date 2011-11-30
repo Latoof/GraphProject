@@ -179,7 +179,7 @@ public class AppliTest {
 			
 			System.out.println(setVille);
 			*/
-			//carte.genererItineraireAgregation(v1, 1);
+			carte.genererItineraireAgregation(v1, 1);
 			
 			System.out.println("END");
 						
