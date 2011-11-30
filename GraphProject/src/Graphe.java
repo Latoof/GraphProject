@@ -54,7 +54,7 @@ public abstract class Graphe {
 			
 		}
 		
-		return new Noeud(-1,"");
+		return new Noeud(-1);
 	}
 	
 	public Arc getArcFromId(int id) {
@@ -67,7 +67,7 @@ public abstract class Graphe {
 			
 		}
 		
-		return new Arc(-1,"",-1, null, null);
+		return new Arc(-1,-1, null, null);
 		
 	}
 	
@@ -85,7 +85,7 @@ public abstract class Graphe {
 		tableauDebut = new Hashtable<Integer, Integer>();
 		tableauFin = new Hashtable<Integer, Integer>();
 		
-		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getLabel());
+		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
 		
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauCouleur[i]=0;
@@ -112,7 +112,7 @@ public abstract class Graphe {
 		tableauDebut.put(n.getId(), temp);
 		temp++;
 		
-		System.out.println("entrée : " + n.getLabel());
+		System.out.println("entrée : " + n.getId());
 		
 		Iterator<Noeud> it = getVoisins(n).iterator();
 		
@@ -125,7 +125,7 @@ public abstract class Graphe {
 			}
 		}
 		tableauCouleur[ n.getId() ]=2;
-		System.out.println("sortie : " + n.getLabel());
+		System.out.println("sortie : " + n.getId());
 //		tableauFin[ n.getId() ]= temp;
 		tableauFin.put(n.getId(), temp);
 		temp++;
@@ -141,7 +141,7 @@ public abstract class Graphe {
 		
 		LinkedList<Noeud> file = new LinkedList<Noeud>();
 		
-		System.out.println("Parcours en largeur depuis le noeud " + nStart.getLabel());
+		System.out.println("Parcours en largeur depuis le noeud " + nStart.getId());
 		
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauCouleur[i]=0;
@@ -164,7 +164,7 @@ public abstract class Graphe {
 			tableauDebut.put(u.getId(), temp);
 			temp++;
 			
-			System.out.println("entrée : " + u.getLabel());
+			System.out.println("entrée : " + u.getId());
 			
 			Iterator<Noeud> it = getVoisins(u).iterator();
 			
@@ -180,7 +180,7 @@ public abstract class Graphe {
 				}
 			}
 			tableauCouleur[ u.getId() ]=2;
-			System.out.println("sortie : " + u.getLabel());
+			System.out.println("sortie : " + u.getId());
 //			tableauFin[ u.getId() ]=temp;
 			tableauFin.put(u.getId(), temp);
 			temp++;

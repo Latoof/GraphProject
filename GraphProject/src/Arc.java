@@ -2,7 +2,6 @@
 public class Arc implements Comparable {
 	
 	int		id;
-	String 	label;
 	double 	ponderation;
 	Noeud	noeudSource, noeudCible;
 	
@@ -13,17 +12,15 @@ public class Arc implements Comparable {
 	 * @param noeudSource
 	 * @param noeudCible
 	 */
-	public Arc(int id, String label, double ponderation, Noeud noeudSource, Noeud noeudCible) {
+	public Arc(int id, double ponderation, Noeud noeudSource, Noeud noeudCible) {
 		this.id = id;
-		this.label = label;
 		this.ponderation = ponderation;
 		this.noeudCible = noeudCible;
 		this.noeudSource = noeudSource;
 	}
 	
-	public Arc(int id, String label, int ponderation) {
+	public Arc(int id, int ponderation) {
 		this.id = id;
-		this.label = label;
 		this.ponderation = ponderation;
 	}
 
@@ -47,19 +44,6 @@ public class Arc implements Comparable {
 		return this.id;
 	}
 
-	/**
-	 * @return the label
-	 */
-	public String getLabel() {
-		return label;
-	}
-
-	/**
-	 * @param label the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-	}
 
 	/**
 	 * @return the ponderation
@@ -77,7 +61,7 @@ public class Arc implements Comparable {
 
 	@Override
 	public String toString() {
-		return "Arc [id=" + id + ", label=" + label + ", ponderation="
+		return "Arc [id=" + id + ", ponderation="
 				+ ponderation + "]";
 	}
 

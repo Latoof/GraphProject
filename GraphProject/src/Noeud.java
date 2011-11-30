@@ -2,11 +2,9 @@
 public class Noeud implements Comparable {
 
 	int 	id;
-	String 	label;
 	
-	public Noeud(int id, String label) {
+	public Noeud(int id) {
 		this.id = id;
-		this.label = label;
 	}
 
 	public int getId() {
@@ -17,16 +15,8 @@ public class Noeud implements Comparable {
 		this.id = id;
 	}
 
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
 	public String toString() {
-		return "Noeud [id=" + id + ", label=" + label + "]";
+		return "Noeud [id=" + id +"];";
 	}
 
 

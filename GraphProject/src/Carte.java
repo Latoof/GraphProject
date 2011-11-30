@@ -37,8 +37,8 @@ public class Carte extends Graphe_matrice {
 		if(this.methodeAgregation(vStart, coeff)){
 			for(int i=0; i < getNbNoeuds()+1 ; i++){
 				if(getVilleFromId(i).getId() != -1){
-					System.out.println("Ville : " + getVilleFromId(i).getLabel());
-					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getLabel());
+					System.out.println("Ville : " + getVilleFromId(i).getNomVille());
+					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
 					System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 				}
 			}
@@ -70,7 +70,7 @@ public class Carte extends Graphe_matrice {
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDistanceKilo = new Hashtable<Integer, Double>();
 		
-		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getLabel() + "\n");
+		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getNomVille() + "\n");
 		
 		for(int i=0;i<getNbNoeuds()+1;i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);

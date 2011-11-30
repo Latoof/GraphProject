@@ -5,7 +5,7 @@ public class Ville extends Noeud {
 	String 	nomVille;
 	
 	public Ville(int idNumb, String nomVille, int interet) {
-		super(idNumb, nomVille);
+		super(idNumb);
 		this.interet = interet;
 	}
 	
@@ -13,6 +13,16 @@ public class Ville extends Noeud {
 		return interet;
 	}
 	
+	
+	
+public String getNomVille() {
+		return nomVille;
+	}
+
+public void setNomVille(String nomVille) {
+	this.nomVille = nomVille;
+}
+
 public String getInteretString(){
 		
 		String stars = "";
@@ -31,10 +41,10 @@ public String getInteretString(){
 	
 	public String toDotLine() {
 
-		String ligneDot = "\"" + this.label + "\""; // on commence par prendre le label du noeud
+		String ligneDot = "\"" + this.getNomVille() + "\""; // on commence par prendre le label du noeud
 		ligneDot += " ["; // on met le crochet qui precede les options
 		// ensuite on met les options
-		ligneDot += "label=\"" + this.label;
+		ligneDot += "label=\"" + this.getNomVille();
 		ligneDot += "(" + this.getInteretString() + ")\"";
 		
 		/*
@@ -59,14 +69,14 @@ public String getInteretString(){
 		Ville a = (Ville)this;
 		Ville b = (Ville)arg0;
 		
-		if(a.getInteret() > b.getInteret()){
+		if (a.getInteret() > b.getInteret()){
 			return 1;
 		}
-		else if(a.getInteret() < b.getInteret()){
+		else if (a.getInteret() < b.getInteret()){
 			return -1;
 		}
-		else{
-			if(a.getId() > b.getId()){
+		else {
+			if (a.getId() > b.getId()){
 				return 1;
 			}
 			else{

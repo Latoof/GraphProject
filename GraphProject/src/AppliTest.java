@@ -10,16 +10,16 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=5; // A modifier pour changer le test (je m'en sers aussi)
+		int t=0; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
-			Noeud n0 = new Noeud(0, "1");
-			Noeud n1 = new Noeud(1, "2");
-			Noeud n2 = new Noeud(2, "3");
-			Noeud n3 = new Noeud(3, "4");
-			Noeud n4 = new Noeud(4, "5");
-			Noeud n5 = new Noeud(5, "6");
+			Noeud n0 = new Noeud(0);
+			Noeud n1 = new Noeud(1);
+			Noeud n2 = new Noeud(2);
+			Noeud n3 = new Noeud(3);
+			Noeud n4 = new Noeud(4);
+			Noeud n5 = new Noeud(5);
 
 			graphe.ajouterNoeud(n0);			
 			graphe.ajouterNoeud(n1);
@@ -28,23 +28,23 @@ public class AppliTest {
 			graphe.ajouterNoeud(n4);
 			graphe.ajouterNoeud(n5);
 			
-			Arc a0 = new Arc(0, "a", 0, n0, n0);
-			Arc a1 = new Arc(1, "b", 0, n0, n1);
-			Arc a2 = new Arc(2, "c", 0, n0, n3);
-			Arc a3 = new Arc(3, "d", 0, n1, n3);
-			Arc a4 = new Arc(4, "e", 0, n1, n2);
-			Arc a5 = new Arc(5, "f", 0, n2, n1);
-			Arc a6 = new Arc(6, "g", 0, n1, n4);
-			Arc a7 = new Arc(7, "h", 0, n4, n5);
+			Arc a0 = new Arc(0, 0, n0, n0);
+			Arc a1 = new Arc(1, 0, n0, n1);
+			Arc a2 = new Arc(2, 0, n0, n3);
+			Arc a3 = new Arc(3, 0, n1, n3);
+			Arc a4 = new Arc(4, 0, n1, n2);
+			Arc a5 = new Arc(5, 0, n2, n1);
+			Arc a6 = new Arc(6, 0, n1, n4);
+			Arc a7 = new Arc(7, 0, n4, n5);
 			
-			Arc a10 = new Arc(10, "z", 0, n0, n0);
-			Arc a11 = new Arc(11, "y", 0, n1, n0);
-			Arc a12 = new Arc(12, "w", 0, n3, n0);
-			Arc a13 = new Arc(13, "v", 0, n3, n1);
-			Arc a14 = new Arc(14, "u", 0, n2, n1);
-			Arc a15 = new Arc(15, "t", 0, n1, n2);
-			Arc a16 = new Arc(16, "s", 0, n4, n1);
-			Arc a17 = new Arc(17, "r", 0, n5, n4);
+			Arc a10 = new Arc(10, 0, n0, n0);
+			Arc a11 = new Arc(11, 0, n1, n0);
+			Arc a12 = new Arc(12, 0, n3, n0);
+			Arc a13 = new Arc(13, 0, n3, n1);
+			Arc a14 = new Arc(14, 0, n2, n1);
+			Arc a15 = new Arc(15, 0, n1, n2);
+			Arc a16 = new Arc(16, 0, n4, n1);
+			Arc a17 = new Arc(17, 0, n5, n4);
 			
 			graphe.ajouterArc(a0);
 			graphe.ajouterArc(a1);
@@ -78,11 +78,11 @@ public class AppliTest {
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
 			
-			Noeud n0 = new Noeud(0, "A");
-			Noeud n1 = new Noeud(1, "B");
-			Noeud n2 = new Noeud(2, "C");
-			Noeud n3 = new Noeud(3, "D");
-			Noeud n4 = new Noeud(4, "E");
+			Noeud n0 = new Noeud(0);
+			Noeud n1 = new Noeud(1);
+			Noeud n2 = new Noeud(2);
+			Noeud n3 = new Noeud(3);
+			Noeud n4 = new Noeud(4);
 
 			
 			graphe.ajouterNoeud(n0);
@@ -93,13 +93,13 @@ public class AppliTest {
 
 	
 			
-			Arc a0 = new Arc(0, "a", 0);
-			Arc a1 = new Arc(1, "b", 0);
-			Arc a2 = new Arc(2, "c", 0);
-			Arc a3 = new Arc(3, "d", 0);
-			Arc a4 = new Arc(4, "e", 0);
-			Arc a5 = new Arc(5, "f", 0);
-			Arc a6 = new Arc(6, "g", 0);
+			Arc a0 = new Arc(0, 0);
+			Arc a1 = new Arc(1, 0);
+			Arc a2 = new Arc(2, 0);
+			Arc a3 = new Arc(3, 0);
+			Arc a4 = new Arc(4, 0);
+			Arc a5 = new Arc(5, 0);
+			Arc a6 = new Arc(6, 0);
 
 			
 			graphe.ajouterArc(a0,n0,n1);

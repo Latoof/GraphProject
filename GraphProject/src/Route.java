@@ -11,7 +11,7 @@ public class Route extends Arc {
 	 */
 
 	public Route(int id, String identifiant, double distance, int interet, Ville villeSource, Ville villeCible) {
-		super(id, identifiant, distance, villeSource, villeCible);
+		super(id, distance, villeSource, villeCible);
 		this.identifiant = identifiant;
 		this.interet = interet;
 	}
@@ -49,11 +49,14 @@ public class Route extends Arc {
 		this.identifiant = identifiant;
 	}
 	
+	
+	
+	
 	public String toDotLine() {
 		String ligneDot =""; // on initialise la ligneDot de la transition
-		ligneDot += "\"" + this.getNoeudSource().getLabel() + "\""; // on ajoute le noeud source entre guillemets
+		ligneDot += "\"" + ((Ville)this.getNoeudSource()).getNomVille() + "\""; // on ajoute le noeud source entre guillemets
 		ligneDot += " -> ";
-		ligneDot += "\"" + this.getNoeudCible().getLabel() + "\""; //on ajoute le noeud destination entre guillemets
+		ligneDot += "\"" + ((Ville)this.getNoeudCible()).getNomVille() + "\""; //on ajoute le noeud destination entre guillemets
 		ligneDot += " ["; // on ajoute ensuite les options de la transition
 		ligneDot += "label=\""+this.getIdentifiant();
 		ligneDot += "(" + this.ponderation + ";";
