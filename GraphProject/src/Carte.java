@@ -1,16 +1,15 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
 
 
 public class Carte extends Graphe_matrice {
 
 	double	distanceMax;
 	int		interetMax;
+	Hashtable<Integer, Double>	tableauDistanceKilo;
 
 	public Carte() {
 		super();
@@ -34,7 +33,23 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
-	public void genererItineraireAgregation (Ville vStart) {
+	public void genererItineraireAgregation(Ville vStart, double coeff){		
+		if(this.methodeAgregation(vStart, coeff)){
+			for(int i=0; i < getNbNoeuds()+1 ; i++){
+				if(getVilleFromId(i).getId() != -1){
+					System.out.println("Ville : " + getVilleFromId(i).getLabel());
+					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getLabel());
+					System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
+				}
+			}
+		}
+		else{
+			System.out.println("Presence d'un circuit absorbant : Resultats non concluants\n");
+		}
+		
+	}
+	
+	public boolean methodeAgregation (Ville vStart, double coeff) {
 		distanceMax = 0;
 		interetMax = 0;
 		
@@ -52,44 +67,48 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		
-		tableauParent = new int[this.getNbNoeuds()];
-		tableauDistance = new int[this.getNbNoeuds()];
+		tableauParent = new Hashtable<Integer, Integer>();
+		tableauDistanceKilo = new Hashtable<Integer, Double>();
 		
+		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getLabel() + "\n");
 		
-		LinkedList<Ville> file = new LinkedList<Ville>();
-		
-		System.out.println("Parcours en largeur depuis le noeud " + vStart.getLabel());
-		
-		for(int i=0;i<getNbNoeuds();i++){
-			tableauDistance[i]=-1;
-			tableauParent[i]=-1;
-			file.add(this.getVilleFromId(i));
+		for(int i=0;i<getNbNoeuds()+1;i++){
+			tableauDistanceKilo.put(i, Double.MAX_VALUE);
+			tableauParent.put(i, -1);
 		}
-		tableauDistance[vStart.getId()]=0;
-		tableauParent[vStart.getId()]=vStart.getId();
 		
-		Ville u;
+		tableauDistanceKilo.put(vStart.getId(), 0.0);
+		tableauParent.put(vStart.getId(), vStart.getId());
 		
-		while(!file.isEmpty()){
-			u=file.pollFirst();
-			
-			Iterator<Arc> it = getArcsSortants(u).iterator();
-			
-			while ( it.hasNext() ) {
-				
+		
+		for(int i=0; i < (this.getNbNoeuds() - 1); i++){
+			Iterator<Arc> it = this.liste_arc.iterator();
+			while(it.hasNext()){
 				Route r = (Route)it.next();
-				if(tableauDistance[r.getNoeudCible().getId()] > (tableauDistance[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, 0.5))){
-					tableauDistance[r.getNoeudCible().getId()] = (int)(tableauDistance[r.getNoeudSource().getId()] + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, 0.5));
-					tableauParent[r.getNoeudCible().getId()] = r.getNoeudSource().getId();
+				if(tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+					tableauDistanceKilo.put(r.getNoeudCible().getId(), (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff)));
+					tableauParent.put(r.getNoeudCible().getId(), r.getNoeudSource().getId());
 				}
 			}
 		}
+		Iterator<Arc> iterat = this.liste_arc.iterator();
+		while(iterat.hasNext()){
+			Route r = (Route)iterat.next();
+			if(tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + ponderationAgregation((Ville)r.getNoeudSource(), (Ville)r.getNoeudCible(), r, coeff))){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {
 		double result = 0;
+		
 		result = coeff * route.getPonderation() / (this.distanceMax);
 		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
+		
+//		result = route.getPonderation();
+			
 		return result;
 	}
 
@@ -160,7 +179,7 @@ public int loadFromDotFile(String cheminFichierDot) throws IOException {
 						closeB = true;
 					}
 					
-					if ( !ligne.contains("->")) {
+					else if ( !ligne.contains("->")) {
 						
 						String label_infos = ligne.split("label=\"")[1].split("\"")[0];
 						System.out.println("Label-info : "+label_infos);
@@ -169,9 +188,9 @@ public int loadFromDotFile(String cheminFichierDot) throws IOException {
 						// maintenant.
 						
 						String label = label_infos.split("\\(")[0];
-						System.out.println("Label --> "+label);
-						int interet = label_infos.split("\\(")[1].split("\\)")[0].length();
-						
+						int interet = ( label_infos.split("\\(")[1].split("\\)").length > 0) ? label_infos.split("\\(")[1].split("\\)")[0].length() : 0;
+						//System.out.println("Label --> "+label+" ;  Interet"+interet);
+
 						Ville nouvelle_ville = new Ville( node_counter, label, interet);
 						this.ajouterNoeud( nouvelle_ville );
 						// Noeud
@@ -182,13 +201,13 @@ public int loadFromDotFile(String cheminFichierDot) throws IOException {
 					}
 					else {
 						
-						String identifiant_noeuds = ligne.split("label=\"")[0].split("\\[")[0];
+						String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
 							System.out.println("Idn : "+identifiant_noeuds);
 							String identifiant_noeud_source = identifiant_noeuds.split("->")[0];
 							String identifiant_noeud_cible = identifiant_noeuds.split("->")[1];
 							
 							
-							System.out.println(identifiant_noeud_source+"->"+identifiant_noeud_cible);
+							System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
 						String label_infos = ligne.split("label=\"")[1].split("\"")[0];
 						
 						// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
@@ -197,11 +216,12 @@ public int loadFromDotFile(String cheminFichierDot) throws IOException {
 							String label = label_infos.split("\\(")[0];
 							
 							String infos = label_infos.split("\\(")[1].split("\\)")[0];
-							int interet = infos.split(";")[1].length();
+							int interet = (infos.split(";").length > 1 ) ? infos.split(";")[1].length() : 0;
 							float distance = Float.valueOf(infos.split(";")[0]);
 						
 							System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
-							System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ---  "+table_correspondance.get(identifiant_noeud_cible).getId());
+							System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
+							System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
 						this.ajouterArc( new Route( arc_counter, label, distance, interet, 
 											(Ville) table_correspondance.get(identifiant_noeud_source),
 											(Ville) table_correspondance.get(identifiant_noeud_cible)) );

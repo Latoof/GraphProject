@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Set;
 import java.util.TreeSet;
 
 
@@ -7,10 +6,11 @@ public class AppliTest {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		int t=6; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -68,7 +68,9 @@ public class AppliTest {
 
 			graphe.parcoursProfondeur(n0, true);
 			
+			System.out.println("Parcours en Largeur");
 			graphe.parcoursLargeur(n0);
+			System.out.println("END Larg");	
 
 			
 		}
@@ -136,30 +138,28 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v0 = new Ville(0, "Nantes", 4);
 			Ville v1 = new Ville(1, "Angers", 3);
-			Ville v2 = new Ville(2, "Les Sables d'Olonnes", 2);
-			Ville v3 = new Ville(3, "La Roche/Yon", 2);
-			Ville v4 = new Ville(4, "Pornichet", 5);
-			Ville v5 = new Ville(5, "paris", 4);
+			Ville v2 = new Ville(2, "Nantes", 2);
+			Ville v3 = new Ville(3, "Pornichet", 2);
+			Ville v4 = new Ville(4, "Rezé", 0);
+			Ville v5 = new Ville(5, "St-Luce-sur-Loire", 0);
+			Ville v6 = new Ville(6, "Rennes", 0);
 			
-			carte.ajouterNoeud(v0);
 			carte.ajouterNoeud(v1);
 			carte.ajouterNoeud(v2);
 			carte.ajouterNoeud(v3);
 			carte.ajouterNoeud(v4);
 			carte.ajouterNoeud(v5);
+			carte.ajouterNoeud(v6);
 	
-			Route r1 = new Route(1, "route66s", 10.6, 3, v0, v1);
-			Route r2 = new Route(2, "a57", 23.5, 4, v1, v3);
-			Route r3 = new Route(3, "a11", 29.8, 1, v3, v4);
-			Route r4 = new Route(4, "route66n", 10.6, 3, v1, v0);
-			Route r5 = new Route(5, "a59", 10.6, 3, v5, v3);
-			Route r6 = new Route(6, "a58", 10.6, 3, v1, v2);
-			Route r7 = new Route(7, "a60", 11.6, 4, v1, v2);
-			Route r8 = new Route(8, "d5554", 50.3, 5, v5, v1);
-			Route r9 = new Route(9, "d125", 30.3, 2, v0, v5);
-			Route r10 = new Route(10, "n45", 27.8, 1, v1, v3);
+			Route r1 = new Route(0, "1->1", 1, 1, v1, v1);
+			Route r2 = new Route(1, "1->2", 2, 0, v1, v2);
+			Route r3 = new Route(2, "2->4", -2, 0, v2, v4);
+			Route r4 = new Route(3, "1->4", 1, 0, v1, v4);
+			Route r5 = new Route(4, "2->3", 3, 0, v2, v3);
+			Route r6 = new Route(5, "2->5", 2, 0, v2, v5);
+			Route r7 = new Route(6, "3->5", -2, 0, v3, v5);
+			Route r8 = new Route(7, "5->6", 1, 0, v5, v6);
 
 			carte.ajouterArc(r1);
 			carte.ajouterArc(r2);
@@ -169,44 +169,31 @@ public class AppliTest {
 			carte.ajouterArc(r6);
 			carte.ajouterArc(r7);
 			carte.ajouterArc(r8);
-			carte.ajouterArc(r9);
-			carte.ajouterArc(r10);
 			
-			System.out.println("Well done.");
-			//System.out.println(carte.toString());
-			
-			//carte.parcoursProfondeur(v0, true);
-			
+			System.out.println("Creation : Well done\n");
 			/*
-			Set<Route> setRoute = new TreeSet<Route>();
+			TreeSet<Route> setVille = new TreeSet<Route>();
+			setVille.add(r1);
+			setVille.add(r2);
+			setVille.add(r3);
 			
-			Route ra = new Route(100, "a", 10, 1, v1, v3);
-			Route rb = new Route(101, "b", 20, 1, v1, v3);
-			Route rc = new Route(102, "c", 05, 1, v1, v3);
-			
-			setRoute.add((Route)ra);
-			setRoute.add((Route)rc);
-			setRoute.add((Route)rb);
-			
-			System.out.println("a par rapport à b : " + ra.compareTo(rb));
-			
-			
-			System.out.println(setRoute.toString());
+			System.out.println(setVille);
 			*/
-			//carte.writeDotFile();
+			//carte.genererItineraireAgregation(v1, 1);
 			
-			carte.genererItineraireAgregation(v0);
-			System.out.println("Well done.");
+			System.out.println("END");
+						
 		}
 		else if ( t == 6 ) {
 			Carte carte = new Carte();
 			try {
-				carte.loadFromDotFile( "/comptes/E084657T/Dropbox/Univ nantes - Master 1 ALMA/StrucComplexes/map.dot" );
+			carte.loadFromDotFile( "./map.dot" );
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			}
-		}
 
+			//carte.writeDotFile( "./map_out.dot" );
+		}
 	}
 }
