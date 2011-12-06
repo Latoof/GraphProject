@@ -17,12 +17,8 @@ public class Route extends Arc {
 	}
 	
 	/**
-	 * @return the interet
+	 * @return la version toString de l'interet
 	 */
-	public int getInteret() {
-		return interet;
-	}
-	
 	public String getInteretString(){
 		
 		String stars = new String();
@@ -35,23 +31,39 @@ public class Route extends Arc {
 	}
 
 	/**
+	 * @return the interet
+	 */
+	public int getInteret() {
+		return interet;
+	}
+	
+	/**
 	 * @param interet the interet to set
 	 */
 	public void setInteret(int interet) {
 		this.interet = interet;
 	}
-
+	
+	/**
+	 * @return the identifiant
+	 */
 	public String getIdentifiant() {
 		return identifiant;
 	}
 
+	/**
+	 * @param identifiant the identifiant to set
+	 */
 	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
 	}
 	
 	
 	
-	
+	/**
+	 * Permet de générer une string contenant la version .dot de la route
+	 * @return La string contenant la version .dot de notre route
+	 */
 	public String toDotLine() {
 		String ligneDot =""; // on initialise la ligneDot de la transition
 		ligneDot += "\"" + ((Ville)this.getNoeudSource()).getNomVille() + "\""; // on ajoute le noeud source entre guillemets
@@ -76,17 +88,17 @@ public class Route extends Arc {
 	
 	/**
 	 * 
-	 * @param r
+	 * @param o
 	 * @return
 	 * On considere qu'une route est plus intéréssante si elle a une distance inférieure, 
 	 * ET un interet plus important que l'autre route. Dans le cas, où les routes sont non 
-	 * comparables, on considére que les routes sont "égales" (Les 2 possibilités restent 
-	 * à envisager).
+	 * comparables, on ne considère pas les routes égales (au sens objets équivalents), et 
+	 * on les distingue par leur id.
 	 */
-	public int compareTo(Object arg0) {
+	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		Route a = (Route)this;
-		Route b = (Route)arg0;
+		Route b = (Route)o;
 		if ((a.interet < b.getInteret()) && (a.ponderation > b.getPonderation())){
 			return -1;
 		}

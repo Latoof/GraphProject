@@ -1,9 +1,19 @@
+/**
+* @author Matthieu Lenogue - Maxime Ouairy
+*/
 
 public class Ville extends Noeud {
 	
 	int 	interet;
 	String 	nomVille;
 	
+	/**
+	 * Constructeur d'objet de type Ville. 
+	 * On considère qu'une ville à un identifiant, un nom, et un intérêt.
+	 * @param idNumb
+	 * @param nomVille
+	 * @param interet
+	 */
 	public Ville(int idNumb, String nomVille, int interet) {
 		super(idNumb);
 		this.interet = interet;
@@ -14,17 +24,21 @@ public class Ville extends Noeud {
 		return interet;
 	}
 	
-	
-	
-public String getNomVille() {
-		return nomVille;
+	public void setInteret(int interet) {
+		this.interet = interet;
 	}
+	
+	public String getNomVille() {
+			return nomVille;
+		}
 
-public void setNomVille(String nomVille) {
-	this.nomVille = nomVille;
-}
-
-public String getInteretString(){
+	public void setNomVille(String nomVille) {
+		this.nomVille = nomVille;
+	}
+	/**
+	 * @return la version toString de l'interet
+	 */
+	public String getInteretString(){
 		
 		String stars = "";
 		
@@ -35,11 +49,11 @@ public String getInteretString(){
 		return stars;
 	}
 
-	public void setInteret(int interet) {
-		this.interet = interet;
-	}
 	
-	
+	/**
+	 * Permet de générer une string contenant la version .dot de la ville
+	 * @return La string contenant la version .dot de notre ville
+	 */
 	public String toDotLine() {
 
 		String ligneDot = "\"" + this.getNomVille() + "\""; // on commence par prendre le label du noeud
@@ -63,12 +77,13 @@ public String getInteretString(){
 	}
 	
 	/**
-	 * On considere d'abord l'interet puis l'id pour classer les villes entre elles.
+	 * On considere d'abord l'interet puis l'identifiant pour classer les villes entre elles.
+	 * @param o
 	 */
-	public int compareTo(Object arg0) {
+	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		Ville a = (Ville)this;
-		Ville b = (Ville)arg0;
+		Ville b = (Ville)o;
 		
 		if (a.getInteret() > b.getInteret()){
 			return 1;
