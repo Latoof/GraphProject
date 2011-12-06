@@ -7,6 +7,7 @@ public class Ville extends Noeud {
 	public Ville(int idNumb, String nomVille, int interet) {
 		super(idNumb);
 		this.interet = interet;
+		this.nomVille = nomVille;
 	}
 	
 	public int getInteret() {

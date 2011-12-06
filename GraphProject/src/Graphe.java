@@ -87,7 +87,7 @@ public abstract class Graphe {
 		
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
 		
-		for(int i=0;i<getNbNoeuds();i++){
+		for(int i=0;(i<getNbNoeuds()+1);i++){
 			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
 		}
@@ -144,7 +144,7 @@ public abstract class Graphe {
 		
 		System.out.println("Parcours en largeur depuis le noeud " + nStart.getId());
 		
-		for(int i=0;i<getNbNoeuds();i++){
+		for(int i=0;i<(getNbNoeuds()+1);i++){
 			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
 //			tableauDistance[i]=-1;

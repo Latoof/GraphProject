@@ -10,7 +10,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=0; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -171,17 +171,12 @@ public class AppliTest {
 			carte.ajouterArc(r8);
 			
 			System.out.println("Creation : Well done\n");
-			/*
-			TreeSet<Route> setVille = new TreeSet<Route>();
-			setVille.add(r1);
-			setVille.add(r2);
-			setVille.add(r3);
-			
-			System.out.println(setVille);
-			*/
 
-			carte.writeDotFile("./map.dot");
-			carte.genererItineraireAgregation(v1, 0.5);
+
+//			carte.writeDotFile("./map.dot");
+//			carte.genererItineraireAgregation(v1, 1);
+	
+			carte.genererItineraireDetourBorne(v1, v6, 1.0);
 			
 			System.out.println("END");
 						

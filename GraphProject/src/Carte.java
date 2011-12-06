@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+/**
+ * @author Matthieu Lenogue - Maxime Ouairy
+ */
 
 public class Carte extends Graphe_matrice {
 
@@ -15,6 +18,11 @@ public class Carte extends Graphe_matrice {
 		super();
 	}
 	
+	/**
+	 * Retourne la ville correspondante à l'id passé en paramètre
+	 * @param l'identifiant de la ville
+	 * @return la ville correspondant à l'id
+	 */
 	public Ville getVilleFromId(int id) {			
 			for (int i=0; i<liste_noeud.size(); i++) {				
 				if (liste_noeud.get(i).getId() == id) {
@@ -33,9 +41,75 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
+	public void genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
+		this.methodeAgregation(vStart, 1);
+		double distanceDest = tableauDistanceKilo.get(vDest.getId());
+		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
+		
+		this.methodeDetourBorne(vStart, vDest, coeff);
+	}
+	
+	public void methodeDetourBorne (Ville vStart, Ville vDest, double coeff) {
+		System.out.println("coucou");
+		this.parcoursProfondeurVille(vStart, false);
+	}
+	
+	public void parcoursProfondeurVille(Ville nStart, Boolean parcoursTot) {
+		tableauDistanceKilo = new Hashtable<Integer, Double>();
+		tableauCouleur = new Hashtable<Integer, Integer>();
+		tableauParent = new Hashtable<Integer, Integer>();
+		tableauDebut = new Hashtable<Integer, Integer>();
+		tableauFin = new Hashtable<Integer, Integer>();
+		
+		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
+		
+		for(int i=0;(i<getNbNoeuds()+1);i++){
+			tableauCouleur.put(i, 0);
+			tableauParent.put(i, -1);
+			tableauDistanceKilo.put(i, 0.0);
+		}
+		temp=0;
+//		tableauParent[nStart.getId()]=nStart.getId();
+		tableauParent.put(nStart.getId(), nStart.getId());
+		visiterProfondeur(nStart);
+		
+		if(parcoursTot){
+			for(int i=0;i<getNbNoeuds();i++){
+				if(tableauCouleur.get(i) == 0){
+					visiterProfondeur(this.getVilleFromId(i));
+				}
+			}
+		}
+	}
+	
+	public void visiterProfondeur(Ville n) {
+		
+		tableauCouleur.put(n.getId(), 1);
+		tableauDebut.put(n.getId(), temp);
+		temp++;
+		
+		System.out.println("entrée : " + n.getId());
+		
+		Iterator<Noeud> it = getVoisins(n).iterator();
+		
+		while ( it.hasNext() ) {
+			
+			Ville nTemp = (Ville)it.next();
+			if(tableauCouleur.get(nTemp.getId()) == 0){
+				tableauParent.put(nTemp.getId(), n.getId());
+				visiterProfondeur(nTemp);
+			}
+		}
+
+		tableauCouleur.put(n.getId(), 0);
+		System.out.println("sortie : " + n.getId());
+		tableauFin.put(n.getId(), temp);
+		temp++;
+	}
+	
 	public void genererItineraireAgregation(Ville vStart, double coeff){		
 		if(this.methodeAgregation(vStart, coeff)){
-			for(int i=0; i < getNbNoeuds()+1 ; i++){
+			for(int i=0; i < (getNbNoeuds()+1) ; i++){
 				if(getVilleFromId(i).getId() != -1){
 					System.out.println("Ville : " + getVilleFromId(i).getNomVille());
 					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
@@ -151,115 +225,115 @@ public class Carte extends Graphe_matrice {
 		} 
 }
 
-public int loadFromDotFile(String cheminFichierDot) throws IOException {
-	
-	this.liste_noeud = new ArrayList<Noeud>();
-	this.liste_arc = new ArrayList<Arc>();
-	
-	HashMap<String, Ville> table_correspondance = new HashMap<String, Ville>();
-	
-	
-	String contenuGraphe = "";
-	
-	InputStream ips = null;
-	try {
-		ips = new FileInputStream(cheminFichierDot);
-	} catch (FileNotFoundException e) {}
-		InputStreamReader ipsr=new InputStreamReader(ips);
-		BufferedReader br=new BufferedReader(ipsr);
+	public int loadFromDotFile(String cheminFichierDot) throws IOException {
 		
-		String ligne = "";
-		boolean openB = false, closeB = false;
+		this.liste_noeud = new ArrayList<Noeud>();
+		this.liste_arc = new ArrayList<Arc>();
 		
-		while ( (ligne = br.readLine()) != null && openB == false ) {
-			
-			if ( ligne.contains("{") ) {
-				openB = true;
-			}
+		HashMap<String, Ville> table_correspondance = new HashMap<String, Ville>();
 		
-		int node_counter = 0, arc_counter = 0;
-		if ( openB ) {
+		
+		String contenuGraphe = "";
+		
+		InputStream ips = null;
+		try {
+			ips = new FileInputStream(cheminFichierDot);
+		} catch (FileNotFoundException e) {}
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
 			
-			while ( (ligne = br.readLine()) != null && closeB == false ) 
+			String ligne = "";
+			boolean openB = false, closeB = false;
 			
-				if ( !ligne.isEmpty() ) {
-					
-					if ( ligne.contains("}") ) {
-						closeB = true;
-					}
-					
-					else if ( !ligne.contains("->")) {
+			while ( (ligne = br.readLine()) != null && openB == false ) {
+				
+				if ( ligne.contains("{") ) {
+					openB = true;
+				}
+			
+			int node_counter = 0, arc_counter = 0;
+			if ( openB ) {
+				
+				while ( (ligne = br.readLine()) != null && closeB == false ) 
+				
+					if ( !ligne.isEmpty() ) {
 						
-						String label_infos = ligne.split("label=\"")[1].split("\"")[0];
-						System.out.println("Label-info : "+label_infos);
+						if ( ligne.contains("}") ) {
+							closeB = true;
+						}
 						
-						// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
-						// maintenant.
-						
-						String label = label_infos.split("\\(")[0];
-						int interet = ( label_infos.split("\\(")[1].split("\\)").length > 0) ? label_infos.split("\\(")[1].split("\\)")[0].length() : 0;
-						//System.out.println("Label --> "+label+" ;  Interet"+interet);
-
-						Ville nouvelle_ville = new Ville( node_counter, label, interet);
-						this.ajouterNoeud( nouvelle_ville );
-						// Noeud
-						
-						System.out.println("adding ''"+label+"''");
-						table_correspondance.put(label, nouvelle_ville);
-						node_counter++;
-					}
-					else {
-						
-						String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
-							System.out.println("Idn : "+identifiant_noeuds);
-							String identifiant_noeud_source = identifiant_noeuds.split("->")[0];
-							String identifiant_noeud_cible = identifiant_noeuds.split("->")[1];
+						else if ( !ligne.contains("->")) {
 							
+							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
+							System.out.println("Label-info : "+label_infos);
 							
-							System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
-						String label_infos = ligne.split("label=\"")[1].split("\"")[0];
-						
-						// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
-						// maintenant.
+							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
+							// maintenant.
 							
 							String label = label_infos.split("\\(")[0];
+							int interet = ( label_infos.split("\\(")[1].split("\\)").length > 0) ? label_infos.split("\\(")[1].split("\\)")[0].length() : 0;
+							//System.out.println("Label --> "+label+" ;  Interet"+interet);
+	
+							Ville nouvelle_ville = new Ville( node_counter, label, interet);
+							this.ajouterNoeud( nouvelle_ville );
+							// Noeud
 							
-							String infos = label_infos.split("\\(")[1].split("\\)")[0];
-							int interet = (infos.split(";").length > 1 ) ? infos.split(";")[1].length() : 0;
-							float distance = Float.valueOf(infos.split(";")[0]);
+							System.out.println("adding ''"+label+"''");
+							table_correspondance.put(label, nouvelle_ville);
+							node_counter++;
+						}
+						else {
+							
+							String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
+								System.out.println("Idn : "+identifiant_noeuds);
+								String identifiant_noeud_source = identifiant_noeuds.split("->")[0];
+								String identifiant_noeud_cible = identifiant_noeuds.split("->")[1];
+								
+								
+								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
+							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
+							
+							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
+							// maintenant.
+								
+								String label = label_infos.split("\\(")[0];
+								
+								String infos = label_infos.split("\\(")[1].split("\\)")[0];
+								int interet = (infos.split(";").length > 1 ) ? infos.split(";")[1].length() : 0;
+								float distance = Float.valueOf(infos.split(";")[0]);
+							
+								System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
+								System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
+								System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
+							this.ajouterArc( new Route( arc_counter, label, distance, interet, 
+												(Ville) table_correspondance.get(identifiant_noeud_source),
+												(Ville) table_correspondance.get(identifiant_noeud_cible)) );
+							// Noeud
+							
+							
+							arc_counter++;
+							// Transistion
+						}
 						
-							System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
-							System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
-							System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
-						this.ajouterArc( new Route( arc_counter, label, distance, interet, 
-											(Ville) table_correspondance.get(identifiant_noeud_source),
-											(Ville) table_correspondance.get(identifiant_noeud_cible)) );
-						// Noeud
 						
-						
-						arc_counter++;
-						// Transistion
 					}
-					
-					
-				}
-	
-			
-		}
 		
-		br.close(); 
-		System.out.println("--"+contenuGraphe+"--");
-
-		if ( closeB ) {
-			return 0;
-		}
-		else {
-			return -1;
-		}
-
-	}
-		return -2;
+				
+			}
+			
+			br.close(); 
+			System.out.println("--"+contenuGraphe+"--");
 	
+			if ( closeB ) {
+				return 0;
+			}
+			else {
+				return -1;
+			}
+	
+		}
+			return -2;
+		
 	}
 
 }

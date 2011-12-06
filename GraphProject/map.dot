@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-digraph {"null" [label="null(***)"];
-"null" [label="null(**)"];
-"null" [label="null(**)"];
+digraph {"null" [label="null()"];
 "null" [label="null()"];
 "null" [label="null()"];
 "null" [label="null()"];
+"null" [label="null()"];
+"null" [label="null(*)"];
 "null" -> "null" [label="1->1(1.0;*)"];
 "null" -> "null" [label="1->2(2.0;)"];
 "null" -> "null" [label="2->4(-2.0;)"];
@@ -13,20 +12,4 @@ digraph {"null" [label="null(***)"];
 "null" -> "null" [label="2->5(2.0;)"];
 "null" -> "null" [label="3->5(-2.0;)"];
 "null" -> "null" [label="5->6(1.0;)"];
-=======
-digraph {"Angers" [label="Angers()"];
-"Nantes" [label="Nantes()"];
-"Pornichet" [label="Pornichet()"];
-"Rezé" [label="Rezé()"];
-"St-Luce-sur-Loire" [label="St-Luce-sur-Loire()"];
-"Rennes" [label="Rennes(*)"];
-"Angers" -> "Angers" [label="1->1(1.0;*)"];
-"Angers" -> "Nantes" [label="1->2(2.0;)"];
-"Nantes" -> "Rezé" [label="2->4(-2.0;)"];
-"Angers" -> "Rezé" [label="1->4(1.0;)"];
-"Nantes" -> "Pornichet" [label="2->3(3.0;)"];
-"Nantes" -> "St-Luce-sur-Loire" [label="2->5(2.0;)"];
-"Pornichet" -> "St-Luce-sur-Loire" [label="3->5(-2.0;)"];
-"St-Luce-sur-Loire" -> "Rennes" [label="5->6(1.0;)"];
->>>>>>> branch 'master' of https://Latoof@github.com/Latoof/GraphProject.git
 }
