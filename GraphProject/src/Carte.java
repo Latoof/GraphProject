@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Matthieu Lenogue - Maxime Ouairy
@@ -45,21 +47,23 @@ public class Carte extends Graphe_matrice {
 		this.methodeAgregation(vStart, 1);
 		double distanceDest = tableauDistanceKilo.get(vDest.getId());
 		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
+		double borneMax = distanceDest * coeff;
+		System.out.println("Borne Max considérée (Pondération aggregation à 1) : " + borneMax);
 		
-		this.methodeDetourBorne(vStart, vDest, coeff);
+		this.methodeDetourBorne(vStart, vDest, borneMax);
 	}
 	
-	public void methodeDetourBorne (Ville vStart, Ville vDest, double coeff) {
-		System.out.println("coucou");
-		this.parcoursProfondeurVille(vStart, false);
+	public void methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {
+		this.parcoursProfondeurVille(vStart, vDest, false, borneMax);
 	}
 	
-	public void parcoursProfondeurVille(Ville nStart, Boolean parcoursTot) {
+	public void parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
 		tableauDistanceKilo = new Hashtable<Integer, Double>();
 		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDebut = new Hashtable<Integer, Integer>();
 		tableauFin = new Hashtable<Integer, Integer>();
+		double distanceParcourue = 0.0;
 		
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
 		
@@ -69,9 +73,8 @@ public class Carte extends Graphe_matrice {
 			tableauDistanceKilo.put(i, 0.0);
 		}
 		temp=0;
-//		tableauParent[nStart.getId()]=nStart.getId();
 		tableauParent.put(nStart.getId(), nStart.getId());
-		visiterProfondeur(nStart);
+		visiterProfondeur(nStart, nDest, borneMax, distanceParcourue);
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
@@ -82,7 +85,7 @@ public class Carte extends Graphe_matrice {
 		}
 	}
 	
-	public void visiterProfondeur(Ville n) {
+	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue) {
 		
 		tableauCouleur.put(n.getId(), 1);
 		tableauDebut.put(n.getId(), temp);
@@ -90,14 +93,28 @@ public class Carte extends Graphe_matrice {
 		
 		System.out.println("entrée : " + n.getId());
 		
-		Iterator<Noeud> it = getVoisins(n).iterator();
-		
+		Set<Arc> set = new TreeSet<Arc>();
+		set = getArcsSortants(n);
+		System.out.println(set);
+		Iterator<Arc> it = getArcsSortants(n).iterator();
 		while ( it.hasNext() ) {
 			
-			Ville nTemp = (Ville)it.next();
-			if(tableauCouleur.get(nTemp.getId()) == 0){
-				tableauParent.put(nTemp.getId(), n.getId());
-				visiterProfondeur(nTemp);
+			Route rTemp = (Route)it.next();
+			
+			if(tableauCouleur.get(rTemp.getNoeudCible().getId()) == 0 && (distanceParcourue + rTemp.getPonderation() <= borneMax)){
+				if(rTemp.getNoeudCible() != nDest){
+					tableauCouleur.put(rTemp.getNoeudCible().getId(), n.getId());
+					distanceParcourue += rTemp.getPonderation();
+					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue);
+				}
+				else{
+					tableauCouleur.put(rTemp.getNoeudCible().getId(), n.getId());
+					distanceParcourue += rTemp.getPonderation();
+					System.out.println("Distance parcourue : " + distanceParcourue);
+					System.out.println("Dest atteinte");
+					return true;
+					
+				}
 			}
 		}
 
@@ -105,6 +122,7 @@ public class Carte extends Graphe_matrice {
 		System.out.println("sortie : " + n.getId());
 		tableauFin.put(n.getId(), temp);
 		temp++;
+		return false;
 	}
 	
 	public void genererItineraireAgregation(Ville vStart, double coeff){		
@@ -187,10 +205,10 @@ public class Carte extends Graphe_matrice {
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {
 		double result = 0;
 		
-		result = coeff * route.getPonderation() / (this.distanceMax);
-		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
+//		result = coeff * route.getPonderation() / (this.distanceMax);
+//		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
 		
-//		result = route.getPonderation();
+		result = route.getPonderation();
 			
 		return result;
 	}

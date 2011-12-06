@@ -100,5 +100,13 @@ public class Ville extends Noeud {
 			}
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Ville [interet=" + interet + ", nomVille=" + nomVille + "]";
+	}
 	
 }

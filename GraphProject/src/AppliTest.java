@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Set;
 import java.util.TreeSet;
 
 
@@ -138,12 +139,12 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(1, "Angers", 0);
-			Ville v2 = new Ville(2, "Nantes", 0);
-			Ville v3 = new Ville(3, "Pornichet", 0);
-			Ville v4 = new Ville(4, "Rezé", 0);
-			Ville v5 = new Ville(5, "St-Luce-sur-Loire", 0);
-			Ville v6 = new Ville(6, "Rennes", 1);
+			Ville v1 = new Ville(1, "1", 0);
+			Ville v2 = new Ville(2, "2", 0);
+			Ville v3 = new Ville(3, "3", 0);
+			Ville v4 = new Ville(4, "4", 0);
+			Ville v5 = new Ville(5, "5", 0);
+			Ville v6 = new Ville(6, "6", 1);
 			
 			carte.ajouterNoeud(v1);
 			carte.ajouterNoeud(v2);
@@ -177,6 +178,7 @@ public class AppliTest {
 //			carte.genererItineraireAgregation(v1, 1);
 	
 			carte.genererItineraireDetourBorne(v1, v6, 1.0);
+			
 			
 			System.out.println("END");
 						
