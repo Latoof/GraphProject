@@ -155,11 +155,11 @@ public class AppliTest {
 	
 			Route r1 = new Route(0, "1->1", 1, 1, v1, v1);
 			Route r2 = new Route(1, "1->2", 2, 0, v1, v2);
-			Route r3 = new Route(2, "2->4", -2, 0, v2, v4);
+			Route r3 = new Route(2, "2->4", 2, 0, v2, v4);
 			Route r4 = new Route(3, "1->4", 1, 0, v1, v4);
 			Route r5 = new Route(4, "2->3", 3, 0, v2, v3);
 			Route r6 = new Route(5, "2->5", 2, 0, v2, v5);
-			Route r7 = new Route(6, "3->5", -2, 0, v3, v5);
+			Route r7 = new Route(6, "3->5", 2, 0, v3, v5);
 			Route r8 = new Route(7, "5->6", 1, 0, v5, v6);
 
 			carte.ajouterArc(r1);
@@ -178,7 +178,7 @@ public class AppliTest {
 //			carte.genererItineraireAgregation(v1, 1);
 	
 			carte.genererItineraireDetourBorne(v1, v6, 3.0);
-			
+//			carte.plusCourtDijkstra(v1);
 			
 			System.out.println("END");
 						
