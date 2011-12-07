@@ -203,7 +203,9 @@ public class AppliTest {
 		}
 		else if ( t==7 ){
 			Carte carte = new Carte();
-			carte.loadFromDotFile("./essai1.dot");
+			carte.loadFromDotFile("./essai2.dot");
+			
+
 			
 			
 			
