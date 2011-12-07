@@ -382,8 +382,8 @@ public class Carte extends Graphe_matrice {
 							
 							String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
 								System.out.println("Idn : "+identifiant_noeuds);
-								String identifiant_noeud_source = identifiant_noeuds.split("->")[0];
-								String identifiant_noeud_cible = identifiant_noeuds.split("->")[1];
+								String identifiant_noeud_source = identifiant_noeuds.split("->")[0].replaceAll(" ", "");
+								String identifiant_noeud_cible = identifiant_noeuds.split("->")[1].replaceAll(" ", "");
 								
 								
 								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
