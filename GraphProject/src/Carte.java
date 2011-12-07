@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,6 +17,11 @@ public class Carte extends Graphe_matrice {
 	double	distanceMax;
 	int		interetMax;
 	Hashtable<Integer, Double>	tableauDistanceKilo;
+	
+	// A revoir. Beaucoup de choses a optimiser
+	LinkedList<Route> cheminLePlusCourtProfondeur;
+	int interetCheminLePlusCourtProfondeur;
+	//
 
 	public Carte() {
 		super();
@@ -27,12 +33,12 @@ public class Carte extends Graphe_matrice {
 	 * @return la ville correspondant à l'id
 	 */
 	public Ville getVilleFromId(int id) {			
-			for (int i=0; i<liste_noeud.size(); i++) {				
-				if (liste_noeud.get(i).getId() == id) {
-					return (Ville)liste_noeud.get(i);
-				}
-			}			
-			return new Ville(-1,"", -1);
+		for (int i=0; i<liste_noeud.size(); i++) {				
+			if (liste_noeud.get(i).getId() == id) {
+				return (Ville)liste_noeud.get(i);
+			}
+		}			
+		return new Ville(-1,"", -1);
 	}
 
 	public Route getRouteFromId(int id) {		
@@ -103,10 +109,8 @@ public class Carte extends Graphe_matrice {
 	public void parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
 		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
-		LinkedList tableauParcours = new LinkedList<Route>();
-		
-		double distanceParcourue = 0.0;
-		
+		LinkedList<Route> tableauParcours = new LinkedList<Route>();
+				
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
 		
 		for(int i=0;(i<getNbNoeuds()+1);i++){
@@ -115,7 +119,16 @@ public class Carte extends Graphe_matrice {
 		}
 		temp=0;
 		tableauParent.put(nStart.getId(), nStart.getId());
-		visiterProfondeur(nStart, nDest, borneMax, distanceParcourue, tableauParcours);
+		
+		
+		cheminLePlusCourtProfondeur = null; // On vide l'eventuel resultat precedent
+		if ( visiterProfondeur(nStart, nDest, borneMax, 0.0, 0, tableauParcours) ) {
+			
+			System.out.println(cheminLePlusCourtProfondeur); 
+			// La variable cheminLePlusCourtProfondeur aura ete modifiee par la fonction "visiter", 
+			// si celle-ci retourne vrai.
+			
+		}
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
@@ -124,9 +137,11 @@ public class Carte extends Graphe_matrice {
 				}
 			}
 		}
+		
+		
 	}
 	
-	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue, LinkedList<Route> tabParcours) {
+	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue, int interet_total, LinkedList<Route> tabParcours) {
 		
 		tableauCouleur.put(n.getId(), 1);
 		
@@ -140,16 +155,29 @@ public class Carte extends Graphe_matrice {
 			
 			Route rTemp = it.next();
 			
-			if(tableauCouleur.get(rTemp.getNoeudCible().getId()) == 0 && (distanceParcourue + rTemp.getPonderation() <= borneMax)){
+			if(tableauCouleur.get(rTemp.getNoeudCible().getId()) == 0 && (distanceParcourue + rTemp.getPonderation() <= borneMax)) {
 				if(rTemp.getNoeudCible() != nDest){
 					tableauCouleur.put(rTemp.getNoeudCible().getId(), 1);
 					distanceParcourue += rTemp.getPonderation();
+					interet_total += rTemp.getInteret() + ((Ville)rTemp.getNoeudCible()).getInteret();
 					tabParcours.addLast( rTemp );
-					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue, tabParcours);
+					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue, interet_total, tabParcours);
 				}
 				else{
 					tableauCouleur.put(rTemp.getNoeudCible().getId(), n.getId());
 					distanceParcourue += rTemp.getPonderation();
+					interet_total += rTemp.getInteret() + ((Ville)rTemp.getNoeudCible()).getInteret();
+					tabParcours.addLast( rTemp ); // Derniere route, donc.
+
+					// On a trouve un chemin acceptable
+					
+					// Si aucun chemin n'a ete trouve precedemment OU que le chemin precedent presente un interet moindre ...
+					if ( cheminLePlusCourtProfondeur == null || interet_total > interetCheminLePlusCourtProfondeur  ) {
+						// On ajoute celui en cours
+						cheminLePlusCourtProfondeur = new LinkedList<Route>(tabParcours);
+						interetCheminLePlusCourtProfondeur = interet_total;
+					}
+					
 					System.out.println("Distance parcourue : " + distanceParcourue);
 					System.out.println("Dest atteinte");
 					return true;
