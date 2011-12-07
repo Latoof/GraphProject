@@ -50,8 +50,50 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
+	public void plusCourtDijkstra(Ville vStart){
+		tableauParent = new Hashtable<Integer, Integer>();
+		tableauDistanceKilo = new Hashtable<Integer, Double>();
+
+		LinkedList<Ville> file = new LinkedList<Ville>();
+
+		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
+
+		for(int i=1;i<=getNbNoeuds();i++){
+			tableauDistanceKilo.put(i, Double.MAX_VALUE);
+			tableauParent.put(i, -1);
+			file.add(this.getVilleFromId(i));
+		}
+		tableauDistanceKilo.put(vStart.getId(), 0.0);
+		tableauParent.put(vStart.getId(), vStart.getId());
+
+		Ville u;
+		while(!file.isEmpty()){
+			u=file.pollFirst();
+
+			Iterator<Arc> it = getArcsSortants(u).iterator();
+
+			while ( it.hasNext() ) {
+
+				Route r = (Route)it.next();
+
+				if(tableauDistanceKilo.get(r.getNoeudCible().getId()) > (tableauDistanceKilo.get(r.getNoeudSource().getId()) + r.getPonderation())){
+					tableauDistanceKilo.put(r.getNoeudCible().getId(), (tableauDistanceKilo.get(r.getNoeudSource().getId()) + r.getPonderation()));
+					tableauParent.put(r.getNoeudCible().getId(), r.getNoeudSource().getId());
+				}
+			}
+		}
+		
+		for(int i=0; i < (getNbNoeuds()+1) ; i++){
+			if(getVilleFromId(i).getId() != -1){
+				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
+				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
+				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
+			}
+		}
+	}
+	
 	public void genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
-		this.methodeAgregation(vStart, 1);
+		this.plusCourtDijkstra(vStart);
 		double distanceDest = tableauDistanceKilo.get(vDest.getId());
 		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
 		double borneMax = distanceDest * coeff;
@@ -236,6 +278,7 @@ public class Carte extends Graphe_matrice {
 		return result;
 	}
 	
+	// A supprimer remplacé par un dijkstra
 	public double ponderationDistance (Route route) {
 		double result = 0;
 			
