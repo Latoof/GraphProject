@@ -177,7 +177,11 @@ public class AppliTest {
 //			carte.writeDotFile("./map.dot");
 //			carte.genererItineraireAgregation(v1, 1);
 	
+			Chrono c = new Chrono();
+			c.start();
 			carte.genererItineraireDetourBorne(v1, v6, 3.0);
+			c.stop();
+			System.out.println("Chrono : "+c.getMilliseconds()+" ms");
 //			carte.plusCourtDijkstra(v1);
 			
 			System.out.println("END");

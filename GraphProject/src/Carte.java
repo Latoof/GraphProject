@@ -122,13 +122,13 @@ public class Carte extends Graphe_matrice {
 		
 		
 		cheminLePlusCourtProfondeur = null; // On vide l'eventuel resultat precedent
-		if ( visiterProfondeur(nStart, nDest, borneMax, 0.0, 0, tableauParcours) ) {
-			
+		visiterProfondeur(nStart, nDest, borneMax, 0.0, 0, tableauParcours);
+		
+		if ( cheminLePlusCourtProfondeur != null ) {
 			System.out.println(cheminLePlusCourtProfondeur); 
+		}
 			// La variable cheminLePlusCourtProfondeur aura ete modifiee par la fonction "visiter", 
 			// si celle-ci retourne vrai.
-			
-		}
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
