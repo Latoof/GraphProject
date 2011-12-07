@@ -56,7 +56,7 @@ public class Carte extends Graphe_matrice {
 
 		LinkedList<Ville> file = new LinkedList<Ville>();
 
-		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
+//		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
 
 		for(int i=1;i<=getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
@@ -85,9 +85,9 @@ public class Carte extends Graphe_matrice {
 		
 		for(int i=0; i < (getNbNoeuds()+1) ; i++){
 			if(getVilleFromId(i).getId() != -1){
-				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
-				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
-				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
+//				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
+//				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
+//				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 			}
 		}
 	}
@@ -111,7 +111,7 @@ public class Carte extends Graphe_matrice {
 		tableauParent = new Hashtable<Integer, Integer>();
 		LinkedList<Route> tableauParcours = new LinkedList<Route>();
 				
-		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
+		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId() + "\n");
 		
 		for( int i=0;(i<getNbNoeuds()+1);i++ ){
 			tableauCouleur.put(i, 0);
@@ -159,8 +159,12 @@ public class Carte extends Graphe_matrice {
 				if(rTemp.getNoeudCible() != nDest){
 					tableauCouleur.put(rTemp.getNoeudCible().getId(), 1);
 					distanceParcourue += rTemp.getPonderation();
+					System.out.println("Distance ajoutée : "+rTemp.getPonderation());
+					System.out.println("Distance parcourue : " + distanceParcourue);
 					interet_total += rTemp.getInteret() + ((Ville)rTemp.getNoeudCible()).getInteret();
+					System.out.println("Interet ajouté\n\tRoute : " + rTemp.getInteret() + "\n\tVille ("+ ((Ville)rTemp.getNoeudCible()).getNomVille() +"): " + ((Ville)rTemp.getNoeudCible()).getInteret());
 					tabParcours.addLast( rTemp );
+					System.out.println(tabParcours+"\n");
 					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue, interet_total, tabParcours);
 				}
 				else{
