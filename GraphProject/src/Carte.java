@@ -71,7 +71,7 @@ public class Carte extends Graphe_matrice {
 				
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
 		
-		for(int i=0;(i<getNbNoeuds()+1);i++){
+		for( int i=0;(i<getNbNoeuds()+1);i++ ){
 			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
 		}
