@@ -11,7 +11,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=7; // A modifier pour changer le test (je m'en sers aussi)
+		int t=8; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -176,6 +176,9 @@ public class AppliTest {
 
 //			carte.writeDotFile("./map.dot");
 //			carte.genererItineraireAgregation(v1, 1);
+			
+			carte.genererItineraireDetourBorne(carte.getVilleFromId(1), carte.getVilleFromId(4), 3.0);
+
 	
 			Chrono c = new Chrono();
 			c.start();
@@ -202,15 +205,27 @@ public class AppliTest {
 			Carte carte = new Carte();
 			carte.loadFromDotFile("./essai1.dot");
 			
+			
+			
+			System.out.println(carte);
 			// Code ici
 			Chrono c = new Chrono();
 			c.start();
-			carte.genererItineraireDetourBorne(carte.getVilleFromId(0), carte.getVilleFromId(4), 3.0);
+			carte.genererItineraireDetourBorne(carte.getVilleFromId(1), carte.getVilleFromId(3), 3.0);
+	//		carte.genererItineraireDetourBorne(v1, v2, coeff)
 			c.stop();
 			System.out.println("Chrono : "+c.getMilliseconds()+" ms");
 			
 			System.out.println(carte);
 			carte.genererItineraireAgregation(carte.getVilleFromId(0), 1);
+		}
+		else if (t == 8){
+			Carte carte = new Carte();
+			carte.loadFromDotFile("./essai2.dot");
+			
+			System.out.println(carte);
+			
+			carte.genererItineraireAgregation(carte.getVilleFromId(0), 0.63);
 		}
 	}
 }
