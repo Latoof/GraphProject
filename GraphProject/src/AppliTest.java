@@ -177,7 +177,7 @@ public class AppliTest {
 //			carte.writeDotFile("./map.dot");
 //			carte.genererItineraireAgregation(v1, 1);
 	
-			carte.genererItineraireDetourBorne(v1, v6, 1.0);
+			carte.genererItineraireDetourBorne(v1, v6, 3.0);
 			
 			
 			System.out.println("END");

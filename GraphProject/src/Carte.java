@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -58,11 +59,10 @@ public class Carte extends Graphe_matrice {
 	}
 	
 	public void parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
-		tableauDistanceKilo = new Hashtable<Integer, Double>();
 		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
-		tableauDebut = new Hashtable<Integer, Integer>();
-		tableauFin = new Hashtable<Integer, Integer>();
+		LinkedList tableauParcours = new LinkedList<Route>();
+		
 		double distanceParcourue = 0.0;
 		
 		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId());
@@ -70,11 +70,10 @@ public class Carte extends Graphe_matrice {
 		for(int i=0;(i<getNbNoeuds()+1);i++){
 			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
-			tableauDistanceKilo.put(i, 0.0);
 		}
 		temp=0;
 		tableauParent.put(nStart.getId(), nStart.getId());
-		visiterProfondeur(nStart, nDest, borneMax, distanceParcourue);
+		visiterProfondeur(nStart, nDest, borneMax, distanceParcourue, tableauParcours);
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
@@ -85,27 +84,26 @@ public class Carte extends Graphe_matrice {
 		}
 	}
 	
-	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue) {
+	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue, LinkedList<Route> tabParcours) {
 		
 		tableauCouleur.put(n.getId(), 1);
-		tableauDebut.put(n.getId(), temp);
-		temp++;
 		
 		System.out.println("entrée : " + n.getId());
 		
-		Set<Arc> set = new TreeSet<Arc>();
-		set = getArcsSortants(n);
-		System.out.println(set);
-		Iterator<Arc> it = getArcsSortants(n).iterator();
+		Set<Arc> set = getArcsSortants(n);
+		Set<Route> setR = (Set)set;
+		
+		Iterator<Route> it = setR.iterator();
 		while ( it.hasNext() ) {
 			
-			Route rTemp = (Route)it.next();
+			Route rTemp = it.next();
 			
 			if(tableauCouleur.get(rTemp.getNoeudCible().getId()) == 0 && (distanceParcourue + rTemp.getPonderation() <= borneMax)){
 				if(rTemp.getNoeudCible() != nDest){
-					tableauCouleur.put(rTemp.getNoeudCible().getId(), n.getId());
+					tableauCouleur.put(rTemp.getNoeudCible().getId(), 1);
 					distanceParcourue += rTemp.getPonderation();
-					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue);
+					tabParcours.addLast( rTemp );
+					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue, tabParcours);
 				}
 				else{
 					tableauCouleur.put(rTemp.getNoeudCible().getId(), n.getId());
@@ -113,6 +111,7 @@ public class Carte extends Graphe_matrice {
 					System.out.println("Distance parcourue : " + distanceParcourue);
 					System.out.println("Dest atteinte");
 					return true;
+					// Stockage du meilleur chemin
 					
 				}
 			}
@@ -120,8 +119,6 @@ public class Carte extends Graphe_matrice {
 
 		tableauCouleur.put(n.getId(), 0);
 		System.out.println("sortie : " + n.getId());
-		tableauFin.put(n.getId(), temp);
-		temp++;
 		return false;
 	}
 	
@@ -181,7 +178,7 @@ public class Carte extends Graphe_matrice {
 		tableauDistanceKilo.put(vStart.getId(), 0.0);
 		tableauParent.put(vStart.getId(), vStart.getId());
 		
-		
+		// Algo de Bellmann Ford !!!
 		for(int i=0; i < (this.getNbNoeuds() - 1); i++){
 			Iterator<Arc> it = this.liste_arc.iterator();
 			while(it.hasNext()){
@@ -205,9 +202,15 @@ public class Carte extends Graphe_matrice {
 	public double ponderationAgregation (Ville vStart, Ville vCible, Route route, double coeff) {
 		double result = 0;
 		
-//		result = coeff * route.getPonderation() / (this.distanceMax);
-//		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
-		
+		result = coeff * route.getPonderation() / (this.distanceMax);
+		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
+					
+		return result;
+	}
+	
+	public double ponderationDistance (Route route) {
+		double result = 0;
+			
 		result = route.getPonderation();
 			
 		return result;
