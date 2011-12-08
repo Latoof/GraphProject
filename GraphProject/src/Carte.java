@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeSet;
 
 /**
@@ -199,8 +200,9 @@ public class Carte extends Graphe_matrice {
 		return false;
 	}
 	
-	public void genererItineraireAgregation(Ville vStart, double coeff){		
+	public void genererItineraireAgregation(Ville vStart, Ville vDest, double coeff){		
 		if(this.methodeAgregation(vStart, coeff)){
+			
 			for(int i=0; i < (getNbNoeuds()+1) ; i++){
 				if(getVilleFromId(i).getId() != -1){
 					System.out.println("Ville : " + getVilleFromId(i).getNomVille());
@@ -208,6 +210,9 @@ public class Carte extends Graphe_matrice {
 					System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 				}
 			}
+			
+			Stack<Integer> itineraire = new Stack<Integer>();
+			itineraire.push(tableauParent.get(vDest));
 		}
 		else{
 			System.out.println("Resultats non concluants :\n\t- Verifier la présence d'un circuit absorbant\n\t- Verifier que interet_max ou distance_max > 0\n");

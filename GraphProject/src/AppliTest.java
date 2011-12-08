@@ -176,16 +176,16 @@ public class AppliTest {
 
 
 //			carte.writeDotFile("./map.dot");
-//			carte.genererItineraireAgregation(v1, 1);
+			carte.genererItineraireAgregation(v1, v6, 1);
 			
-			carte.genererItineraireDetourBorne(carte.getVilleFromId(1), carte.getVilleFromId(4), 3.0);
+//			carte.genererItineraireDetourBorne(carte.getVilleFromId(1), carte.getVilleFromId(4), 3.0);
 
 	
-			Chrono c = new Chrono();
-			c.start();
-			carte.genererItineraireDetourBorne(v1, v6, 3.0);
-			c.stop();
-			System.out.println("Chrono : "+c.getMilliseconds()+" ms");
+//			Chrono c = new Chrono();
+//			c.start();
+//			carte.genererItineraireDetourBorne(v1, v6, 3.0);
+//			c.stop();
+//			System.out.println("Chrono : "+c.getMilliseconds()+" ms");
 //			carte.plusCourtDijkstra(v1);
 			
 			System.out.println("END");
@@ -220,7 +220,7 @@ public class AppliTest {
 			System.out.println("Chrono : "+c.getMilliseconds()+" ms");
 			
 			System.out.println(carte);
-			carte.genererItineraireAgregation(carte.getVilleFromId(0), 1);
+//			carte.genererItineraireAgregation(carte.getVilleFromId(0), 1);
 		}
 		else if (t == 8){
 			Carte carte = new Carte();
@@ -228,7 +228,7 @@ public class AppliTest {
 			
 			System.out.println(carte);
 			
-			carte.genererItineraireAgregation(carte.getVilleFromId(0), 0.63);
+//			carte.genererItineraireAgregation(carte.getVilleFromId(0), 0.63);
 		}
 		else if ( t == 9) { // Simple test de validite du temps CPU
 
