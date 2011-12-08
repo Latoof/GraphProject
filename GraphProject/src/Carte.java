@@ -58,7 +58,7 @@ public class Carte extends Graphe_matrice {
 
 //		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
 
-		for(int i=1;i<=getNbNoeuds();i++){
+		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
 			tableauParent.put(i, -1);
 			file.add(this.getVilleFromId(i));
@@ -83,7 +83,7 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		
-		for(int i=0; i < (getNbNoeuds()+1) ; i++){
+		for(int i=0; i < (getNbNoeuds()) ; i++){
 			if(getVilleFromId(i).getId() != -1){
 //				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
 //				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());

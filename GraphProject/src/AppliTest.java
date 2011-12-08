@@ -12,7 +12,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=9; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -140,12 +140,12 @@ public class AppliTest {
 		else if ( t == 5 ) {
 			Carte carte = new Carte();
 			
-			Ville v1 = new Ville(1, "1", 1);
-			Ville v2 = new Ville(2, "2", 2);
-			Ville v3 = new Ville(3, "3", 1);
-			Ville v4 = new Ville(4, "4", 1);
-			Ville v5 = new Ville(5, "5", 3);
-			Ville v6 = new Ville(6, "6", 1);
+			Ville v1 = new Ville(0, "1", 1);
+			Ville v2 = new Ville(1, "2", 2);
+			Ville v3 = new Ville(2, "3", 1);
+			Ville v4 = new Ville(3, "4", 1);
+			Ville v5 = new Ville(4, "5", 3);
+			Ville v6 = new Ville(5, "6", 1);
 			
 			carte.ajouterNoeud(v1);
 			carte.ajouterNoeud(v2);
@@ -266,8 +266,8 @@ Carte carte = new Carte();
 			carte.ajouterArc(r7);
 			carte.ajouterArc(r8);
 			
-			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testCheminPlusCourt( carte ));
-			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testDetourBorne( carte, 0.5 ));
+//			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testCheminPlusCourt( carte ));
+//			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testDetourBorne( carte, 0.5 ));
 
 		}
 	}
