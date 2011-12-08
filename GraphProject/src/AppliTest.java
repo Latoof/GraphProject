@@ -16,12 +16,12 @@ public class AppliTest {
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
-			Noeud n0 = new Noeud(0);
-			Noeud n1 = new Noeud(1);
-			Noeud n2 = new Noeud(2);
-			Noeud n3 = new Noeud(3);
-			Noeud n4 = new Noeud(4);
-			Noeud n5 = new Noeud(5);
+			Noeud n0 = new Noeud();
+			Noeud n1 = new Noeud();
+			Noeud n2 = new Noeud();
+			Noeud n3 = new Noeud();
+			Noeud n4 = new Noeud();
+			Noeud n5 = new Noeud();
 
 			graphe.ajouterNoeud(n0);			
 			graphe.ajouterNoeud(n1);
@@ -80,11 +80,11 @@ public class AppliTest {
 		else if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
 			
-			Noeud n0 = new Noeud(0);
-			Noeud n1 = new Noeud(1);
-			Noeud n2 = new Noeud(2);
-			Noeud n3 = new Noeud(3);
-			Noeud n4 = new Noeud(4);
+			Noeud n0 = new Noeud();
+			Noeud n1 = new Noeud();
+			Noeud n2 = new Noeud();
+			Noeud n3 = new Noeud();
+			Noeud n4 = new Noeud();
 
 			
 			graphe.ajouterNoeud(n0);
@@ -231,21 +231,44 @@ public class AppliTest {
 			carte.genererItineraireAgregation(carte.getVilleFromId(0), 0.63);
 		}
 		else if ( t == 9) { // Simple test de validite du temps CPU
-			Chrono c = new Chrono();
+
+Carte carte = new Carte();
 			
-			c.start();
-			int tours = 100;
-			ArrayList<Integer> tab = new ArrayList<Integer>();
-			for (int i=0;i<tours;i++) {
-				tab.add(i);
-				int a = 0;
-				tab.get(i);
-			}
-			c.stop();
+			Ville v1 = new Ville(0, "1", 1);
+			Ville v2 = new Ville(1, "2", 2);
+			Ville v3 = new Ville(2, "3", 1);
+			Ville v4 = new Ville(3, "4", 1);
+			Ville v5 = new Ville(4, "5", 3);
+			Ville v6 = new Ville(5, "6", 1);
 			
-			System.out.println("Temps proc : "+c.getTime()+" (moyenne = "+c.getTime()/tours+")");
+			carte.ajouterNoeud(v1);
+			carte.ajouterNoeud(v2);
+			carte.ajouterNoeud(v3);
+			carte.ajouterNoeud(v4);
+			carte.ajouterNoeud(v5);
+			carte.ajouterNoeud(v6);
+	
+			Route r1 = new Route(0, "1->1", 1, 1, v1, v1);
+			Route r2 = new Route(1, "1->2", 2, 1, v1, v2);
+			Route r3 = new Route(2, "2->4", 2, 2, v2, v4);
+			Route r4 = new Route(3, "1->4", 1, 1, v1, v4);
+			Route r5 = new Route(4, "2->3", 3, 3, v2, v3);
+			Route r6 = new Route(5, "2->5", 2, 4, v2, v5);
+			Route r7 = new Route(6, "3->5", 2, 1, v3, v5);
+			Route r8 = new Route(7, "5->6", 1, 1, v5, v6);
+
+			carte.ajouterArc(r1);
+			carte.ajouterArc(r2);
+			carte.ajouterArc(r3);
+			carte.ajouterArc(r4);
+			carte.ajouterArc(r5);
+			carte.ajouterArc(r6);
+			carte.ajouterArc(r7);
+			carte.ajouterArc(r8);
 			
-		
+			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testCheminPlusCourt( carte ));
+			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testDetourBorne( carte, 0.5 ));
+
 		}
 	}
 }

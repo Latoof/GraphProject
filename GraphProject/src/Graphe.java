@@ -54,7 +54,7 @@ public abstract class Graphe {
 			
 		}
 		
-		return new Noeud(-1);
+		return null;
 	}
 	
 	public Arc getArcFromId(int id) {

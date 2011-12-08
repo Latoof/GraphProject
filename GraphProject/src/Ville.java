@@ -15,7 +15,7 @@ public class Ville extends Noeud {
 	 * @param interet
 	 */
 	public Ville(int idNumb, String nomVille, int interet) {
-		super(idNumb);
+		super();
 		this.interet = interet;
 		this.nomVille = nomVille;
 	}

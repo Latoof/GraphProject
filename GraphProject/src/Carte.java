@@ -50,7 +50,7 @@ public class Carte extends Graphe_matrice {
 		return new Route(-1,"",-1, -1, null, null);
 	}
 	
-	public void plusCourtDijkstra(Ville vStart){
+	public boolean plusCourtDijkstra(Ville vStart){
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDistanceKilo = new Hashtable<Integer, Double>();
 
@@ -90,23 +90,26 @@ public class Carte extends Graphe_matrice {
 //				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 			}
 		}
+		
+		return true;
 	}
 	
-	public void genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
+	public LinkedList<Route> genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
 		this.plusCourtDijkstra(vStart);
 		double distanceDest = tableauDistanceKilo.get(vDest.getId());
 		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
 		double borneMax = distanceDest * coeff;
 		System.out.println("Borne Max considérée (Pondération aggregation à 1) : " + borneMax);
 		
-		this.methodeDetourBorne(vStart, vDest, borneMax);
+		
+		return this.methodeDetourBorne(vStart, vDest, borneMax);
 	}
 	
-	public void methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {
-		this.parcoursProfondeurVille(vStart, vDest, false, borneMax);
+	public LinkedList<Route> methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {
+		return this.parcoursProfondeurVille(vStart, vDest, false, borneMax);
 	}
 	
-	public void parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
+	public LinkedList<Route> parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
 		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
 		LinkedList<Route> tableauParcours = new LinkedList<Route>();
@@ -138,7 +141,7 @@ public class Carte extends Graphe_matrice {
 			}
 		}
 		
-		
+		return cheminLePlusCourtProfondeur;
 	}
 	
 	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue, int interet_total, LinkedList<Route> tabParcours) {
