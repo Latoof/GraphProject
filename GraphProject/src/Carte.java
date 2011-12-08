@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeSet;
 
 /**
  * @author Matthieu Lenogue - Maxime Ouairy
@@ -18,6 +16,7 @@ public class Carte extends Graphe_matrice {
 	double	distanceMax;
 	int		interetMax;
 	Hashtable<Integer, Double>	tableauDistanceKilo;
+	LinkedList<Route> 	itineraire;
 	
 	// A revoir. Beaucoup de choses a optimiser
 	LinkedList<Route> cheminLePlusCourtProfondeur;
@@ -202,17 +201,27 @@ public class Carte extends Graphe_matrice {
 	
 	public void genererItineraireAgregation(Ville vStart, Ville vDest, double coeff){		
 		if(this.methodeAgregation(vStart, coeff)){
-			
-			for(int i=0; i < (getNbNoeuds()+1) ; i++){
+			/*
+			for(int i=0; i < getNbNoeuds() ; i++){
 				if(getVilleFromId(i).getId() != -1){
 					System.out.println("Ville : " + getVilleFromId(i).getNomVille());
 					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
 					System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 				}
 			}
-			
-			Stack<Integer> itineraire = new Stack<Integer>();
-			itineraire.push(tableauParent.get(vDest));
+			*/
+			LinkedList<Integer> itineraire = new LinkedList<Integer>();
+			int u = vDest.getId();
+			while(u != vStart.getId()){
+				itineraire.addFirst(tableauParent.get(u));
+				u = tableauParent.get(u);
+			}
+			System.out.println("itineraire depuis "+vStart.getNomVille()+" vers "+vDest.getNomVille());
+			int v;
+			while(itineraire.size() != 0){
+				v = itineraire.removeFirst();
+				System.out.println("On passe par "+getVilleFromId(v).getNomVille());
+			}
 		}
 		else{
 			System.out.println("Resultats non concluants :\n\t- Verifier la présence d'un circuit absorbant\n\t- Verifier que interet_max ou distance_max > 0\n");
@@ -252,7 +261,7 @@ public class Carte extends Graphe_matrice {
 		
 		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getNomVille() + "\n");
 		
-		for(int i=0;i<getNbNoeuds()+1;i++){
+		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
 			tableauParent.put(i, -1);
 		}
