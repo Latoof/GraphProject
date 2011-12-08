@@ -1,7 +1,11 @@
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
+
 public final class Chrono {
 	
     private long begin;
     private long end;
+    ThreadMXBean mx = ManagementFactory.getThreadMXBean();
     
     public boolean status;
     
@@ -13,12 +17,13 @@ public final class Chrono {
     
     public void start() {
     	reset();
-        begin = System.currentTimeMillis(); 
+        begin = mx.getCurrentThreadCpuTime();
+        
         // Timestamp du systeme.
     }
      
     public void stop(){
-        end = System.currentTimeMillis();
+        end = mx.getCurrentThreadCpuTime();
     }
  
     public void reset() {
@@ -27,24 +32,13 @@ public final class Chrono {
     }
     
     public long getTime() {
-        return getMilliseconds();
+        return end-begin;
     }
  
     public long getMilliseconds() {
         return end-begin;
     }
  
-    public double getSeconds() {
-        return getMilliseconds() / 1000.0;
-    }
- 
-    public double getMinutes() {
-        return getMilliseconds() / 60000.0;
-    }
- 
-    // Si tout va bien, ne devrait pas servir !
-    public double getHours() {
-        return getMilliseconds() / 3600000.0;
-    }
+
     
 }
