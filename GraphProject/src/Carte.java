@@ -5,7 +5,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * @author Matthieu Lenogue - Maxime Ouairy
