@@ -20,24 +20,36 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		matrice_adjacence = new Matrice_Perso<HashSet<Integer>>();		
 	}
 	
-	public void ajouterNoeud (Noeud n) {
-		liste_noeud.add(n);
-		noeud_actifs.put(n.getId(), true);
+	public int ajouterNoeud (Noeud n) {
 		
-		matrice_adjacence.Add(new HashSet<Integer>(), n.getId());
-		this.resizeMatrice();
+		if ( super.ajouterNoeud(n) != -1 ) {
+			
+			noeud_actifs.put(n.getId(), true);
+			
+			matrice_adjacence.Add(new HashSet<Integer>(), n.getId());
+			this.resizeMatrice();
+		
+			return n.getId();
+		}
+		
+		return -1;
 	}
 	
-	public void supprimerNoeud (Noeud n) {
+	public int supprimerNoeud (Noeud n) {
 
-		liste_noeud.remove((Noeud)n);
-		noeud_actifs.put(n.getId(), false);
+		int prevID = super.supprimerNoeud(n);
+		if ( prevID != -1 ) {
+		
+			noeud_actifs.put(prevID, false);
+		}
 		/*
 		for(int i=0; i < (matrice_adjacence.getNumRows() - 1); i++){
 			matrice_adjacence.set(n.getId(), i, new HashSet<Integer>());
 			matrice_adjacence.set(i, n.getId(), new HashSet<Integer>());
 		}
 		*/
+		
+		return -1;
 	}
 	
 	public void resizeMatrice (){

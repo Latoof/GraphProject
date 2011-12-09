@@ -37,7 +37,7 @@ public class Carte extends Graphe_matrice {
 				return (Ville)liste_noeud.get(i);
 			}
 		}			
-		return new Ville(-1,"", -1);
+		return null;
 	}
 
 	public Route getRouteFromId(int id) {		
@@ -46,7 +46,7 @@ public class Carte extends Graphe_matrice {
 				return (Route)liste_arc.get(i);
 			}
 		}
-		return new Route(-1,"",-1, -1, null, null);
+		return null;
 	}
 	
 	public boolean plusCourtDijkstra(Ville vStart){
@@ -103,12 +103,20 @@ public class Carte extends Graphe_matrice {
 		LinkedList<Route> itineraire = new LinkedList<Route>();
 		itineraire = this.methodeDetourBorne(vStart, vDest, borneMax);
 
-		Ville v = (Ville)itineraire.removeFirst().getNoeudCible();
-		while(itineraire.size() != 0){
-			System.out.println("On passe par "+v.getNomVille());
-			v = (Ville)itineraire.removeFirst().getNoeudCible();
+		if ( itineraire != null ) {
+			
+			Ville v = (Ville)itineraire.removeFirst().getNoeudCible();
+			while(itineraire.size() != 0){
+				System.out.println("On passe par "+v.getNomVille());
+				v = (Ville)itineraire.removeFirst().getNoeudCible();
+			}
+			return itineraire;
+		
 		}
-		return itineraire;
+		else {
+			System.out.println("ITINERAIRE NULL");
+			return null;
+		}
 	}
 	
 	public LinkedList<Route> methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {

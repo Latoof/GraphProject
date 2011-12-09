@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
+
 public class AppliTest {
 
 	/**
@@ -265,13 +266,25 @@ Carte carte = new Carte();
 			carte.ajouterArc(r7);
 			carte.ajouterArc(r8);
 			
-			TestsTempsProcesseur tp = new TestsTempsProcesseur( 10, (float)0.1 );
+			TestsTempsProcesseur tp = new TestsTempsProcesseur( carte );
 			
 			long tps_CheminPlusCourt = tp.testCheminPlusCourt( );
-			long tps_DetourBorne = tp.testDetourBorne( 0.5 );
 			
  			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
-			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_DetourBorne > -1 ? tps_CheminPlusCourt : "Echec" ));
+
+			
+			long tps_DetourBorne = tp.testDetourBorne( 0.5 );
+			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_DetourBorne > -1 ? tps_DetourBorne : "Echec" ));
+
+			
+
+
+			long tps_serie = tp.testDetourBorneSerie(100, 0.5, 20, (float)0.1 );
+ 			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
+
+ 			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
+			System.out.println("TC ---> Temps proc pour detour borne : "+ ( tps_DetourBorne > -1 ? tps_DetourBorne : "Echec" ));
+ 			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
 
 		}
 	}

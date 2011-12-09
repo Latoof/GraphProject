@@ -2,17 +2,15 @@
 public class Noeud implements Comparable {
 
 	int 	id;
-	private static int compteur_noeuds = 0;
-	
+
 	
 	public Noeud() {
 		
 		// this.id = ++compteur_noeuds;
 		// ID commencant a 1
 		
-		this.id = compteur_noeuds++;
+		this.id = -1;
 		// ID commencant a 0
-		System.out.println("Ajout noeud "+this.id);
 	}
 
 	public int getId() {

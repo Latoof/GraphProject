@@ -31,6 +31,33 @@ public class TestsTempsProcesseur {
 		this.genererCarte( nbNoeuds, densite);
 	}
 	
+
+
+	public long testDetourBorneSerie( int series, double coeff,  int nbNoeuds, float densite ) throws NumberFormatException, IOException {
+		
+		long temps_cumule = 0;
+		int nb_succes = 0;
+		long moyenne;
+		
+		for (int i=0; i<series; i++) {
+			
+			this.genererCarte(nbNoeuds, densite);
+			
+			long tps = this.testDetourBorne( coeff );
+			
+			if ( tps != -1 ) {
+				nb_succes++;
+				temps_cumule += tps;
+			}
+		}
+		
+		moyenne = temps_cumule / nb_succes;
+		System.out.println("total pour "+ nb_succes+ "resultats : "+temps_cumule);
+		
+		return moyenne;
+		
+	}
+	
 	public long testDetourBorne( double coeff ) {
 		
 		int startID = 0;

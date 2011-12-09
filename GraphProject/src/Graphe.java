@@ -6,6 +6,8 @@ import java.util.Set;
 
 public abstract class Graphe {
 
+	int compteurNoeuds = 0;
+	int compteurArcs = 0;
 	ArrayList<Noeud>			liste_noeud;
 	ArrayList<Arc>				liste_arc;
 	Hashtable<Integer, Integer> tableauCouleur;
@@ -21,15 +23,35 @@ public abstract class Graphe {
 	}
 	
 	
-	public void ajouterNoeud (Noeud n) {
+	public int ajouterNoeud (Noeud n) {
 		
-		liste_noeud.add(n);
+		if ( n.getId() == -1 ) {
+			n.setId(compteurNoeuds++);
+			liste_noeud.add(n);
+			
+			return n.getId();
+		}
+		
+		System.out.println("Erreur lors de l'ajout du Noeud "+n.toString()+" -> Noeud deja utilise ! (id "+n.getId()+")");
+		
+		return -1;
 
 	}
 	
-	public void supprimerNoeud (Noeud n) {
+	public int supprimerNoeud (Noeud n) {
 		
-		liste_noeud.remove(n);
+		if ( liste_noeud.contains(n) ) {
+			
+			int prevID = n.getId();
+
+			liste_noeud.remove(n);
+			n.setId(-1);
+			
+			return prevID;
+		
+		}
+		
+		return -1;
 	}
 
 	public void ajouterArc(Arc a) {

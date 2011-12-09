@@ -6,10 +6,10 @@ import java.util.Set;
 
 public class Graphe_liste extends Graphe {
 	
-	ArrayList<
-		LinkedList< 
-			ArrayList<
-				Integer
+	ArrayList< // Tableau de ...
+		LinkedList< // ... tableau de ...
+			ArrayList< // ... tableau ...
+				Integer // ... d'entiers
 			> 
 		>
 	> liste_adjacence;
@@ -28,54 +28,69 @@ public class Graphe_liste extends Graphe {
 								>();
 	}
 	
-	public void ajouterNoeud (Noeud n) {
+	public int ajouterNoeud (Noeud n) {
 		
-		liste_noeud.add(n);
+		if ( super.ajouterNoeud(n) != -1 ) {
+			
+			LinkedList< ArrayList<Integer> > graphList = new LinkedList< ArrayList<Integer> >();
+			graphList.add(new ArrayList<Integer>());
+			graphList.get(0).add( n.getId() );
+			
+			liste_adjacence.add( graphList );
+			
+			return n.getId();
+		}
 		
-		LinkedList< ArrayList<Integer> > graphList = new LinkedList< ArrayList<Integer> >();
-		graphList.add(new ArrayList<Integer>());
-		graphList.get(0).add( n.getId() );
+		return -1;
 		
-		liste_adjacence.add( graphList );
+
 	}
 	
-	public void supprimerNoeud (Noeud n) {
-		
-		/** Suppression des Noeuds voisins posterieurs **/
-		for (int i=0; i<liste_adjacence.size(); i++) {
-			
-			if (liste_adjacence.get(i).get(0).get(0) == n.getId() ) 
-				liste_adjacence.remove(i);
-			
-		}
-		/************************************/
-
-		
-		
-		/** Suppression des arcs allant vers ce Noeud **/
-		for (int i=0; i<liste_adjacence.size(); i++) {
-			
-			ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
-			while ( itL.hasNext() ) {
+	public int supprimerNoeud (Noeud n) {
 				
-				ArrayList<Integer> aTemp = itL.next();
+		int prevID = super.supprimerNoeud(n);
+		if ( prevID != -1 ) {
+		
 				
-				if ( aTemp.get(0) == n.getId() ) {
-					
-					for (int j=1; j<aTemp.size(); j++) {
-						liste_arc.remove( getArcFromId( aTemp.get(j) ) );
-						itL.remove();
-						
-					}
-				}
+			/** Suppression des Noeuds voisins posterieurs **/
+			for (int i=0; i<liste_adjacence.size(); i++) {
+				
+				if (liste_adjacence.get(i).get(0).get(0) == prevID ) 
+					liste_adjacence.remove(i);
 				
 			}
-
+			/************************************/
+	
+			
+			
+			/** Suppression des arcs allant vers ce Noeud **/
+			for (int i=0; i<liste_adjacence.size(); i++) {
+				
+				ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(i).listIterator();
+				while ( itL.hasNext() ) {
+					
+					ArrayList<Integer> aTemp = itL.next();
+					
+					if ( aTemp.get(0) == prevID ) {
+						
+						for (int j=1; j<aTemp.size(); j++) {
+							liste_arc.remove( getArcFromId( aTemp.get(j) ) );
+							itL.remove();
+							
+						}
+					}
+					
+				}
+	
+			}
+			
+			return prevID;
+			/************************************/
+			
 		}
-		/************************************/
-
 		
-		liste_noeud.remove(n);
+		return -1;
+			
 	}
 	
 	public Set<Noeud> getPredecesseurs(Noeud n) {
