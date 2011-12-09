@@ -205,7 +205,8 @@ public class Carte extends Graphe_matrice {
 		}
 
 		tableauCouleur.put(n.getId(), 0);
-		tabParcours.removeLast();
+		if ( !tabParcours.isEmpty() )
+			tabParcours.removeLast();
 		System.out.println("sortie : " + n.getNomVille()+"\n");
 		
 		return false;
