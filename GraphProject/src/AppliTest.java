@@ -175,10 +175,9 @@ public class AppliTest {
 			System.out.println("Creation : Well done\n");
 
 
-//			carte.writeDotFile("./map.dot");
-			carte.genererItineraireAgregation(v1, v6, 1);
+//			carte.genererItineraireAgregation(v1, v6, 1);
 			
-//			carte.genererItineraireDetourBorne(carte.getVilleFromId(1), carte.getVilleFromId(4), 3.0);
+			carte.genererItineraireDetourBorne(carte.getVilleFromId(0), carte.getVilleFromId(5), 3.0);
 
 	
 //			Chrono c = new Chrono();
