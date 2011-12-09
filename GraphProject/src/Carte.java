@@ -105,11 +105,11 @@ public class Carte extends Graphe_matrice {
 
 		if ( itineraire != null ) {
 			
-			Ville v = (Ville)itineraire.removeFirst().getNoeudCible();
 			while(itineraire.size() != 0){
-				System.out.println("On passe par "+v.getNomVille());
-				v = (Ville)itineraire.removeFirst().getNoeudCible();
-			}
+				Route r = (Route)itineraire.removeFirst();
+				System.out.println("On passe par la route : "+r.getIdentifiant()+" vers "+((Ville)r.getNoeudCible()).getNomVille());
+				}
+			
 			return itineraire;
 		
 		}
@@ -128,7 +128,7 @@ public class Carte extends Graphe_matrice {
 		tableauParent = new Hashtable<Integer, Integer>();
 		LinkedList<Route> tableauParcours = new LinkedList<Route>();
 				
-		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getNomVille() + "\n");
+//		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getNomVille() + "\n");
 		
 		for( int i=0;(i<getNbNoeuds()+1);i++ ){
 			tableauCouleur.put(i, 0);
@@ -142,7 +142,7 @@ public class Carte extends Graphe_matrice {
 		visiterProfondeur(nStart, nDest, borneMax, 0.0, 0, tableauParcours);
 		
 		if ( cheminLePlusCourtProfondeur != null ) {
-			System.out.println(cheminLePlusCourtProfondeur); 
+//			System.out.println(cheminLePlusCourtProfondeur); 
 		}
 			// La variable cheminLePlusCourtProfondeur aura ete modifiee par la fonction "visiter", 
 			// si celle-ci retourne vrai.
@@ -162,7 +162,7 @@ public class Carte extends Graphe_matrice {
 		
 		tableauCouleur.put(n.getId(), 1);
 		
-		System.out.println("entrée : " + n.getNomVille());
+//		System.out.println("entrée : " + n.getNomVille());
 		
 		Set<Arc> set = getArcsSortants(n);
 		Set<Route> setR = (Set)set;
@@ -176,12 +176,8 @@ public class Carte extends Graphe_matrice {
 				if(rTemp.getNoeudCible() != nDest){
 					tableauCouleur.put(rTemp.getNoeudCible().getId(), 1);
 					distanceParcourue += rTemp.getPonderation();
-					System.out.println("Distance ajoutée : "+rTemp.getPonderation());
-					System.out.println("Distance parcourue : " + distanceParcourue);
 					interet_total += rTemp.getInteret() + ((Ville)rTemp.getNoeudCible()).getInteret();
-					System.out.println("Interet ajouté\n\tRoute : " + rTemp.getInteret() + "\n\tVille ("+ ((Ville)rTemp.getNoeudCible()).getNomVille() +"): " + ((Ville)rTemp.getNoeudCible()).getInteret());
 					tabParcours.addLast( rTemp );
-					System.out.println(tabParcours+"\n");
 					visiterProfondeur((Ville)rTemp.getNoeudCible(), nDest, borneMax, distanceParcourue, interet_total, tabParcours);
 				}
 				else{
@@ -199,8 +195,8 @@ public class Carte extends Graphe_matrice {
 						interetCheminLePlusCourtProfondeur = interet_total;
 					}
 					
-					System.out.println("Distance parcourue : " + distanceParcourue);
-					System.out.println("Dest atteinte");
+					System.out.println("\nDistance parcourue : " + distanceParcourue);
+					System.out.println("Dest atteinte\n");
 					return true;
 					// Stockage du meilleur chemin
 					
@@ -209,21 +205,15 @@ public class Carte extends Graphe_matrice {
 		}
 
 		tableauCouleur.put(n.getId(), 0);
+		tabParcours.removeLast();
 		System.out.println("sortie : " + n.getNomVille()+"\n");
+		
 		return false;
 	}
 	
 	public void genererItineraireAgregation(Ville vStart, Ville vDest, double coeff){		
 		if(this.methodeAgregation(vStart, coeff)){
-			/*
-			for(int i=0; i < getNbNoeuds() ; i++){
-				if(getVilleFromId(i).getId() != -1){
-					System.out.println("Ville : " + getVilleFromId(i).getNomVille());
-					System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
-					System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
-				}
-			}
-			*/
+			
 			LinkedList<Integer> itineraire = new LinkedList<Integer>();
 			int u = vDest.getId();
 			while(u != vStart.getId()){
