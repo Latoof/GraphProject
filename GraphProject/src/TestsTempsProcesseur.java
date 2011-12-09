@@ -38,6 +38,7 @@ public class TestsTempsProcesseur {
 		long temps_cumule = 0;
 		int nb_succes = 0;
 		long moyenne;
+		double moyenne_cum = 0;
 		
 		for (int i=0; i<series; i++) {
 			
@@ -47,12 +48,17 @@ public class TestsTempsProcesseur {
 			
 			if ( tps != -1 ) {
 				nb_succes++;
+			//	moyenne_cum = (double) ( moyenne_cum * (float) (((nb_succes - 1) / nb_succes)) + tps * (float) (( 1  / nb_succes )) );
+			//	System.out.println("MC### "+moyenne_cum+ " ( "+moyenne_cum * (float) (((nb_succes - 1) / nb_succes))+" + "+tps * (float) (( 1  / nb_succes )));
 				temps_cumule += tps;
+				
 			}
 		}
 		
 		moyenne = temps_cumule / nb_succes;
-		System.out.println("total pour "+ nb_succes+ "resultats : "+temps_cumule);
+		System.out.println("total pour "+ nb_succes+ "resultats : "+temps_cumule+"("+moyenne);
+	//	System.out.println("total test "+ nb_succes+ "resultats : "+moyenne_cum);
+
 		
 		return moyenne;
 		

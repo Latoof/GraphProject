@@ -279,7 +279,7 @@ Carte carte = new Carte();
 			
 
 
-			long tps_serie = tp.testDetourBorneSerie(100, 0.5, 20, (float)0.1 );
+			long tps_serie = tp.testDetourBorneSerie(1000, 0.5, 18, (float)0.1 );
  			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
 
  			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
