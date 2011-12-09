@@ -101,8 +101,15 @@ public class Carte extends Graphe_matrice {
 		double borneMax = distanceDest * coeff;
 		System.out.println("Borne Max considérée (Pondération aggregation à 1) : " + borneMax);
 		
-		
-		return this.methodeDetourBorne(vStart, vDest, borneMax);
+		LinkedList<Route> itineraire = new LinkedList<Route>();
+		itineraire = this.methodeDetourBorne(vStart, vDest, borneMax);
+
+		Ville v = (Ville)itineraire.removeFirst().getNoeudCible();
+		while(itineraire.size() != 0){
+			System.out.println("On passe par "+v.getNomVille());
+			v = (Ville)itineraire.removeFirst().getNoeudCible();
+		}
+		return itineraire;
 	}
 	
 	public LinkedList<Route> methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {
@@ -114,7 +121,7 @@ public class Carte extends Graphe_matrice {
 		tableauParent = new Hashtable<Integer, Integer>();
 		LinkedList<Route> tableauParcours = new LinkedList<Route>();
 				
-		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getId() + "\n");
+		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getNomVille() + "\n");
 		
 		for( int i=0;(i<getNbNoeuds()+1);i++ ){
 			tableauCouleur.put(i, 0);
@@ -148,7 +155,7 @@ public class Carte extends Graphe_matrice {
 		
 		tableauCouleur.put(n.getId(), 1);
 		
-		System.out.println("entrée : " + n.getId());
+		System.out.println("entrée : " + n.getNomVille());
 		
 		Set<Arc> set = getArcsSortants(n);
 		Set<Route> setR = (Set)set;
@@ -195,7 +202,7 @@ public class Carte extends Graphe_matrice {
 		}
 
 		tableauCouleur.put(n.getId(), 0);
-		System.out.println("sortie : " + n.getId());
+		System.out.println("sortie : " + n.getNomVille()+"\n");
 		return false;
 	}
 	
@@ -258,9 +265,7 @@ public class Carte extends Graphe_matrice {
 		
 		tableauParent = new Hashtable<Integer, Integer>();
 		tableauDistanceKilo = new Hashtable<Integer, Double>();
-		
-		System.out.println("Generation d'un itineraire depuis la ville " + vStart.getNomVille() + "\n");
-		
+				
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
 			tableauParent.put(i, -1);
