@@ -24,7 +24,7 @@ public class CreationGraphe {
 		max_interet_touristique = 5;
 		min_distance = 5;
 		max_distance = 100;
-		genere(graine);
+		//genere(graine);
 	}
 	
 	CreationGraphe(int nb_noeuds, float densite, String nom_fichier) {
@@ -35,7 +35,7 @@ public class CreationGraphe {
 		max_interet_touristique = 5;
 		min_distance = 5;
 		max_distance = 100;
-		genere(0);
+		//genere(0);
 	}
 
 	
@@ -51,7 +51,7 @@ public class CreationGraphe {
 		max_interet_touristique = 5;
 		min_distance = 5;
 		max_distance = 100;
-		genere(graine);
+		//genere(graine);
 	}
 
 	
@@ -165,4 +165,88 @@ public class CreationGraphe {
 	        	}
 	}
 
+	// Ajoutee (pas presente das le fichier d'origine)
+	public String toString(int graine) {
+		String strOut = "";
+
+		int debut, arrivee, label_arc, label_noeud;
+		String arc, noeud;
+		
+		int it;
+		float dist;
+	
+		java.util.Random nb = new java.util.Random(graine) ; 
+		
+		
+		
+		System.out.println("densite = " + densite);
+		System.out.println("nb_noeuds = " + nb_noeuds);
+		System.out.println("nb_arcs = " + nb_arcs);
+		System.out.println("max_interet_touristique = " + max_interet_touristique);
+		System.out.println("min_distance = " + min_distance);
+		System.out.println("max_distance = " + max_distance);
+
+		strOut += "digraph {\n";
+		
+		// les noeuds
+		for (label_noeud = 1; label_noeud <= nb_noeuds; label_noeud++) {
+			it = nb.nextInt(max_interet_touristique + 1);
+			noeud = noeudToString(label_noeud, it);
+			strOut += noeud.toString();
+
+		}
+		
+		// un chemin parcourant tous les noeuds pour avoir un graphe connexe
+		for (label_arc = 1; label_arc < nb_noeuds; label_arc++) {
+			// noeud arrivee
+			arrivee = label_arc + 1;
+			
+			// distance : [min_distance,  max_distance]
+			dist = nb.nextFloat() * (max_distance - min_distance) + min_distance;
+			
+			// interet touristique : [0, max_interet_touristique]
+			it = nb.nextInt(max_interet_touristique + 1);
+
+			// ecriture
+			arc = arcToString(label_arc, label_arc, arrivee, dist, it);
+			strOut += arc.toString();
+		}
+		// un arc liant le dernier au premier noeud pour qu'il y ait toujours un chemin entre deux noeuds
+		dist = nb.nextFloat() * (max_distance - min_distance) + min_distance;
+
+		it = nb.nextInt(max_interet_touristique + 1);
+		arc = arcToString(nb_noeuds, nb_noeuds, 1, dist, it);
+		arc.toString();
+
+		
+		// completer les arcs
+		for (label_arc = nb_noeuds+1 ; label_arc <= nb_arcs; label_arc++) {
+			// noeud debut
+			debut = 1 + nb.nextInt(nb_noeuds);
+
+			// noeud arrivee
+			arrivee = 1 + nb.nextInt(nb_noeuds);
+						// arrivee et debut sont differents
+			while (arrivee == debut) {
+				arrivee = 1 + nb.nextInt(nb_noeuds);
+			}
+			// distance : [min_distance,  max_distance]
+			dist = nb.nextFloat() * (max_distance - min_distance) + min_distance;
+
+			// interet touristique : [0, max_interet_touristique]
+			it = nb.nextInt(max_interet_touristique + 1);
+			// ecriture
+			arc = arcToString(label_arc, debut, arrivee, dist, it);
+			strOut += arc.toString();
+			
+		}
+
+
+		strOut += "}\n";
+		
+		return strOut;
+		
+
+	}
+	
 }

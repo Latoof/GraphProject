@@ -12,7 +12,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=5; // A modifier pour changer le test (je m'en sers aussi)
+		int t=9; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -266,8 +266,13 @@ Carte carte = new Carte();
 			carte.ajouterArc(r7);
 			carte.ajouterArc(r8);
 			
-//			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testCheminPlusCourt( carte ));
-//			System.out.println("Temps proc pour chemin le plus court : "+TestsTempsProcesseur.testDetourBorne( carte, 0.5 ));
+			TestsTempsProcesseur tp = new TestsTempsProcesseur( 10, (float)0.1 );
+			
+			long tps_CheminPlusCourt = tp.testCheminPlusCourt( );
+			long tps_DetourBorne = tp.testDetourBorne( 0.5 );
+			
+ 			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
+			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_DetourBorne > -1 ? tps_CheminPlusCourt : "Echec" ));
 
 		}
 	}

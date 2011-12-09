@@ -328,9 +328,29 @@ public class Carte extends Graphe_matrice {
 			e.printStackTrace();
 		} 
 }
-
-	public int loadFromDotFile(String cheminFichierDot) throws IOException {
+	public boolean loadFromString(String input) throws NumberFormatException, IOException {
 		
+		InputStreamReader rd = new InputStreamReader(new ByteArrayInputStream(input.getBytes()));
+		return this.load(rd);		
+	}
+	
+	public boolean loadFromDotFile(String cheminFichierDot) throws IOException {
+		
+		FileInputStream ips = null;
+		try {
+			ips = new FileInputStream(cheminFichierDot);
+		} catch (FileNotFoundException e) {}
+			InputStreamReader ipsr = new InputStreamReader(ips);
+
+			if ( ipsr != null ) {
+				return load(ipsr);
+			}
+
+			return false;
+			
+	}
+	
+	public boolean load(InputStreamReader rd) throws NumberFormatException, IOException {
 		this.liste_noeud = new ArrayList<Noeud>();
 		this.liste_arc = new ArrayList<Arc>();
 		
@@ -340,11 +360,8 @@ public class Carte extends Graphe_matrice {
 		String contenuGraphe = "";
 		
 		InputStream ips = null;
-		try {
-			ips = new FileInputStream(cheminFichierDot);
-		} catch (FileNotFoundException e) {}
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
+
+			BufferedReader br=new BufferedReader(rd);
 			
 			String ligne = "";
 			boolean openB = false, closeB = false;
@@ -429,15 +446,18 @@ public class Carte extends Graphe_matrice {
 			System.out.println("--"+contenuGraphe+"--");
 	
 			if ( closeB ) {
-				return 0;
+				return true;
 			}
 			else {
-				return -1;
+				return false;
 			}
 	
 		}
-			return -2;
+			return false;
 		
 	}
+	
+
+
 
 }
