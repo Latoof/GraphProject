@@ -10,7 +10,7 @@ import java.util.Set;
  * @author Matthieu Lenogue - Maxime Ouairy
  */
 
-public class Carte extends Graphe_matrice {
+public class Carte_m extends Graphe_matrice {
 
 	double	distanceMax;
 	int		interetMax;
@@ -22,7 +22,7 @@ public class Carte extends Graphe_matrice {
 	int interetCheminLePlusCourtProfondeur;
 	//
 
-	public Carte() {
+	public Carte_m() {
 		super();
 	}
 	

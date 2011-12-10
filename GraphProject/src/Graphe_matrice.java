@@ -32,6 +32,8 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 			return n.getId();
 		}
 		
+		System.out.println("ERREUR lors de l'ajout du Noeud "+n);
+		
 		return -1;
 	}
 	
@@ -58,7 +60,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		
 		for (int i=0; i < size; i++){
 						
-			while (matrice_adjacence.getNumCols(i) <= size ){
+			while (matrice_adjacence.getNumCols(i) <= size ) {
 				matrice_adjacence.Add(new HashSet<Integer>(), i);
 			}
 			
@@ -71,7 +73,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 	public void ajouterArc (Arc a) {
 		
 		liste_arc.add(a);
-		matrice_adjacence.get(a.getNoeudSource().getId(), a.getNoeudCible().getId()).add(a.getId());
+		matrice_adjacence.get( a.getNoeudSource().getId(), a.getNoeudCible().getId() ).add(a.getId());
 		
 	}
 	

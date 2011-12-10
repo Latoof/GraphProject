@@ -7,13 +7,16 @@ import java.util.TreeSet;
 
 public class AppliTest {
 
+	public static int MATRICE = 0;
+	public static int LISTE = 1;
+
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=9; // A modifier pour changer le test (je m'en sers aussi)
+		int t=10; // A modifier pour changer le test (je m'en sers aussi)
 		if (t == 0 ) {
 			Graphe_matrice graphe = new Graphe_matrice();
 			
@@ -139,7 +142,7 @@ public class AppliTest {
 
 		}
 		else if ( t == 5 ) {
-			Carte carte = new Carte();
+			Carte_m carte = new Carte_m();
 			
 			Ville v1 = new Ville(0, "1", 1);
 			Ville v2 = new Ville(1, "2", 2);
@@ -192,7 +195,7 @@ public class AppliTest {
 						
 		}
 		else if ( t == 6 ) {
-			Carte carte = new Carte();
+			Carte_m carte = new Carte_m();
 			try {
 			carte.loadFromDotFile( "./map.dot" );
 			} catch (IOException e) {
@@ -203,7 +206,7 @@ public class AppliTest {
 			//carte.writeDotFile( "./map_out.dot" );
 		}
 		else if ( t==7 ){
-			Carte carte = new Carte();
+			Carte_m carte = new Carte_m();
 			carte.loadFromDotFile("./essai2.dot");
 			
 
@@ -223,7 +226,7 @@ public class AppliTest {
 //			carte.genererItineraireAgregation(carte.getVilleFromId(0), 1);
 		}
 		else if (t == 8){
-			Carte carte = new Carte();
+			Carte_m carte = new Carte_m();
 			carte.loadFromDotFile("./essai2.dot");
 			
 			System.out.println(carte);
@@ -232,8 +235,8 @@ public class AppliTest {
 		}
 		else if ( t == 9) { // Simple test de validite du temps CPU
 
-Carte carte = new Carte();
-			
+			Carte_m carte = new Carte_m();
+			/*
 			Ville v1 = new Ville(0, "1", 1);
 			Ville v2 = new Ville(1, "2", 2);
 			Ville v3 = new Ville(2, "3", 1);
@@ -265,9 +268,10 @@ Carte carte = new Carte();
 			carte.ajouterArc(r6);
 			carte.ajouterArc(r7);
 			carte.ajouterArc(r8);
+			*/
+			TestsTempsProcesseur tp = new TestsTempsProcesseur( );
 			
-			TestsTempsProcesseur tp = new TestsTempsProcesseur( carte );
-			
+			/*
 			long tps_CheminPlusCourt = tp.testCheminPlusCourt( );
 			
  			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
@@ -275,17 +279,32 @@ Carte carte = new Carte();
 			
 			long tps_DetourBorne = tp.testDetourBorne( 0.5 );
 			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_DetourBorne > -1 ? tps_DetourBorne : "Echec" ));
-
+			*/
 			
 
 
-			long tps_serie = tp.testDetourBorneSerie(1000, 0.5, 18, (float)0.1 );
+			long tps_serie = tp.serieTestDetourBorne(100, LISTE, 0.4, 8, (float)0.5 );
  			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
 
+ 			/*
  			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
 			System.out.println("TC ---> Temps proc pour detour borne : "+ ( tps_DetourBorne > -1 ? tps_DetourBorne : "Echec" ));
+			*/
  			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
 
+		}
+		else if ( t == 10 ) { // Re_tests sur l'implementation liste_adj (car bizzarreries)
+			
+			TestsTempsProcesseur tp = new TestsTempsProcesseur( );
+			tp.genererCarte(8, (float) 0.2);
+			
+			Carte_l cl = tp.carte_l;
+			
+			System.out.println(cl);
+			System.out.println("Successeurs : "+cl.getSuccesseurs( cl.getNoeudFromId(3) ));
+			System.out.println("Predecesseurs : "+cl.getPredecesseurs( cl.getNoeudFromId(3) ));
+			
+			
 		}
 	}
 }
