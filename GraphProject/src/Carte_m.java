@@ -55,8 +55,6 @@ public class Carte_m extends Graphe_matrice {
 
 		LinkedList<Ville> file = new LinkedList<Ville>();
 
-//		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
-
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
 			tableauParent.put(i, -1);
@@ -79,14 +77,6 @@ public class Carte_m extends Graphe_matrice {
 					tableauDistanceKilo.put(r.getNoeudCible().getId(), (tableauDistanceKilo.get(r.getNoeudSource().getId()) + r.getPonderation()));
 					tableauParent.put(r.getNoeudCible().getId(), r.getNoeudSource().getId());
 				}
-			}
-		}
-		
-		for(int i=0; i < (getNbNoeuds()) ; i++){
-			if(getVilleFromId(i).getId() != -1){
-//				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
-//				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
-//				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
 			}
 		}
 		
@@ -128,7 +118,6 @@ public class Carte_m extends Graphe_matrice {
 		tableauParent = new Hashtable<Integer, Integer>();
 		LinkedList<Route> tableauParcours = new LinkedList<Route>();
 				
-//		System.out.println("Parcours en profondeur depuis le noeud " + nStart.getNomVille() + "\n");
 		
 		for( int i=0;(i<getNbNoeuds()+1);i++ ){
 			tableauCouleur.put(i, 0);
@@ -140,12 +129,6 @@ public class Carte_m extends Graphe_matrice {
 		
 		cheminLePlusCourtProfondeur = null; // On vide l'eventuel resultat precedent
 		visiterProfondeur(nStart, nDest, borneMax, 0.0, 0, tableauParcours);
-		
-		if ( cheminLePlusCourtProfondeur != null ) {
-//			System.out.println(cheminLePlusCourtProfondeur); 
-		}
-			// La variable cheminLePlusCourtProfondeur aura ete modifiee par la fonction "visiter", 
-			// si celle-ci retourne vrai.
 		
 		if(parcoursTot){
 			for(int i=0;i<getNbNoeuds();i++){
@@ -161,8 +144,6 @@ public class Carte_m extends Graphe_matrice {
 	public boolean visiterProfondeur(Ville n, Ville nDest, double borneMax, double distanceParcourue, int interet_total, LinkedList<Route> tabParcours) {
 		
 		tableauCouleur.put(n.getId(), 1);
-		
-//		System.out.println("entrée : " + n.getNomVille());
 		
 		Set<Arc> set = getArcsSortants(n);
 		Set<Route> setR = (Set)set;
@@ -207,7 +188,7 @@ public class Carte_m extends Graphe_matrice {
 		tableauCouleur.put(n.getId(), 0);
 		if ( !tabParcours.isEmpty() )
 			tabParcours.removeLast();
-		System.out.println("sortie : " + n.getNomVille()+"\n");
+//		System.out.println("sortie : " + n.getNomVille()+"\n");
 		
 		return false;
 	}

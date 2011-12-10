@@ -231,7 +231,7 @@ public class AppliTest {
 			
 			System.out.println(carte);
 			
-//			carte.genererItineraireAgregation(carte.getVilleFromId(0), 0.63);
+			carte.genererItineraireAgregation(carte.getVilleFromId(0), carte.getVilleFromId(3), 0.63);
 		}
 		else if ( t == 9) { // Simple test de validite du temps CPU
 
