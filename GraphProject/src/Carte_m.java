@@ -86,33 +86,36 @@ public class Carte_m extends Graphe_matrice {
 	public LinkedList<Route> genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
 		this.plusCourtDijkstra(vStart);
 		double distanceDest = tableauDistanceKilo.get(vDest.getId());
-		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
+		
+		if(distanceDest == Double.MAX_VALUE){
+			System.out.println("Itinéraire impossible à déterminer entre "+vStart.getNomVille()+" et "+vDest.getNomVille());
+			return null;
+		}
+		System.out.println("\nMethode Detour Borné\nDistance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
 		double borneMax = distanceDest * coeff;
 		System.out.println("Borne Max considÃ©rÃ©e (PondÃ©ration aggregation Ã  1) : " + borneMax);
 		
 		LinkedList<Route> itineraire = new LinkedList<Route>();
-		itineraire = this.methodeDetourBorne(vStart, vDest, borneMax);
+		itineraire = this.parcoursProfondeurVille(vStart, vDest, false, borneMax);
 
 		if ( itineraire != null ) {
-			
+			Route r;
+			double distanceTot = 0;
 			while(itineraire.size() != 0){
-				Route r = (Route)itineraire.removeFirst();
+				r = (Route)itineraire.removeFirst();
+				distanceTot += r.getPonderation();
 				System.out.println("On passe par la route : "+r.getIdentifiant()+" vers "+((Ville)r.getNoeudCible()).getNomVille());
 				}
-			
+			System.out.println("Distance parcourue : "+distanceTot+" km");
 			return itineraire;
 		
 		}
 		else {
-			System.out.println("ITINERAIRE NULL");
+			System.out.println("Itinéraire impossible à déterminer, en tenant compte des paramètres enregistrés.");
 			return null;
 		}
 	}
-	
-	public LinkedList<Route> methodeDetourBorne (Ville vStart, Ville vDest, double borneMax) {
-		return this.parcoursProfondeurVille(vStart, vDest, false, borneMax);
-	}
-	
+
 	public LinkedList<Route> parcoursProfondeurVille(Ville nStart, Ville nDest, Boolean parcoursTot, double borneMax) {
 		tableauCouleur = new Hashtable<Integer, Integer>();
 		tableauParent = new Hashtable<Integer, Integer>();
@@ -176,8 +179,7 @@ public class Carte_m extends Graphe_matrice {
 						interetCheminLePlusCourtProfondeur = interet_total;
 					}
 					
-					System.out.println("\nDistance parcourue : " + distanceParcourue);
-					System.out.println("Dest atteinte\n");
+					System.out.println("\nDest atteinte\n");
 					return true;
 					// Stockage du meilleur chemin
 					
@@ -188,7 +190,6 @@ public class Carte_m extends Graphe_matrice {
 		tableauCouleur.put(n.getId(), 0);
 		if ( !tabParcours.isEmpty() )
 			tabParcours.removeLast();
-//		System.out.println("sortie : " + n.getNomVille()+"\n");
 		
 		return false;
 	}
@@ -196,6 +197,7 @@ public class Carte_m extends Graphe_matrice {
 	public void genererItineraireAgregation(Ville vStart, Ville vDest, double coeff){		
 		if(this.methodeAgregation(vStart, coeff)){
 			
+			System.out.println("\nMethode Agregation");
 			LinkedList<Integer> itineraire = new LinkedList<Integer>();
 			int u = vDest.getId();
 			while(u != vStart.getId()){
@@ -282,15 +284,6 @@ public class Carte_m extends Graphe_matrice {
 					
 		return result;
 	}
-	
-	// A supprimer remplacÃ© par un dijkstra
-	public double ponderationDistance (Route route) {
-		double result = 0;
-			
-		result = route.getPonderation();
-			
-		return result;
-	}
 
 	public void writeDotFile( String file ) throws IOException {
 				
@@ -321,6 +314,7 @@ public class Carte_m extends Graphe_matrice {
 			e.printStackTrace();
 		} 
 }
+	
 	public boolean loadFromString(String input) throws NumberFormatException, IOException {
 		
 		InputStreamReader rd = new InputStreamReader(new ByteArrayInputStream(input.getBytes()));
@@ -379,7 +373,7 @@ public class Carte_m extends Graphe_matrice {
 						else if ( !ligne.contains("->")) {
 							
 							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
-							System.out.println("Label-info : "+label_infos);
+//							System.out.println("Label-info : "+label_infos);
 							
 							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
 							// maintenant.
@@ -392,19 +386,19 @@ public class Carte_m extends Graphe_matrice {
 							this.ajouterNoeud( nouvelle_ville );
 							// Noeud
 							
-							System.out.println("adding ''"+label+"''");
+//							System.out.println("adding ''"+label+"''");
 							table_correspondance.put(label, nouvelle_ville);
 							node_counter++;
 						}
 						else {
 							
 							String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
-								System.out.println("Idn : "+identifiant_noeuds);
+//								System.out.println("Idn : "+identifiant_noeuds);
 								String identifiant_noeud_source = identifiant_noeuds.split("->")[0].replaceAll(" ", "");
 								String identifiant_noeud_cible = identifiant_noeuds.split("->")[1].replaceAll(" ", "");
 								
 								
-								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
+//								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
 							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
 							
 							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
@@ -416,9 +410,9 @@ public class Carte_m extends Graphe_matrice {
 								int interet = (infos.split(";").length > 1 ) ? infos.split(";")[1].length() : 0;
 								float distance = Float.valueOf(infos.split(";")[0]);
 							
-								System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
-								System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
-								System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
+//								System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
+//								System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
+//								System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
 							this.ajouterArc( new Route( arc_counter, label, distance, interet, 
 												(Ville) table_correspondance.get(identifiant_noeud_source),
 												(Ville) table_correspondance.get(identifiant_noeud_cible)) );
@@ -436,7 +430,7 @@ public class Carte_m extends Graphe_matrice {
 			}
 			
 			br.close(); 
-			System.out.println("--"+contenuGraphe+"--");
+//			System.out.println("--"+contenuGraphe+"--");
 	
 			if ( closeB ) {
 				return true;
@@ -450,7 +444,4 @@ public class Carte_m extends Graphe_matrice {
 		
 	}
 	
-
-
-
 }

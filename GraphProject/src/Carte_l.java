@@ -55,7 +55,6 @@ public class Carte_l extends Graphe_liste {
 
 		LinkedList<Ville> file = new LinkedList<Ville>();
 
-//		System.out.println("Parcours PCC Dijkstra depuis le noeud " + vStart.getNomVille() + "\n");
 
 		for(int i=0;i<getNbNoeuds();i++){
 			tableauDistanceKilo.put(i, Double.MAX_VALUE);
@@ -82,21 +81,13 @@ public class Carte_l extends Graphe_liste {
 			}
 		}
 		
-		for(int i=0; i < (getNbNoeuds()) ; i++){
-			if(getVilleFromId(i).getId() != -1){
-//				System.out.println("Ville : " + getVilleFromId(i).getNomVille());
-//				System.out.println("Parent : " + getVilleFromId(tableauParent.get(i)).getNomVille());
-//				System.out.println("Rapport Distance/Interet depuis le point de départ : " + tableauDistanceKilo.get(i) + "\n");
-			}
-		}
-		
 		return true;
 	}
 	
 	public LinkedList<Route> genererItineraireDetourBorne(Ville vStart, Ville vDest, double coeff){
 		this.plusCourtDijkstra(vStart);
 		double distanceDest = tableauDistanceKilo.get(vDest.getId());
-		System.out.println("Distance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
+		System.out.println("\nDistance jusqu'a " + vDest.getNomVille() + " depuis " + vStart.getNomVille() + " = " + distanceDest);
 		double borneMax = distanceDest * coeff;
 		System.out.println("Borne Max considérée (Pondération aggregation à 1) : " + borneMax);
 		
@@ -207,7 +198,7 @@ public class Carte_l extends Graphe_liste {
 		tableauCouleur.put(n.getId(), 0);
 		if ( !tabParcours.isEmpty() )
 			tabParcours.removeLast();
-		System.out.println("sortie : " + n.getNomVille()+"\n");
+//		System.out.println("sortie : " + n.getNomVille()+"\n");
 		
 		return false;
 	}
@@ -221,7 +212,7 @@ public class Carte_l extends Graphe_liste {
 				itineraire.addFirst(tableauParent.get(u));
 				u = tableauParent.get(u);
 			}
-			System.out.println("itineraire depuis "+vStart.getNomVille()+" vers "+vDest.getNomVille());
+			System.out.println("\nitineraire depuis "+vStart.getNomVille()+" vers "+vDest.getNomVille());
 			int v;
 			while(itineraire.size() != 0){
 				v = itineraire.removeFirst();
@@ -299,15 +290,6 @@ public class Carte_l extends Graphe_liste {
 		result = coeff * route.getPonderation() / (this.distanceMax);
 		result -= (1 - coeff) * (route.getInteret() + vCible.getInteret()) / (2 * interetMax );
 					
-		return result;
-	}
-	
-	// A supprimer remplacé par un dijkstra
-	public double ponderationDistance (Route route) {
-		double result = 0;
-			
-		result = route.getPonderation();
-			
 		return result;
 	}
 
@@ -398,7 +380,7 @@ public class Carte_l extends Graphe_liste {
 						else if ( !ligne.contains("->")) {
 							
 							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
-							System.out.println("Label-info : "+label_infos);
+//							System.out.println("Label-info : "+label_infos);
 							
 							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
 							// maintenant.
@@ -418,12 +400,12 @@ public class Carte_l extends Graphe_liste {
 						else {
 							
 							String identifiant_noeuds = ligne.split("label=\"")[0].split(" \\[")[0];
-								System.out.println("Idn : "+identifiant_noeuds);
+//								System.out.println("Idn : "+identifiant_noeuds);
 								String identifiant_noeud_source = identifiant_noeuds.split("->")[0].replaceAll(" ", "");
 								String identifiant_noeud_cible = identifiant_noeuds.split("->")[1].replaceAll(" ", "");
 								
 								
-								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
+//								System.out.println("''"+identifiant_noeud_source+"''->''"+identifiant_noeud_cible+"''");
 							String label_infos = ligne.split("label=\"")[1].split("\"")[0];
 							
 							// Infos dans le label ou separation des ce point la ? Dans tous les cas, les infos doivent etre identifiees des m
@@ -435,9 +417,9 @@ public class Carte_l extends Graphe_liste {
 								int interet = (infos.split(";").length > 1 ) ? infos.split(";")[1].length() : 0;
 								float distance = Float.valueOf(infos.split(";")[0]);
 							
-								System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
-								System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
-								System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
+//								System.out.println("Ajout de "+ label + " avec interet "+interet+" et distance "+ distance);
+//								System.out.println(table_correspondance.get(identifiant_noeud_source).getId()+" ^^ ");
+//								System.out.println(" ^^ "+table_correspondance.get(identifiant_noeud_cible).getId());
 							this.ajouterArc( new Route( arc_counter, label, distance, interet, 
 												(Ville) table_correspondance.get(identifiant_noeud_source),
 												(Ville) table_correspondance.get(identifiant_noeud_cible)) );
@@ -455,7 +437,7 @@ public class Carte_l extends Graphe_liste {
 			}
 			
 			br.close(); 
-			System.out.println("--"+contenuGraphe+"--");
+//			System.out.println("--"+contenuGraphe+"--");
 	
 			if ( closeB ) {
 				return true;

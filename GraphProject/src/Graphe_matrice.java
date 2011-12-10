@@ -44,12 +44,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 		
 			noeud_actifs.put(prevID, false);
 		}
-		/*
-		for(int i=0; i < (matrice_adjacence.getNumRows() - 1); i++){
-			matrice_adjacence.set(n.getId(), i, new HashSet<Integer>());
-			matrice_adjacence.set(i, n.getId(), new HashSet<Integer>());
-		}
-		*/
+		
 		
 		return -1;
 	}
@@ -58,7 +53,7 @@ Hashtable<Integer, Boolean>		 	noeud_actifs;
 
 		int size = (matrice_adjacence.getNumRows() - 1);
 		
-		for (int i=0; i < size; i++){
+		for (int i=0; i <= size; i++){
 						
 			while (matrice_adjacence.getNumCols(i) <= size ) {
 				matrice_adjacence.Add(new HashSet<Integer>(), i);

@@ -54,11 +54,7 @@ public abstract class Graphe {
 		return -1;
 	}
 
-	public void ajouterArc(Arc a) {
-		
-		liste_arc.add(a);
-		
-	}
+	public abstract void ajouterArc(Arc a) ;
 	
 	public void supprimerArc(Arc a) {
 		
@@ -114,7 +110,6 @@ public abstract class Graphe {
 			tableauParent.put(i, -1);
 		}
 		temp=0;
-//		tableauParent[nStart.getId()]=nStart.getId();
 		tableauParent.put(nStart.getId(), nStart.getId());
 		visiterProfondeur(nStart);
 		
@@ -130,7 +125,6 @@ public abstract class Graphe {
 	public void visiterProfondeur(Noeud n) {
 						
 		tableauCouleur.put(n.getId(), 1);
-//		tableauDebut[n.getId()]=temp;
 		tableauDebut.put(n.getId(), temp);
 		temp++;
 		
@@ -149,7 +143,6 @@ public abstract class Graphe {
 
 		tableauCouleur.put(n.getId(), 2);
 		System.out.println("sortie : " + n.getId());
-//		tableauFin[ n.getId() ]= temp;
 		tableauFin.put(n.getId(), temp);
 		temp++;
 	}
@@ -169,13 +162,11 @@ public abstract class Graphe {
 		for(int i=0;i<(getNbNoeuds()+1);i++){
 			tableauCouleur.put(i, 0);
 			tableauParent.put(i, -1);
-//			tableauDistance[i]=-1;
 			tableauDistance.put(i, -1);
 		}
 		temp=0;
 		tableauCouleur.put(nStart.getId(), 1);
 		tableauParent.put(nStart.getId(), nStart.getId());
-//		tableauDistance[nStart.getId()]=0;
 		tableauDistance.put(nStart.getId(), 0);
 		
 		file.addFirst(nStart);
@@ -183,7 +174,6 @@ public abstract class Graphe {
 		
 		while(!file.isEmpty()){
 			u=file.pollFirst();
-//			tableauDebut[u.getId()]=temp;
 			tableauDebut.put(u.getId(), temp);
 			temp++;
 			
@@ -197,7 +187,6 @@ public abstract class Graphe {
 				if(tableauCouleur.get(v.getId()) == 0){
 					tableauCouleur.put(v.getId(), 1);
 					tableauParent.put(v.getId(), u.getId());
-//					tableauDistance[ v.getId() ] = (tableauDistance[ u.getId() ] + 1);
 					tableauDistance.put(v.getId(), (tableauDistance.get(u.getId()) + 1));
 					file.addLast(v);
 				}
@@ -205,15 +194,12 @@ public abstract class Graphe {
 
 			tableauCouleur.put(u.getId(), 2);
 			System.out.println("sortie : " + u.getId());
-//			tableauFin[ u.getId() ]=temp;
 			tableauFin.put(u.getId(), temp);
 			temp++;
 		}
 	}
 
-	public Set<Noeud> getVoisins(Noeud n){
-		return null;
-	}
+	public abstract Set<Noeud> getVoisins(Noeud n);
 
 	
 	@Override

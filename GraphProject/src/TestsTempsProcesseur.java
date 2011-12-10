@@ -26,8 +26,9 @@ public class TestsTempsProcesseur {
 		
 		CreationGraphe cg = new CreationGraphe(nbNoeuds, densite, "");
 		String strIn = cg.toString(85);
-		System.out.println("Loading :\n"+strIn);
-		//carte_m.loadFromString(strIn);
+		System.out.println("Loading Matrice :\n"+strIn);
+		carte_m.loadFromString(strIn);
+		System.out.println("Loading Liste :\n"+strIn);
 		carte_l.loadFromString(strIn);
 		
 	}
@@ -142,7 +143,8 @@ public class TestsTempsProcesseur {
 	
 	
 	public int randomInt(int min, int max) {
-		return (int)(Math.random() * (max-min)) + min;
+		return (int)(Math.random() * (max-min)) + min;	
+	
 	}
 	
 }

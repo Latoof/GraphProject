@@ -114,5 +114,13 @@ public class Route extends Arc {
 			}
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Route [identifiant=" + identifiant + ", interet=" + interet
+				+ ", id=" + id + ", ponderation=" + ponderation
+				+ ", noeudSource=" + noeudSource + ", noeudCible=" + noeudCible
+				+ "]";
+	}
 	
 }

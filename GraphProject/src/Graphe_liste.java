@@ -133,10 +133,6 @@ public class Graphe_liste extends Graphe {
 				
 				ListIterator<ArrayList<Integer>> it = liste_adjacence.get(i).listIterator();
 				
-				if ( it.hasNext() ) {
-				//	it.next();
-				}
-				
 				while ( it.hasNext() ) {
 					rList.add( 
 							getNoeudFromId( it.next().get(0) ) 
@@ -228,12 +224,12 @@ public class Graphe_liste extends Graphe {
 		
 	}*/
 	
-	public void ajouterArc(Arc a, Noeud n1, Noeud n2) {
+	public void ajouterArc(Arc a) {
 		
 		
 		liste_arc.add(a);
 		
-		ListIterator<ArrayList<Integer>> it = liste_adjacence.get( n1.getId() ).listIterator();
+		ListIterator<ArrayList<Integer>> it = liste_adjacence.get( a.getNoeudSource().getId() ).listIterator();
 		
 		boolean alreadyPresent = false;
 		ArrayList<Integer> ltemp;
@@ -242,7 +238,7 @@ public class Graphe_liste extends Graphe {
 			ltemp = it.next();
 			
 			/** Cas ou une transition du noeud n1 vers le noeud n2 n'existe deja */
-			if ( ltemp.get(0) == n2.getId() ) {
+			if ( ltemp.get(0) == a.getNoeudCible().getId() ) {
 				alreadyPresent = true;
 				ltemp.add( a.getId() );
 			}
@@ -253,15 +249,15 @@ public class Graphe_liste extends Graphe {
 		if ( !alreadyPresent ) {
 			/** Cas ou aucune transition du noeud n1 vers le noeud n2 n'existe encore */
 			ArrayList<Integer> transList = new ArrayList<Integer>();
-			transList.add( n2.getId() );
+			transList.add( a.getNoeudCible().getId() );
 			transList.add( a.getId() );
 			
-			liste_adjacence.get( n1.getId() ).add(transList);
+			liste_adjacence.get( a.getNoeudSource().getId() ).add(transList);
 			/******************************/
 		}
 		
-		a.setNoeudSource(n1);
-		a.setNoeudCible(n2);
+		a.setNoeudSource(a.getNoeudSource());
+		a.setNoeudCible(a.getNoeudCible());
 		
 		
 	}
@@ -303,7 +299,7 @@ public class Graphe_liste extends Graphe {
 
 		Noeud nSource = a.getNoeudSource();
 		
-		ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(nSource.getId()).listIterator();
+		ListIterator<ArrayList<Integer>> itL = liste_adjacence.get(a.getNoeudSource().getId()).listIterator();
 		
 		if ( itL.hasNext() ) {
 			itL.next();
