@@ -73,14 +73,7 @@ public class Route extends Arc {
 		ligneDot += "label=\""+this.getIdentifiant();
 		ligneDot += "(" + this.ponderation + ";";
 		ligneDot += this.getInteretString() + ")\"";
-		/*
-		ligneDot += "fontcolor=" + "black" + " ";
-		ligneDot += "labelfontname=" + "Sans" + " ";
-		ligneDot += "labelfontsize=" + "14" + " ";
-		ligneDot += "style=" + "solid" + " ";
-		ligneDot += "color=" + "black" + " ";
-		ligneDot += "arrowhead=" + "normal";
-		*/
+
 		ligneDot += "];\n" ; // fin des options
 		
 		return ligneDot;

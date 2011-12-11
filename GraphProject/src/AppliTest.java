@@ -16,7 +16,7 @@ public class AppliTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		int t=9; // A modifier pour changer le test (je m'en sers aussi)
+		int t=5; // A modifier pour changer le test (je m'en sers aussi)
 		if ( t == 1 ) {
 			Graphe_liste graphe = new Graphe_liste();
 			
@@ -106,6 +106,9 @@ public class AppliTest {
 			
 			System.out.println("Creation : Well done\n");
 			
+			System.out.println(carte.compteurNoeuds);
+			System.out.println(carte.compteurArcs);
+			
 			Chrono c = new Chrono();
 
 			c.start();
@@ -160,14 +163,15 @@ public class AppliTest {
 			
 			TestsTempsProcesseur tp = new TestsTempsProcesseur( );
 
-			long tps_serie = tp.serieTestDetourBorne(50, MATRICE, 2, 8, (float)0.5 );
- 			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
-
+			long tps_serie = tp.serieTestDetourBorne(100, MATRICE, 2, 8, (float)0.5 );
+ 			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie+" cycles" : "Echec" ));
+ 			
+ 			
  			/*
  			System.out.println("TC ---> Temps proc pour chemin le plus court : "+ ( tps_CheminPlusCourt > -1 ? tps_CheminPlusCourt : "Echec" ));
 			System.out.println("TC ---> Temps proc pour detour borne : "+ ( tps_DetourBorne > -1 ? tps_DetourBorne : "Echec" ));
 			*/
- 			System.out.println("TC ---> Temps proc moyen borne : "+ ( tps_serie > -1 ? tps_serie : "Echec" ));
+ 			
 
 		}
 		else if ( t == 10 ) { // Re_tests sur l'implementation liste_adj (car bizzarreries)

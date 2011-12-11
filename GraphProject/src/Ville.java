@@ -62,14 +62,6 @@ public class Ville extends Noeud {
 		ligneDot += "label=\"" + this.getNomVille();
 		ligneDot += "(" + this.getInteretString() + ")\"";
 		
-		/*
-		ligneDot += "fontcolor=" + "black" + " ";
-		ligneDot += "shape=" + "ellipse" + " ";
-		ligneDot += "color=" + "black" + " ";
-		ligneDot += "fontname=" + "Sans" + " ";
-		ligneDot += "fontsize=" + "14" + " ";
-		ligneDot += "style=" + "Sans" + " ";
-		*/
 		
 		ligneDot += "];\n"; // on ferme le crochet
 

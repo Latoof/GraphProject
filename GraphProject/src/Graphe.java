@@ -35,7 +35,6 @@ public abstract class Graphe {
 		System.out.println("Erreur lors de l'ajout du Noeud "+n.toString()+" -> Noeud deja utilise ! (id "+n.getId()+")");
 		
 		return -1;
-
 	}
 	
 	public int supprimerNoeud (Noeud n) {
@@ -56,11 +55,7 @@ public abstract class Graphe {
 
 	public abstract void ajouterArc(Arc a) ;
 	
-	public void supprimerArc(Arc a) {
-		
-		liste_arc.remove( a.getId() );
-		
-	}
+	public abstract void supprimerArc(Arc a) ;
 	
 	public Noeud getNoeudFromId(int id) {
 		

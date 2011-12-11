@@ -6,9 +6,6 @@ public class Noeud implements Comparable {
 	
 	public Noeud() {
 		
-		// this.id = ++compteur_noeuds;
-		// ID commencant a 1
-		
 		this.id = -1;
 		// ID commencant a 0
 	}
