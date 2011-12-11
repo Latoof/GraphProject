@@ -6,6 +6,10 @@ import java.util.Set;
 
 public class Graphe_liste extends Graphe {
 	
+	/**
+	 * @uml.property  name="liste_adjacence"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.util.LinkedList"
+	 */
 	ArrayList< // Tableau de ...
 		LinkedList< // ... tableau de ...
 			ArrayList< // ... tableau ...

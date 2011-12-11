@@ -3,10 +3,22 @@ import java.lang.management.ThreadMXBean;
 
 public final class Chrono {
 	
+    /**
+	 * @uml.property  name="begin"
+	 */
     private long begin;
+    /**
+	 * @uml.property  name="end"
+	 */
     private long end;
+    /**
+	 * @uml.property  name="mx"
+	 */
     ThreadMXBean mx = ManagementFactory.getThreadMXBean();
     
+    /**
+	 * @uml.property  name="status"
+	 */
     public boolean status;
     
     public Chrono() {

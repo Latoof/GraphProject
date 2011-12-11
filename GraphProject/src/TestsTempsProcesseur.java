@@ -3,7 +3,15 @@ import java.util.LinkedList;
 
 public class TestsTempsProcesseur {
 
+	/**
+	 * @uml.property  name="carte_m"
+	 * @uml.associationEnd  
+	 */
 	public Carte_m carte_m;
+	/**
+	 * @uml.property  name="carte_l"
+	 * @uml.associationEnd  
+	 */
 	public Carte_l carte_l;
 
 	

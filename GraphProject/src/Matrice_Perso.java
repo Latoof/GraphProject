@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 public class Matrice_Perso<E> {
 	
+	/**
+	 * @uml.property  name="matrice"
+	 * @uml.associationEnd  
+	 */
 	ArrayList<ArrayList<E>>	matrice;
 	
 	public Matrice_Perso() {

@@ -1,9 +1,24 @@
 
 public class Arc implements Comparable {
 	
+	/**
+	 * @uml.property  name="id"
+	 */
 	int		id;
+	/**
+	 * @uml.property  name="ponderation"
+	 */
 	double 	ponderation;
-	Noeud	noeudSource, noeudCible;
+	/**
+	 * @uml.property  name="noeudSource"
+	 * @uml.associationEnd  
+	 */
+	Noeud	noeudSource;
+	/**
+	 * @uml.property  name="noeudCible"
+	 * @uml.associationEnd  
+	 */
+	Noeud noeudCible;
 	
 	/**
 	 * @param id
@@ -24,36 +39,58 @@ public class Arc implements Comparable {
 		this.ponderation = ponderation;
 	}
 
+	/**
+	 * @param noeudSource
+	 * @uml.property  name="noeudSource"
+	 */
 	public void setNoeudSource(Noeud noeudSource) {
 		this.noeudSource = noeudSource;
 	}
 
+	/**
+	 * @param noeudCible
+	 * @uml.property  name="noeudCible"
+	 */
 	public void setNoeudCible(Noeud noeudCible) {
 		this.noeudCible = noeudCible;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="noeudSource"
+	 */
 	public Noeud getNoeudSource() {
 		return noeudSource;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="noeudCible"
+	 */
 	public Noeud getNoeudCible() {
 		return noeudCible;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="id"
+	 */
 	public int getId() {
 		return this.id;
 	}
 
 
 	/**
-	 * @return the ponderation
+	 * @return  the ponderation
+	 * @uml.property  name="ponderation"
 	 */
 	public double getPonderation() {
 		return ponderation;
 	}
 
 	/**
-	 * @param ponderation the ponderation to set
+	 * @param ponderation  the ponderation to set
+	 * @uml.property  name="ponderation"
 	 */
 	public void setPonderation(double ponderation) {
 		this.ponderation = ponderation;

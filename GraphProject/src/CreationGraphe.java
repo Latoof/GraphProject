@@ -7,12 +7,33 @@ import java.io.*;
  *
  */
 public class CreationGraphe {
+	/**
+	 * @uml.property  name="nb_noeuds"
+	 */
 	private int nb_noeuds;
+	/**
+	 * @uml.property  name="nb_arcs"
+	 */
 	private int nb_arcs;
+	/**
+	 * @uml.property  name="densite"
+	 */
 	private float densite; //nombre d'arcs / (nombre de noeuds)^2
+	/**
+	 * @uml.property  name="nom_fichier"
+	 */
 	private String nom_fichier;
+	/**
+	 * @uml.property  name="max_interet_touristique"
+	 */
 	private int max_interet_touristique;
+	/**
+	 * @uml.property  name="min_distance"
+	 */
 	private float min_distance;
+	/**
+	 * @uml.property  name="max_distance"
+	 */
 	private float max_distance;
 
 

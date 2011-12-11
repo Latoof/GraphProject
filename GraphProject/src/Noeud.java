@@ -1,6 +1,10 @@
 
 public class Noeud implements Comparable {
 
+	/**
+	 * @uml.property  name="id"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="Noeud" qualifier="this:Graphe java.lang.Double"
+	 */
 	int 	id;
 
 	
@@ -10,10 +14,18 @@ public class Noeud implements Comparable {
 		// ID commencant a 0
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="id"
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 * @uml.property  name="id"
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}

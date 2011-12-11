@@ -9,7 +9,15 @@ import java.util.TreeSet;
 public class Graphe_matrice extends Graphe {
 
 	
+/**
+ * @uml.property  name="matrice_adjacence"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
 Matrice_Perso<HashSet<Integer>> 	matrice_adjacence;
+/**
+ * @uml.property  name="noeud_actifs"
+ * @uml.associationEnd  qualifier="valueOf:java.lang.Integer java.lang.Boolean"
+ */
 Hashtable<Integer, Boolean>		 	noeud_actifs;
 
 	

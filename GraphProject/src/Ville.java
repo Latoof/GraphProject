@@ -4,7 +4,13 @@
 
 public class Ville extends Noeud {
 	
+	/**
+	 * @uml.property  name="interet"
+	 */
 	int 	interet;
+	/**
+	 * @uml.property  name="nomVille"
+	 */
 	String 	nomVille;
 	
 	/**
@@ -20,18 +26,34 @@ public class Ville extends Noeud {
 		this.nomVille = nomVille;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="interet"
+	 */
 	public int getInteret() {
 		return interet;
 	}
 	
+	/**
+	 * @param interet
+	 * @uml.property  name="interet"
+	 */
 	public void setInteret(int interet) {
 		this.interet = interet;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="nomVille"
+	 */
 	public String getNomVille() {
 			return nomVille;
 		}
 
+	/**
+	 * @param nomVille
+	 * @uml.property  name="nomVille"
+	 */
 	public void setNomVille(String nomVille) {
 		this.nomVille = nomVille;
 	}

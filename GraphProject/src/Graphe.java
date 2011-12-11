@@ -6,15 +6,50 @@ import java.util.Set;
 
 public abstract class Graphe {
 
+	/**
+	 * @uml.property  name="compteurNoeuds"
+	 */
 	int compteurNoeuds = 0;
+	/**
+	 * @uml.property  name="compteurArcs"
+	 */
 	int compteurArcs = 0;
+	/**
+	 * @uml.property  name="liste_noeud"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="Ville"
+	 */
 	ArrayList<Noeud>			liste_noeud;
+	/**
+	 * @uml.property  name="liste_arc"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="Route"
+	 */
 	ArrayList<Arc>				liste_arc;
+	/**
+	 * @uml.property  name="tableauCouleur"
+	 * @uml.associationEnd  qualifier="valueOf:java.lang.Integer java.lang.Integer"
+	 */
 	Hashtable<Integer, Integer> tableauCouleur;
+	/**
+	 * @uml.property  name="tableauParent"
+	 * @uml.associationEnd  qualifier="valueOf:java.lang.Integer java.lang.Integer"
+	 */
 	Hashtable<Integer, Integer>	tableauParent;
+	/**
+	 * @uml.property  name="tableauDebut"
+	 */
 	Hashtable<Integer, Integer> tableauDebut;
+	/**
+	 * @uml.property  name="tableauFin"
+	 */
 	Hashtable<Integer, Integer> tableauFin;
+	/**
+	 * @uml.property  name="tableauDistance"
+	 * @uml.associationEnd  qualifier="valueOf:java.lang.Integer java.lang.Integer"
+	 */
 	Hashtable<Integer, Integer>	tableauDistance;
+	/**
+	 * @uml.property  name="temp"
+	 */
 	int 						temp;
 	
 	public Graphe() {

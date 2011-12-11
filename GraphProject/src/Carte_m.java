@@ -12,13 +12,32 @@ import java.util.Set;
 
 public class Carte_m extends Graphe_matrice {
 
+	/**
+	 * @uml.property  name="distanceMax"
+	 */
 	double	distanceMax;
+	/**
+	 * @uml.property  name="interetMax"
+	 */
 	int		interetMax;
+	/**
+	 * @uml.property  name="tableauDistanceKilo"
+	 * @uml.associationEnd  qualifier="valueOf:java.lang.Integer java.lang.Double"
+	 */
 	Hashtable<Integer, Double>	tableauDistanceKilo;
+	/**
+	 * @uml.property  name="itineraire"
+	 */
 	LinkedList<Route> 	itineraire;
 	
 	// A revoir. Beaucoup de choses a optimiser
+	/**
+	 * @uml.property  name="cheminLePlusCourtProfondeur"
+	 */
 	LinkedList<Route> cheminLePlusCourtProfondeur;
+	/**
+	 * @uml.property  name="interetCheminLePlusCourtProfondeur"
+	 */
 	int interetCheminLePlusCourtProfondeur;
 	//
 

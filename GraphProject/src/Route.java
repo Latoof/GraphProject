@@ -1,7 +1,13 @@
 
 public class Route extends Arc {
 
+	/**
+	 * @uml.property  name="identifiant"
+	 */
 	String identifiant;
+	/**
+	 * @uml.property  name="interet"
+	 */
 	int interet;
 	
 	/***
@@ -31,28 +37,32 @@ public class Route extends Arc {
 	}
 
 	/**
-	 * @return the interet
+	 * @return  the interet
+	 * @uml.property  name="interet"
 	 */
 	public int getInteret() {
 		return interet;
 	}
 	
 	/**
-	 * @param interet the interet to set
+	 * @param interet  the interet to set
+	 * @uml.property  name="interet"
 	 */
 	public void setInteret(int interet) {
 		this.interet = interet;
 	}
 	
 	/**
-	 * @return the identifiant
+	 * @return  the identifiant
+	 * @uml.property  name="identifiant"
 	 */
 	public String getIdentifiant() {
 		return identifiant;
 	}
 
 	/**
-	 * @param identifiant the identifiant to set
+	 * @param identifiant  the identifiant to set
+	 * @uml.property  name="identifiant"
 	 */
 	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
